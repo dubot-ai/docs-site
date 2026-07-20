@@ -1,0 +1,37 @@
+:root {
+  --coral: #EA6242;
+  --coral-strong: #D64B2A;
+  --coral-bg: #FEEEE9;
+  --coral-border: #F4BEAE;
+  --navy-950: #070C2D;
+  --navy-900: #0D1341;
+  --navy-800: #192050;
+  --navy-700: #354175;
+  --navy-600: #4A5A8A;
+  --navy-400: #9EA8C8;
+  --purple-300: #E4E5F1;
+  --purple-200: #ECEDF8;
+  --purple-100: #F7F8FF;
+  --dubot-shadow: 0 0 32px 0 rgba(74, 90, 138, 0.08);
+}
+
+.approval-accent {
+  color: var(--coral-strong);
+}
+
+.brand-accent {
+  color: var(--coral);
+  font-family: "Fraunces", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+code,
+kbd,
+pre {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+[data-badge] {
+  border-radius: 4px;
+}

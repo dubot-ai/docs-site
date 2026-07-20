@@ -1,0 +1,64 @@
+---
+title: "Dubot overview"
+description: "The AI action layer for customer experience"
+---
+
+<Info>
+  **Early product:** Dubot is working with its first pilot customer. This documentation distinguishes pilot capabilities from planned product direction.
+</Info>
+
+## Talk is cheap. <span className="brand-accent">Resolution takes action.</span>
+
+Support AI can explain what a customer should do next. The customer still has to find the right screen, understand the interface, and complete the work themselves.
+
+Dubot turns a support answer into an approved action inside the product. It gives CX teams a way to help customers complete real tasks while keeping the business in control of what can happen.
+
+![Dubot connects support intent to approved product actions](/assets/architecture.svg)
+
+## What Dubot adds
+
+<CardGroup cols={3}>
+  <Card title="Understand the request" icon="message">
+    Receive customer intent and relevant context from a support conversation or product surface.
+  </Card>
+  <Card title="Choose an approved action" icon="shield-check">
+    Match the request to an action the business has reviewed and allowed.
+  </Card>
+  <Card title="Help complete the task" icon="cursor-click">
+    Guide or perform the approved steps in the product through the appropriate surface.
+  </Card>
+</CardGroup>
+
+## Why CX teams start the conversation
+
+CX leaders see the gap first. Answers are getting faster, but many contacts still end with the customer doing the hard part. Dubot is designed for requests where resolution requires a product action, not another paragraph.
+
+Examples might include updating an account setting, correcting a configuration, or completing a known workflow. Each proposed use case is reviewed during pilot design. An example here does not mean that action is generally available.
+
+## What technical evaluators need to know
+
+Dubot is not intended to receive unrestricted access to a product. A pilot starts with a small set of named journeys and explicit boundaries.
+
+<Steps>
+  <Step title="Define the allowed outcome">
+    CX and product owners choose one high-value customer task.
+  </Step>
+  <Step title="Map the product journey">
+    Dubot identifies the relevant screens, states, and completion signals.
+  </Step>
+  <Step title="Set the control points">
+    The team agrees what Dubot may suggest, what requires confirmation, and what remains unavailable.
+  </Step>
+  <Step title="Test before exposure">
+    The journey is evaluated in a controlled environment before it reaches customers.
+  </Step>
+</Steps>
+
+<CardGroup cols={2}>
+  <Card title="See how it works" icon="diagram-project" href="/concepts/how-dubot-works">
+    Follow the request from support conversation to verified outcome.
+  </Card>
+  <Card title="Plan a pilot" icon="flask" href="/pilots/pilot-guide">
+    See the smallest useful contribution from CX, product, and technical teams.
+  </Card>
+</CardGroup>

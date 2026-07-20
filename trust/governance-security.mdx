@@ -1,0 +1,50 @@
+---
+title: "Governance and security"
+description: "The questions that define a safe Dubot pilot"
+---
+
+## Authority should be designed, not assumed
+
+An action layer is useful because it can affect the product. That is also why its authority must be explicit, narrow, and observable.
+
+Dubot's intended governance model begins with named journeys and agreed control points. It does not begin with unrestricted product access.
+
+## Pilot safeguards
+
+<CardGroup cols={2}>
+  <Card title="Bounded scope" icon="crop-simple">
+    The pilot covers a small number of reviewed customer outcomes.
+  </Card>
+  <Card title="Explicit confirmation" icon="circle-check">
+    Sensitive or consequential steps can require customer or agent approval.
+  </Card>
+  <Card title="Known completion" icon="flag-checkered">
+    Each journey defines evidence of success, failure, or safe stopping.
+  </Card>
+  <Card title="Visible recovery" icon="rotate-left">
+    Unexpected state should lead to a clear stop or handoff, not hidden improvisation.
+  </Card>
+</CardGroup>
+
+## Technical review checklist
+
+Before a pilot moves beyond a controlled test, Dubot and the customer should document:
+
+- environments and domains in scope;
+- user identity and session assumptions;
+- credentials or tokens, if any, and how they are stored;
+- the minimum data passed into and out of a journey;
+- actions that are allowed, confirmation-gated, or prohibited;
+- logging, retention, and access expectations;
+- failure, recovery, and support ownership;
+- testing and release approval.
+
+## Claims that require verification
+
+<Warning>
+  This prototype does not make claims about certifications, encryption standards, data residency, subprocessors, penetration testing, uptime, or contractual controls. Those details must come from verified product and company evidence before publication.
+</Warning>
+
+## A practical evaluation principle
+
+The first question is not "Can the system click anything?" It is "Can this one approved customer outcome be completed safely, predictably, and visibly?"

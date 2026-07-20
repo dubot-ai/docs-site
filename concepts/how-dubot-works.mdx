@@ -1,0 +1,56 @@
+---
+title: "How Dubot works"
+description: "A technical model for turning customer intent into controlled product action"
+---
+
+Dubot sits between a customer request and the product experience. It translates intent into a known journey, operates through an approved surface, and checks whether the expected result occurred.
+
+## The action loop
+
+<Steps>
+  <Step title="Receive intent and context">
+    A support AI, agent, or in-product surface passes the customer request and the context needed for the journey.
+  </Step>
+  <Step title="Resolve the journey">
+    Dubot identifies a reviewed journey that matches the request. If no suitable journey exists, it should stop or fall back rather than improvise a new write action.
+  </Step>
+  <Step title="Check state and policy">
+    Dubot evaluates the current product state, the allowed scope, and any required confirmation before continuing.
+  </Step>
+  <Step title="Guide or act">
+    Browserbot or the contextual sidepanel helps the customer complete the next approved step.
+  </Step>
+  <Step title="Verify the result">
+    Dubot checks for the expected state change and reports whether the journey completed, needs attention, or could not continue safely.
+  </Step>
+</Steps>
+
+## Control model
+
+Dubot is designed around bounded journeys rather than open-ended control.
+
+| Control | What it answers |
+| --- | --- |
+| Approved journey | Is this customer outcome supported? |
+| Product state | Is the interface in the expected condition? |
+| Confirmation | Does the customer or agent need to approve this step? |
+| Completion signal | How do we know the intended result occurred? |
+| Failure behavior | What happens if Dubot cannot proceed confidently? |
+
+<Warning>
+  Exact runtime, identity, data handling, and audit behavior must be confirmed for each pilot. This page describes the intended control model, not a universal deployment contract.
+</Warning>
+
+## Current status
+
+<AccordionGroup>
+  <Accordion title="Pilot">
+    Bounded customer journeys, Browserbot-based interaction, explicit approval points, and outcome verification are being evaluated with an early pilot customer.
+  </Accordion>
+  <Accordion title="In product development">
+    The contextual sidepanel, reusable governance controls, and support-platform connection patterns are being shaped alongside pilot learning.
+  </Accordion>
+  <Accordion title="Not promised here">
+    General availability, a public API, prebuilt connectors, deployment models, and formal compliance claims are not implied by this documentation.
+  </Accordion>
+</AccordionGroup>

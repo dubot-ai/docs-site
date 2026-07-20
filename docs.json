@@ -1,0 +1,61 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "maple",
+  "name": "Dubot Docs",
+  "description": "Technical documentation for evaluating and piloting Dubot",
+  "colors": {
+    "primary": "#0D1341",
+    "light": "#F4BEAE",
+    "dark": "#EA6242"
+  },
+  "fonts": {
+    "heading": {
+      "family": "Schibsted Grotesk",
+      "weight": 700
+    },
+    "body": {
+      "family": "Schibsted Grotesk",
+      "weight": 400
+    }
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "logo": {
+    "light": "/assets/logo-light.svg",
+    "dark": "/assets/logo-dark.svg"
+  },
+  "favicon": "/assets/favicon.svg",
+  "appearance": {
+    "default": "light"
+  },
+  "seo": {
+    "metatags": {
+      "canonical": "https://docs.dubot.ai"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Start here",
+            "pages": ["index", "concepts/how-dubot-works"]
+          },
+          {
+            "group": "Product",
+            "pages": ["surfaces/overview", "integrations/overview"]
+          },
+          {
+            "group": "Evaluation",
+            "pages": ["trust/governance-security", "pilots/pilot-guide"]
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "socials": {}
+  }
+}

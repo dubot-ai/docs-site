@@ -1,0 +1,68 @@
+---
+title: "Pilot guide"
+description: "Evaluate one high-value customer action without creating a platform project"
+---
+
+## Start with one resolution worth proving
+
+The goal of a Dubot pilot is not to automate the entire support operation. It is to learn whether one recurring customer request can move from explanation to controlled resolution inside the product.
+
+<Info>
+  Dubot is working with its first early pilot customer. This guide reflects an emerging process, not a mature deployment program.
+</Info>
+
+## A good first journey
+
+Choose a request that is:
+
+- common enough to matter;
+- frustrating because the answer still leaves work for the customer;
+- completed through a product journey the team understands;
+- bounded enough to test safely;
+- measurable through a visible end state.
+
+Avoid starting with a journey that is highly destructive, poorly understood, dominated by unusual exceptions, or dependent on several unfinished integrations.
+
+## What each team contributes
+
+| Team | Smallest useful contribution |
+| --- | --- |
+| CX | One recurring request, example conversations, and the desired customer outcome |
+| Product | The expected journey, edge cases, and success state |
+| Technical | Access to a controlled environment plus review of identity, security, and failure behavior |
+| Dubot | Journey mapping, surface configuration, testing, and a reviewable pilot experience |
+
+## Pilot sequence
+
+<Steps>
+  <Step title="Select">
+    Agree on one customer request and define what resolved means.
+  </Step>
+  <Step title="Map">
+    Document the product states, decisions, and known exceptions.
+  </Step>
+  <Step title="Control">
+    Mark allowed actions, approval points, stop conditions, and data boundaries.
+  </Step>
+  <Step title="Test">
+    Run representative cases in a controlled environment and inspect failures.
+  </Step>
+  <Step title="Learn">
+    Compare completion, customer effort, failure modes, and operational burden before expanding scope.
+  </Step>
+</Steps>
+
+## Suggested evidence
+
+A pilot should produce evidence, not just a demo:
+
+- journey completion and safe-stop rates;
+- where customers or agents hesitate or intervene;
+- unexpected product states;
+- time and effort compared with the existing resolution path;
+- the work required to add or maintain the journey;
+- the controls required before broader exposure.
+
+## The first technical conversation
+
+The first conversation should confirm feasibility, not design a full implementation. Bring the chosen journey, a test environment, and the people who understand identity and product risk. Dubot can use that session to turn unknowns into a small verification list.

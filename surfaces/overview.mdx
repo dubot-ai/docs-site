@@ -1,0 +1,49 @@
+---
+title: "Surfaces"
+description: "Where customers, agents, and Dubot meet"
+---
+
+## One action layer, multiple surfaces
+
+The same approved journey can appear differently depending on where the customer needs help. Dubot is being designed around two product surfaces and connections to support AI.
+
+![Browserbot and sidepanel surfaces](/assets/surfaces.svg)
+
+## Browserbot
+
+Browserbot works with the existing product interface. It can interpret the current screen, identify the next step in a reviewed journey, and help move the customer toward a verified outcome.
+
+Browserbot is useful when:
+
+- the task already exists in the product interface;
+- the journey spans several screens or UI states;
+- the customer benefits from help in context;
+- rebuilding the workflow as a separate integration would add unnecessary work.
+
+<Info>
+  **Pilot surface:** Browserbot is the primary surface being evaluated in the first pilot. Supported behavior remains limited to reviewed journeys and agreed controls.
+</Info>
+
+## Contextual sidepanel
+
+The sidepanel is intended to make the journey legible. It can explain what Dubot is doing, show progress, request confirmation, and give the customer or agent a clear place to pause or recover.
+
+The sidepanel should not become a second version of the product. Its job is to provide context and control while the work happens in the real interface.
+
+<Note>
+  **Product direction:** The sidepanel experience is still being developed. Final behavior and availability should not be assumed from this description.
+</Note>
+
+## Support AI
+
+A support system can remain the conversational entry point. When an answer is not enough, it can offer an eligible Dubot journey and pass the customer into the appropriate product surface.
+
+This keeps responsibilities clear:
+
+| Layer | Responsibility |
+| --- | --- |
+| Support AI | Understand the conversation and explain the option |
+| Dubot | Select and govern the approved product journey |
+| Browserbot | Work with the live product interface |
+| Sidepanel | Show context, progress, and control |
+| Product | Remain the source of truth for the resulting state |

@@ -1,0 +1,53 @@
+---
+title: "Integrations"
+description: "How Dubot can connect support intent to product action"
+---
+
+## Keep the support stack. Add an action layer.
+
+Dubot is designed to work alongside the tools a CX team already uses. The support platform remains the place where a request is understood. Dubot becomes relevant when resolving that request requires controlled work inside the product.
+
+![Example support entry points connecting through Dubot to the product](/assets/integrations.svg)
+
+<CardGroup cols={3}>
+  <Card title="Support platforms" icon="headset">
+    Systems such as Zendesk, Intercom, Salesforce, or a custom support experience can be evaluated as conversational entry points.
+  </Card>
+  <Card title="Support AI" icon="sparkles">
+    An AI assistant can identify an eligible action and hand off the context required to begin a reviewed journey.
+  </Card>
+  <Card title="Your product" icon="window">
+    Browserbot and the sidepanel help complete the work in the product where the source-of-truth state already lives.
+  </Card>
+</CardGroup>
+
+<Warning>
+  The names above describe the integration category and evaluation targets. They do not claim that prebuilt connectors are generally available.
+</Warning>
+
+## The integration contract
+
+A pilot integration should stay intentionally small. The exact mechanism depends on the support system and product environment, but the contract needs to answer five questions.
+
+| Question | Minimum pilot answer |
+| --- | --- |
+| What starts a journey? | A named support intent or deliberate user choice |
+| What context is passed? | Only the fields needed for the approved journey |
+| How is the user identified? | An agreed identity and session model |
+| Where does action occur? | A controlled product environment and surface |
+| What returns to support? | A clear completed, stopped, or needs-attention result |
+
+## A typical handoff
+
+```text
+Customer request
+  -> support system identifies an eligible journey
+  -> customer or agent chooses to continue
+  -> Dubot receives the minimum required context
+  -> approved journey opens in the product
+  -> result is verified and reported
+```
+
+## What we do not need on day one
+
+A useful pilot should not require a broad API program, a complete workflow catalog, or a production-wide rollout. We begin with one valuable request and the narrowest connection that can test it safely.
