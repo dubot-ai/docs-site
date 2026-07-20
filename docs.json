@@ -45,7 +45,7 @@
           },
           {
             "group": "Product",
-            "pages": ["surfaces/overview", "integrations/overview"]
+            "pages": ["surfaces/overview", "product/knowledge", "integrations/overview"]
           },
           {
             "group": "Evaluation",

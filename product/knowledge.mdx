@@ -1,0 +1,77 @@
+---
+title: "Knowledge"
+description: "How Dubot builds a reviewable source of product knowledge"
+---
+
+## Give every approved journey the same product context
+
+CX teams already maintain the answers that explain how their product works. Dubot brings those sources into a workspace corpus so the team can inspect what has been collected, keep it current, and prepare it for use by approved journeys.
+
+<CardGroup cols={3}>
+  <Card title="Crawl a Help Center" icon="globe">
+    Add a public Help Center as a source and collect the pages available to the crawler.
+  </Card>
+  <Card title="Upload documents" icon="file-text">
+    Add PDF, DOCX, Markdown, and text files that contain relevant product guidance.
+  </Card>
+  <Card title="Review the corpus" icon="database">
+    Inspect sources and extracted articles, then monitor size, sync status, and content health.
+  </Card>
+</CardGroup>
+
+## What exists today
+
+The current product supports the ingestion and review side of the knowledge system.
+
+- Add a public Help Center URL or upload supported documents.
+- Inspect the sources and articles collected for a workspace.
+- Re-crawl an individual source or sync all crawl sources manually.
+- Enable a weekly sync for crawl sources.
+- Review article count, corpus size, sync status, and content that is no longer linked from its source.
+- Remove a source and its extracted content from the workspace corpus.
+
+<Info>
+  Knowledge ingestion is available in the product today. Runtime retrieval, where an agent searches this corpus while helping complete a journey, is still in development.
+</Info>
+
+## How ingestion works
+
+```text
+Public Help Center or uploaded documents
+  -> deterministic extraction
+  -> workspace corpus
+  -> source and article review
+  -> approved journey context (in development)
+```
+
+Ingestion is deterministic. Dubot extracts and normalizes source content without using AI to rewrite it during ingestion. This makes the collected material easier to inspect before it becomes part of an agent experience.
+
+Each workspace has one corpus assembled from its connected sources. Crawl sources can be refreshed. Uploaded files are static and must be uploaded again when their content changes.
+
+## Current boundaries
+
+| Area | Current behavior |
+| --- | --- |
+| Crawl access | Publicly accessible Help Center pages |
+| Crawl rules | Source robots directives are honored |
+| Uploaded formats | PDF, DOCX, Markdown, and TXT |
+| Freshness | Manual sync or optional weekly sync for crawl sources |
+| Private sources | Authenticated crawling is not currently supported |
+| Agent retrieval | In development and not yet part of the runtime contract |
+
+<Warning>
+  Adding a source does not mean every article should be available to every journey. Source scope, exclusions, and access expectations should be reviewed as part of a pilot.
+</Warning>
+
+## Decide what belongs in the pilot
+
+A useful knowledge setup starts with a narrow, owned source set. CX and technical teams should agree on:
+
+- which Help Center or documents are authoritative;
+- who owns the accuracy of each source;
+- how often crawl sources need to be refreshed;
+- which sections or documents should be excluded;
+- whether any source contains customer, employee, or other sensitive information;
+- which approved journeys will eventually need this context.
+
+The first goal is not to import everything. It is to establish a corpus the team understands and can review before connecting it to agent behavior.
