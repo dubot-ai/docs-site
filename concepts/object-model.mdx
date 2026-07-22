@@ -1,0 +1,49 @@
+---
+title: "Object model"
+description: "The building blocks Dubot uses to turn intent into controlled action"
+---
+
+Dubot organizes everything around a simple structure: small, reviewable building blocks are grouped into capabilities, and capabilities are given to an agent. Understanding these three layers is the fastest way to read the rest of these docs.
+
+## Three layers
+
+```text
+atomic units (actions, pages, knowledge, journeys)
+  -> capabilities (scoped buckets with a description of when to use them)
+    -> agents (a configured assistant that is given capabilities)
+```
+
+## Atomic units
+
+<CardGroup cols={2}>
+  <Card title="Action" icon="zap">
+    An operation the agent can perform, such as calling a product endpoint. Each action carries a risk level and a policy: act automatically, require confirmation, or never. Actions that write always confirm.
+  </Card>
+  <Card title="Page" icon="app-window">
+    A summarized inventory of a screen in the product: what is on it, what it links to, and which controls trigger which operations. Captured once and summarized, not stored as raw markup.
+  </Card>
+  <Card title="Knowledge" icon="book-open">
+    Help center articles and documents ingested into a single reviewable corpus per workspace. See [Knowledge](/product/knowledge) for what exists today.
+  </Card>
+  <Card title="Journey" icon="route">
+    A described workflow, stored as editable text: to accomplish something, call this action, go here, highlight this, and fall back to showing the customer. Journeys are authored and reviewable, not rigid recordings.
+  </Card>
+</CardGroup>
+
+<Note>
+  A journey is one building block among several, not the top-level catalog. It describes how a task is done and can reference actions, pages, and knowledge.
+</Note>
+
+## Capabilities
+
+A capability is a scoped bucket of atomic units with a description of when it should be used. Capabilities are how a team gives an agent a coherent area of responsibility without granting open-ended access. Guardrails such as security boundaries and brand voice are expressed as high-priority rules that travel with the agent.
+
+## Agents
+
+An agent is a configured assistant. Today the product lets a team set an agent's model, reasoning budget, and customer-facing behavior, then attach capabilities and actions after the agent is created. This is the configuration plane. How the agent behaves at runtime is described in [How Dubot works](/concepts/how-dubot-works).
+
+<Info>
+  **Available today:** creating an agent, configuring its model, reasoning budget, and behavior, and attaching capabilities and actions.
+
+  **In development:** runtime knowledge retrieval and reusable governance controls.
+</Info>

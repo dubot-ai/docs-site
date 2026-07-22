@@ -1,0 +1,50 @@
+---
+title: "How journeys and actions are created"
+description: "The ways Dubot learns a product before it acts"
+---
+
+Before Dubot can act inside a product, it needs to know what the product can do. That knowledge comes from three inputs, each with a different level of maturity today.
+
+<CardGroup cols={3}>
+  <Card title="Ingest" icon="globe">
+    A backend crawl of a public help center. No login required. Produces the knowledge corpus.
+  </Card>
+  <Card title="Crawl" icon="radar">
+    A browser extension explores the logged-in product and produces candidate actions, page summaries, and brand styles.
+  </Card>
+  <Card title="Record" icon="circle-dot">
+    A person walks through a workflow in the extension. The recording is codified into a journey and candidate actions.
+  </Card>
+</CardGroup>
+
+## What each input produces
+
+| Input | Requires login | Produces | Status |
+| --- | --- | --- | --- |
+| Ingest | No | Knowledge corpus | Available today |
+| Crawl | Yes | Candidate actions, page summaries, brand styles | In development |
+| Record | Yes | A journey plus candidate actions | In development |
+
+<Note>
+  Recording is designed to work before any SDK is installed, so a first workflow can be captured with nothing added to the product.
+</Note>
+
+## From capture to approved building block
+
+Nothing captured is used blindly. Candidate actions and journeys flow through a single review queue before they can be attached to a capability.
+
+```text
+crawl / record / ingest
+  -> candidate actions, pages, journeys, knowledge
+    -> review queue: dedupe, merge, confirm
+      -> approved building blocks
+        -> grouped into capabilities
+```
+
+<Warning>
+  Automatically captured journeys are a starting point, not a finished workflow. A person reviews, edits, and approves before anything becomes part of an agent experience.
+</Warning>
+
+## Why not just record selectors
+
+Crawl and record capture what a step means, not a fixed path to a UI element. Navigation is stored as intent and resolved at runtime, so captured journeys survive ordinary product changes. See [How Dubot works](/concepts/how-dubot-works) for the runtime model.

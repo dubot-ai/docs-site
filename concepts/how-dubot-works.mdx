@@ -3,7 +3,7 @@ title: "How Dubot works"
 description: "A technical model for turning customer intent into controlled product action"
 ---
 
-Dubot sits between a customer request and the product experience. It translates intent into a known journey, operates through an approved surface, and checks whether the expected result occurred.
+Dubot sits between a customer request and the product experience. It translates intent into a known set of building blocks, operates through an approved surface, and checks whether the expected result occurred. If you have not read the [object model](/concepts/object-model), start there: actions, pages, knowledge, and journeys are grouped into capabilities and given to an agent.
 
 ## Current configuration view
 
@@ -15,31 +15,48 @@ The current Dubot app lets a team configure an agent's model, reasoning budget, 
 
 <Steps>
   <Step title="Receive intent and context">
-    A support AI, agent, or in-product surface passes the customer request and the context needed for the journey.
+    A support AI, agent, or in-product surface passes the customer request and the context needed to act.
   </Step>
-  <Step title="Resolve the journey">
-    Dubot identifies a reviewed journey that matches the request. If no suitable journey exists, it should stop or fall back rather than improvise a new write action.
+  <Step title="Resolve to an approved capability">
+    Dubot matches the request to a capability the business has reviewed. If no suitable action or journey exists, it stops or falls back rather than improvise a new write.
   </Step>
   <Step title="Check state and policy">
     Dubot evaluates the current product state, the allowed scope, and any required confirmation before continuing.
   </Step>
-  <Step title="Guide or act">
-    Browserbot or the contextual sidepanel helps the customer complete the next approved step.
+  <Step title="Do, or fall back to show">
+    When an approved action exists and is reachable, Dubot performs it. When it does not, Browserbot or the contextual sidepanel guides the customer to the right place and shows them the next step.
   </Step>
   <Step title="Verify the result">
-    Dubot checks for the expected state change and reports whether the journey completed, needs attention, or could not continue safely.
+    Dubot checks for the expected state change and reports whether the request was completed, needs attention, or could not continue safely.
   </Step>
 </Steps>
 
+## Runtime model
+
+Two ideas shape how Dubot behaves once a request is approved.
+
+<CardGroup cols={2}>
+  <Card title="Do, falls back to Show" icon="git-branch">
+    Whether Dubot acts or guides is decided at runtime, not fixed in advance. If the approved action is available it runs; otherwise Dubot navigates the customer to the right screen and shows them the step. The customer is never left at a dead end.
+  </Card>
+  <Card title="Intent, not selectors" icon="compass">
+    Navigation targets are stored as intent, such as "the settings link in the primary navigation," and resolved against the live interface at runtime by a fast model, with resolutions cached and retried. This avoids brittle stored selectors that break when a product's markup changes.
+  </Card>
+</CardGroup>
+
+<Note>
+  The runtime model describes intended behavior. The contextual sidepanel and runtime knowledge retrieval are in active development.
+</Note>
+
 ## Control model
 
-Dubot is designed around bounded journeys rather than open-ended control.
+Dubot is designed around bounded, approved building blocks rather than open-ended control.
 
 | Control | What it answers |
 | --- | --- |
-| Approved journey | Is this customer outcome supported? |
+| Approved capability | Is this customer outcome supported? |
+| Action policy | Should this step act automatically, confirm, or never run? |
 | Product state | Is the interface in the expected condition? |
-| Confirmation | Does the customer or agent need to approve this step? |
 | Completion signal | How do we know the intended result occurred? |
 | Failure behavior | What happens if Dubot cannot proceed confidently? |
 
@@ -51,10 +68,10 @@ Dubot is designed around bounded journeys rather than open-ended control.
 
 <AccordionGroup>
   <Accordion title="Available for customer evaluation">
-    Bounded customer journeys, Browserbot-based interaction, explicit approval points, and outcome verification can be evaluated with a focused first use case.
+    Agent configuration, attaching capabilities and actions, knowledge ingestion, Browserbot-based interaction, explicit approval points, and outcome verification can be evaluated with a focused first use case.
   </Accordion>
   <Accordion title="Coming next">
-    The contextual sidepanel, reusable governance controls, knowledge retrieval, and support-platform connection patterns are in active product development.
+    The contextual sidepanel, runtime knowledge retrieval, reusable governance controls, and support-platform connection patterns are in active product development.
   </Accordion>
   <Accordion title="Not promised here">
     General availability, a public API, prebuilt connectors, deployment models, and formal compliance claims are not implied by this documentation.

@@ -7,7 +7,7 @@ description: "The questions that define safe, controlled product action"
 
 An action layer is useful because it can affect the product. That is also why its authority must be explicit, narrow, and observable.
 
-Dubot's intended governance model begins with named journeys and agreed control points. It does not begin with unrestricted product access.
+Dubot's intended governance model begins with named capabilities and agreed control points. It does not begin with unrestricted product access.
 
 ## Initial rollout safeguards
 
@@ -16,7 +16,7 @@ Dubot's intended governance model begins with named journeys and agreed control 
     The initial rollout covers a small number of reviewed customer outcomes.
   </Card>
   <Card title="Explicit confirmation" icon="circle-check">
-    Sensitive or consequential steps can require customer or agent approval.
+    Sensitive or consequential steps can require customer or agent approval, and actions that write always confirm.
   </Card>
   <Card title="Known completion" icon="flag">
     Each journey defines evidence of success, failure, or safe stopping.
@@ -25,6 +25,18 @@ Dubot's intended governance model begins with named journeys and agreed control 
     Unexpected state should lead to a clear stop or handoff, not hidden improvisation.
   </Card>
 </CardGroup>
+
+## How actions are governed
+
+Every action carries a policy that decides how it may run.
+
+| Policy | Behavior |
+| --- | --- |
+| Auto | May run without a confirmation step |
+| Confirm | Requires customer or agent approval before running |
+| Never | Is not available to the agent |
+
+Actions that write to the product always confirm. Read-only actions can be allowed to run automatically when a team is comfortable with their scope.
 
 ## Technical review checklist
 

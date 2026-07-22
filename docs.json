@@ -41,7 +41,11 @@
         "groups": [
           {
             "group": "Start here",
-            "pages": ["index", "concepts/how-dubot-works"]
+            "pages": ["index"]
+          },
+          {
+            "group": "Concepts",
+            "pages": ["concepts/object-model", "concepts/how-dubot-works", "concepts/acquisition"]
           },
           {
             "group": "Product",

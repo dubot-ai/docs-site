@@ -5,23 +5,23 @@ description: "Where customers, agents, and Dubot meet"
 
 ## One action layer, multiple surfaces
 
-The same approved journey can appear differently depending on where the customer needs help. Dubot is being designed around two product surfaces and connections to support AI.
+The same approved capability can appear differently depending on where the customer needs help. Dubot is being designed around two product surfaces and connections to support AI.
 
 <CardGroup cols={3}>
   <Card title="Browserbot" icon="bot">
-    Works with the live product interface to help complete a reviewed journey.
+    Works with the live product interface to guide a customer through a reviewed step.
   </Card>
   <Card title="Contextual sidepanel" icon="panel-right">
     Shows context, progress, confirmation, and recovery alongside the product.
   </Card>
   <Card title="Support AI" icon="sparkles">
-    Recognizes an eligible request and offers the appropriate approved journey.
+    Recognizes an eligible request and offers the appropriate approved capability.
   </Card>
 </CardGroup>
 
 ## Browserbot
 
-Browserbot works with the existing product interface. It can interpret the current screen, identify the next step in a reviewed journey, and help move the customer toward a verified outcome.
+Browserbot works with the existing product interface. In its first version it is descriptive and human-scripted: guided by an intent, it can take the customer to the right place, highlight the relevant control, prompt a click, and explain the step. It is the "show" half of Dubot's runtime, used when a direct action is not available or when a step benefits from being done in context.
 
 Browserbot is useful when:
 
@@ -46,14 +46,14 @@ The sidepanel should not become a second version of the product. Its job is to p
 
 ## Support AI
 
-A support system can remain the conversational entry point. When an answer is not enough, it can offer an eligible Dubot journey and pass the customer into the appropriate product surface.
+A support system can remain the conversational entry point. When an answer is not enough, it can offer an eligible Dubot capability and pass the customer into the appropriate product surface.
 
 This keeps responsibilities clear:
 
 | Layer | Responsibility |
 | --- | --- |
 | Support AI | Understand the conversation and explain the option |
-| Dubot | Select and govern the approved product journey |
+| Dubot | Select and govern the approved capability |
 | Browserbot | Work with the live product interface |
 | Sidepanel | Show context, progress, and control |
 | Product | Remain the source of truth for the resulting state |
