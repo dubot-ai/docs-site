@@ -25,6 +25,15 @@ Dubot is designed to work alongside the tools a CX team already uses. The suppor
   The names above describe the integration category and evaluation targets. They do not claim that prebuilt connectors are generally available.
 </Warning>
 
+## How actions relate to your product
+
+Dubot adds an action layer, not a new backend. A few properties keep the integration surface small.
+
+- **Configuration, not new code.** Actions are defined against the APIs your product already exposes. Dubot does not add new API endpoints.
+- **Your writes ship from your code.** Anything that changes state in the product runs from your own codebase, shipped by your team, not from Dubot.
+- **It runs where the SDK already is.** The action layer operates inside the SDK you install, so there is no separate service for your team to stand up and deploy.
+- **Reviewable before it runs.** Every action is inspectable, in the Actions interface or over MCP, before it is attached to an agent.
+
 ## The integration contract
 
 A first integration should stay intentionally small. The exact mechanism depends on the support system and product environment, but the contract needs to answer five questions.

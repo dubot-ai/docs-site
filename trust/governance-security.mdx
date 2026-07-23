@@ -38,6 +38,18 @@ Every action carries a policy that decides how it may run.
 
 Actions that write to the product always confirm. Read-only actions can be allowed to run automatically when a team is comfortable with their scope.
 
+## What the action layer can see
+
+Through a connected product, Dubot sees the shape of your product's own API responses, the same information a developer would see with the browser network tab open while using the product. It does not receive hidden or privileged access beyond what the connected surface already returns.
+
+## How support data is handled
+
+When a support conversation is used to measure or improve deflection, that data is read-only and kept to a minimum footprint. Conversation content should be de-identified or reduced to outcome-level signal, according to what the customer's security team prefers. Connector scopes should be requested at the minimum needed for a specific use case, and narrowed when a smaller scope is enough.
+
+<Note>
+  Actions are reviewable before use, in the Actions interface or over MCP, so a security or engineering team can inspect exactly what an action does before it is attached to an agent.
+</Note>
+
 ## Technical review checklist
 
 Before customer use moves beyond a controlled test, Dubot and the customer should document:
