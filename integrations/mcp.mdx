@@ -1,9 +1,25 @@
 ---
-title: "MCP"
-description: "Connect an authorized AI client to inspect and configure a Dubot workspace"
+title: "MCP servers"
+description: "Choose the public documentation MCP or Dubot's protected product MCP"
 ---
 
-## Manage Dubot from an AI client
+Dubot offers two MCP servers for different jobs. One reads the public
+documentation. The other works with an authorized Dubot workspace.
+
+## Choose the right MCP
+
+| Service | Use it for | Access | Server URL |
+| --- | --- | --- | --- |
+| Documentation MCP | Search and read Dubot's public documentation | Public and read-only | `https://dubot.mintlify.site/mcp` |
+| Product MCP | Inspect workspace configuration, prepare Test changes, and publish approved changes | OAuth and an explicit workspace grant | `https://app.dubot.ai/mcp` |
+
+<Note>
+  The documentation MCP cannot inspect a customer workspace, change Dubot
+  configuration, publish to Production, or run product actions. Use the
+  protected product MCP for workspace administration.
+</Note>
+
+## Manage a workspace with the product MCP
 
 Dubot provides a protected remote Model Context Protocol (MCP) server for
 authorized workspace administration. An MCP-capable client can use it to
@@ -11,7 +27,7 @@ inspect Dubot configuration, prepare changes in Test, review what would be
 published, and publish approved configuration to Production.
 
 <Info>
-  **Available now:** The Dubot MCP is live at
+  **Available now:** The Dubot product MCP is live at
   `https://app.dubot.ai/mcp`. It requires OAuth authentication and an explicit
   workspace grant.
 </Info>
@@ -60,9 +76,9 @@ Dubot authorization boundary stay the same.
 
 ## What the MCP does not provide
 
-The MCP is Dubot's authenticated configuration and publishing surface. It does
-not provide anonymous access, grant access to workspaces outside the OAuth
-consent, or turn the public marketing website into an action surface.
+The product MCP is Dubot's authenticated configuration and publishing surface.
+It does not provide anonymous access, grant access to workspaces outside the
+OAuth consent, or turn the public marketing website into an action surface.
 
 The customer product remains the source of truth for product state and
 permissions. Product actions still follow the action policies and confirmation
@@ -93,3 +109,11 @@ inspect current configuration
 
 Use the smallest workspace grant that supports the task. Remove the connection
 from the MCP client when it is no longer needed.
+
+## Read the docs from an AI client
+
+Connect to `https://dubot.mintlify.site/mcp` when an AI client needs public
+product documentation rather than workspace access. This server is useful for
+questions about Dubot's product model, integration contract, governance,
+workflow recording, and pilot process. It does not require a Dubot workspace
+grant.
