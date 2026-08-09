@@ -1,6 +1,6 @@
 ---
-title: "How journeys and actions are created"
-description: "The ways Dubot learns a product before it acts"
+title: "How Dubot learns a product"
+description: "Record workflows and turn captured calls into reviewed candidate actions"
 ---
 
 Before Dubot can act inside a product, it needs to know what the product can do. That knowledge comes from three inputs, each with a different level of maturity today.
@@ -10,10 +10,10 @@ Before Dubot can act inside a product, it needs to know what the product can do.
     A backend crawl of a public help center. No login required. Produces the knowledge corpus.
   </Card>
   <Card title="Crawl" icon="radar">
-    A browser extension explores the logged-in product and produces candidate actions, page summaries, and brand styles.
+    An in-development browser pass explores the logged-in product and produces candidate actions, page summaries, and brand styles.
   </Card>
   <Card title="Record" icon="circle-dot">
-    A person walks through a workflow in the extension. The recording is codified into a journey and candidate actions.
+    A person uses the product normally while the browser extension records the calls triggered by the workflow. Dubot turns the captured calls into candidate actions for review.
   </Card>
 </CardGroup>
 
@@ -23,28 +23,59 @@ Before Dubot can act inside a product, it needs to know what the product can do.
 | --- | --- | --- | --- |
 | Ingest | No | Knowledge corpus | Available today |
 | Crawl | Yes | Candidate actions, page summaries, brand styles | In development |
-| Record | Yes | A journey plus candidate actions | In development |
+| Record | Yes | Candidate actions from a recorded workflow | Available today |
 
 <Note>
-  Recording is designed to work before any SDK is installed, so a first workflow can be captured with nothing added to the product.
+  Recording works before any SDK is installed. The extension observes calls
+  made during normal, logged-in product use; it does not add those calls to the
+  action catalog automatically.
 </Note>
 
-## From capture to approved building block
+## Record, review, and add
 
-Nothing captured is used blindly. Candidate actions and journeys flow through a single review queue before they can be attached to a capability.
+<Steps>
+  <Step title="Record a real workflow">
+    Start recording in the extension, then use the product normally. The
+    extension captures the calls triggered by the workflow so the recording
+    reflects the product's actual behavior.
+  </Step>
+  <Step title="Review discovered calls">
+    Finish the recording and inspect the candidate actions Dubot found. Choose
+    the calls that represent useful product operations rather than adding every
+    request indiscriminately.
+  </Step>
+  <Step title="Define the action contract">
+    Review the method and endpoint, correct the description and assumptions,
+    decide which inputs come from product context or the conversation, and
+    choose which response data an agent can use.
+  </Step>
+  <Step title="Set the runtime policy">
+    Decide whether the action can run automatically, requires confirmation, or
+    must not be available to an agent. Add it to the catalog only after that
+    review is complete.
+  </Step>
+</Steps>
+
+Nothing captured is used blindly. A recorded call remains a candidate until a
+person reviews its contract and explicitly adds it to the action catalog.
 
 ```text
-crawl / record / ingest
-  -> candidate actions, pages, journeys, knowledge
-    -> review queue: dedupe, merge, confirm
-      -> approved building blocks
-        -> grouped into capabilities
+record a workflow
+  -> capture the calls it triggers
+    -> discover candidate actions
+      -> review inputs, outputs, and runtime policy
+        -> add approved actions to the catalog
 ```
 
 <Warning>
-  Automatically captured journeys are a starting point, not a finished workflow. A person reviews, edits, and approves before anything becomes part of an agent experience.
+  Recording does not make an action agent-callable by itself. A person must
+  review and approve each candidate before it becomes part of an agent
+  experience.
 </Warning>
 
 ## Why not just record selectors
 
-Crawl and record capture what a step means, not a fixed path to a UI element. Navigation is stored as intent and resolved at runtime, so captured journeys survive ordinary product changes. See [How Dubot works](/concepts/how-dubot-works) for the runtime model.
+Recording learns from the product calls behind a workflow rather than relying
+only on selectors for visible controls. The reviewed action contract describes
+the operation an agent can use, while navigation is resolved separately at
+runtime. See [How Dubot works](/concepts/how-dubot-works) for the runtime model.
