@@ -49,7 +49,7 @@
           },
           {
             "group": "Product",
-            "pages": ["surfaces/overview", "product/knowledge", "integrations/overview"]
+            "pages": ["surfaces/overview", "product/knowledge", "integrations/overview", "integrations/mcp"]
           },
           {
             "group": "Evaluation",

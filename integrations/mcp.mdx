@@ -1,0 +1,94 @@
+---
+title: "MCP"
+description: "Connect an authorized AI client to inspect and configure a Dubot workspace"
+---
+
+## Manage Dubot from an AI client
+
+Dubot provides a protected remote Model Context Protocol (MCP) server for
+authorized workspace administration. An MCP-capable client can use it to
+inspect Dubot configuration, prepare changes in Test, review what would be
+published, and publish approved configuration to Production.
+
+<Info>
+  **Available now:** The Dubot MCP is live at
+  `https://app.dubot.ai/mcp`. It requires OAuth authentication and an explicit
+  workspace grant.
+</Info>
+
+## Connect
+
+<Steps>
+  <Step title="Add the remote server">
+    In an MCP-capable client, add `https://app.dubot.ai/mcp` as a remote MCP
+    server.
+  </Step>
+  <Step title="Complete OAuth">
+    Follow the sign-in flow opened by the client. Dubot does not require you to
+    paste an API key into the client.
+  </Step>
+  <Step title="Choose the workspace boundary">
+    Grant access only to the Dubot workspaces the client should be able to
+    inspect or manage.
+  </Step>
+  <Step title="Review before publishing">
+    Keep authoring work in Test, inspect unpublished changes and their
+    dependencies, then approve a separate publish operation when the intended
+    Production change is clear.
+  </Step>
+</Steps>
+
+The exact labels in the connection flow vary by MCP client. The server URL and
+Dubot authorization boundary stay the same.
+
+## What an authorized client can do
+
+| Area | Examples |
+| --- | --- |
+| Workspace inspection | List the workspaces included in the grant and inspect their Dubot configuration |
+| Agents and capabilities | Read configuration, create or update Test drafts, and inspect relationships |
+| Actions | Review action definitions and activity, then create or update Test drafts |
+| Brand | Inspect or update Test brand configuration |
+| Guidance and activity | Review guidance runs, themes, metrics, and agent conversations available to the workspace |
+| Publishing | List unpublished Test changes, preview transitive dependencies, and publish selected configuration to Production |
+
+<Warning>
+  Publishing changes or brand configuration affects Production. Review the
+  selected entities, dependencies, and target workspace before approving a
+  publish operation in any MCP client.
+</Warning>
+
+## What the MCP does not provide
+
+The MCP is Dubot's authenticated configuration and publishing surface. It does
+not provide anonymous access, grant access to workspaces outside the OAuth
+consent, or turn the public marketing website into an action surface.
+
+The customer product remains the source of truth for product state and
+permissions. Product actions still follow the action policies and confirmation
+model described in [Governance and security](/trust/governance-security).
+
+## Authorization and discovery
+
+An unauthenticated connection starts the OAuth discovery flow. The server
+publishes protected-resource and authorization-server metadata so a compatible
+client can locate the authorization service, complete user consent, and retry
+with an access token.
+
+The public marketing domain will also advertise the protected service through
+an API catalog. That discovery link is planned separately from this
+documentation and does not change the MCP's authentication requirements.
+
+## Recommended operating sequence
+
+```text
+inspect current configuration
+  -> create or update drafts in Test
+  -> list unpublished changes
+  -> preview selected changes and dependencies
+  -> confirm the workspace and Production effect
+  -> publish the approved selection
+```
+
+Use the smallest workspace grant that supports the task. Remove the connection
+from the MCP client when it is no longer needed.
