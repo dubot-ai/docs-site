@@ -17,7 +17,7 @@ Dubot is designed to work alongside the tools a CX team already uses. The suppor
     An AI assistant can identify an eligible action and hand off the context required to begin a reviewed journey.
   </Card>
   <Card title="Your product" icon="app-window">
-    Browserbot and the sidepanel help complete the work in the product where the source-of-truth state already lives.
+    Browserbot and connected actions help complete the work where the source-of-truth state already lives.
   </Card>
 </CardGroup>
 
@@ -25,7 +25,16 @@ Dubot is designed to work alongside the tools a CX team already uses. The suppor
   The names above describe the integration category and evaluation targets. They do not claim that prebuilt connectors are generally available.
 </Warning>
 
-## How actions relate to your product
+## Two execution routes
+
+Dubot can work through the product's live interface or through a reviewed action contract. A journey can use either route when it is available and approved.
+
+| Route | Where it operates | Best suited to |
+| --- | --- | --- |
+| Browserbot | Inside the customer's signed-in product session | Live navigation, contextual guidance, form preparation, and governed UI interaction |
+| Connected action | Through a reviewed product API or client-side action contract | Stable reads and writes with typed inputs, product authorization, and explicit result handling |
+
+## How connected actions relate to your product
 
 Dubot adds an action layer, not a new backend. A few properties keep the integration surface small.
 
@@ -33,6 +42,8 @@ Dubot adds an action layer, not a new backend. A few properties keep the integra
 - **Your writes ship from your code.** Anything that changes state in the product runs from your own codebase, shipped by your team, not from Dubot.
 - **It runs where the SDK already is.** The action layer operates inside the SDK you install, so there is no separate service for your team to stand up and deploy.
 - **Reviewable before it runs.** Every action is inspectable, in the Actions interface or over MCP, before it is attached to an agent.
+
+Browserbot uses the permissions of the signed-in product session. A connected action uses the authorization and business rules enforced by the customer's product. Neither route should be treated as unrestricted access.
 
 <Card title="Manage Dubot over MCP" icon="plug" href="/integrations/mcp">
   Connect an authorized AI client to inspect workspace configuration, prepare

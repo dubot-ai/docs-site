@@ -1,0 +1,66 @@
+---
+title: "Product Map"
+description: "How Dubot represents product meaning, account differences, and product change"
+---
+
+## A living model of the product
+
+A Browserbot journey should not be a chain of permanent selectors. It needs a reviewable model of what the product means, what the customer is trying to accomplish, and what evidence shows that the task is complete.
+
+The Product Map brings together:
+
+- pages and important product states;
+- entities such as an invoice, recipe, workspace, or configuration;
+- semantic targets such as a status field, primary navigation item, or submission control;
+- capabilities and the effects they can produce;
+- journeys, checkpoints, fallbacks, and completion signals;
+- roles, permissions, feature flags, and account-specific variants;
+- current runtime evidence and last-seen product versions.
+
+## Four layers
+
+### Shared product meaning
+
+The shared layer describes concepts that should remain stable across customers. A journey can refer to an invoice due date or recipe ingredient field without making one account's label or markup the universal definition.
+
+### Account overlay
+
+The account overlay resolves differences such as custom fields, terminology, navigation, product tier, feature availability, and permissions. Account-specific variation belongs here rather than in a copied version of every journey.
+
+### Live observation
+
+Before a step runs, Browserbot observes the current page, entity, visible controls, permissions, and expected state. The live product remains execution truth.
+
+### Versioned journey
+
+A journey defines the goal, checkpoints, allowed behavior, approval policy, success conditions, and fallbacks. Changes are reviewed and versioned instead of being learned silently from one run.
+
+## Current and committed behavior
+
+Today, a person creates guidance in the browser extension or promotes an explored journey into a curated guide. The saved guide is a snapshot, while the runtime can use current page evidence to recover when the route has drifted.
+
+<Info>
+  **Available now:** User-authored guidance and promotion of explored journeys into reviewed guides.
+</Info>
+
+<Note>
+  **Committed capability:** Logged-in crawling will add pages and available product behavior to the Product Map. Configurable recrawls will identify product changes, suggest new journeys, and propose updates to existing journeys for review.
+</Note>
+
+## When the product changes
+
+```text
+saved target no longer matches
+  -> resolve from the live interface
+    -> continue and record the deviation, or stop safely
+      -> update journey health
+        -> propose a reviewed map or journey change
+```
+
+A common product change should update the shared map. An account-specific difference should update only that account's overlay. A change that alters the meaning or risk of an operation should invalidate the affected step until it is reviewed.
+
+## Avoid silent forks
+
+A successful recovery is useful evidence, but it should not automatically become permanent configuration. Repeated deviations need to be grouped, reviewed, and either adopted into the shared product map or recorded as a deliberate account variant.
+
+This keeps the system adaptive without making its behavior unreviewable.

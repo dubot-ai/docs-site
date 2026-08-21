@@ -45,15 +45,15 @@
           },
           {
             "group": "Concepts",
-            "pages": ["concepts/object-model", "concepts/how-dubot-works", "concepts/acquisition"]
+            "pages": ["concepts/object-model", "concepts/how-dubot-works", "concepts/product-map", "concepts/acquisition"]
           },
           {
             "group": "Product",
-            "pages": ["surfaces/overview", "product/knowledge", "integrations/overview", "integrations/mcp"]
+            "pages": ["product/browserbot", "surfaces/overview", "product/knowledge", "integrations/overview", "integrations/mcp"]
           },
           {
             "group": "Evaluation",
-            "pages": ["trust/governance-security", "pilots/pilot-guide"]
+            "pages": ["trust/architecture-data", "trust/governance-security", "pilots/pilot-guide"]
           }
         ]
       }
