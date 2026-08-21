@@ -1,6 +1,6 @@
 # Dubot documentation
 
-Public documentation for Dubot, the AI action layer for customer experience teams.
+Public documentation for Dubot, the adaptive product journey and action layer for customer experience teams.
 
 The site is built with Mintlify and deployed from the `main` branch.
 

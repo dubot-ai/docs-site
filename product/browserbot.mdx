@@ -1,0 +1,97 @@
+---
+title: "Browserbot"
+description: "Adaptive product journeys that can guide or act within configured limits"
+---
+
+## A product tour with a brain
+
+A product tour follows an authored sequence. Browserbot starts with the customer's goal, works with the live product interface, and follows a reviewed journey toward a defined outcome.
+
+The goal and controls remain deliberate. The route can adapt:
+
+```text
+deterministic goal
+  -> adaptive route through the live product
+    -> governed guidance or action
+      -> observed result
+```
+
+Browserbot can explain a control, navigate to the right place, prepare information, request approval, interact with the interface, and verify what happened. The exact behavior available in a journey depends on its configuration, the customer's permissions, and the product state at runtime.
+
+<Info>
+  **Available for customer evaluation:** Browserbot can be evaluated through a focused, reviewed customer journey. The supported steps, approval boundaries, and completion signals are agreed for that environment before exposure.
+</Info>
+
+## Browserbot and product tours
+
+| Product tour | Browserbot |
+| --- | --- |
+| Starts from an authored campaign | Starts from the customer's goal |
+| Follows a fixed sequence | Resolves the next step against the live product |
+| Explains predefined screens | Can guide, navigate, prepare, or act |
+| Requires targeting maintenance | Can recover and record when a journey has drifted |
+| Optimized for onboarding and announcements | Optimized for helping complete a task |
+
+A product tour can still be the right tool for a required introduction, release announcement, or fixed onboarding sequence. Browserbot is intended for requests where the right route depends on the customer's current context and goal.
+
+## Journey behavior
+
+Each Browserbot step has an intended effect and a control policy.
+
+| Behavior | Example | Typical control |
+| --- | --- | --- |
+| Observe | Check the current page or state | Automatic |
+| Explain | Highlight and describe a control | Automatic |
+| Navigate | Open the relevant section | Automatic or configurable |
+| Prepare | Fill information without committing it | Configurable |
+| Commit | Save, send, create, or otherwise change product state | Automatic, confirm-first, or unavailable |
+| Verify | Check the expected result | Required by the journey |
+| Recover | Re-resolve a step or offer a safe fallback | Automatic within the journey's confidence boundary |
+
+Governance is based on the expected effect, not the fact that a browser click occurs. Opening a tab, preparing a form, and submitting a consequential change can therefore carry different policies.
+
+## Live resolution and recovery
+
+Guidance is stored as reviewed intent and checkpoints rather than depending on one selector as permanent truth. At runtime, Browserbot observes the current page and resolves the intended target from the available interface evidence.
+
+If a saved target no longer matches, Browserbot can attempt to recover using the live page. The journey should stop or offer a fallback when the target, permissions, or expected effect cannot be resolved confidently.
+
+Recovery is also product feedback. A journey that repeatedly needs a different route can be marked unhealthy and proposed for review instead of silently creating account-specific copies.
+
+<Warning>
+  Adaptive recovery is not permission to guess. Consequential steps should not continue when Browserbot cannot establish the intended target and effect with adequate confidence.
+</Warning>
+
+## Product changes and account differences
+
+Browserbot combines three sources of context:
+
+- a shared map of product pages, concepts, controls, and capabilities;
+- an account overlay for roles, labels, fields, features, and routes that differ;
+- a live observation of the customer's current product state.
+
+This lets a shared journey refer to product meaning, such as an invoice due date or a recipe ingredient field, while resolving how that meaning appears in a particular account.
+
+<Note>
+  **Committed capability:** Logged-in product crawling, configurable recrawls, journey-health signals, and proposed journey updates extend the product map beyond today's user-authored guidance. Exact configuration and availability will be documented as these controls become available.
+</Note>
+
+## Control stays visible
+
+A customer should be able to understand what Browserbot is doing and stop the journey. A complete experience needs both:
+
+- a journey controller that shows the goal, current state, and Stop control;
+- a step-level explanation attached to the relevant part of the product.
+
+When a consequential step requires approval, the customer or agent reviews the resolved effect before it runs. After execution, Browserbot observes the expected product state and reports completion, failure, recovery, or stopping.
+
+## Related concepts
+
+<CardGroup cols={2}>
+  <Card title="Product Map" icon="map" href="/concepts/product-map">
+    See how shared product meaning, account differences, and live evidence work together.
+  </Card>
+  <Card title="Governance and security" icon="shield-check" href="/trust/governance-security">
+    Review browser execution, connected actions, approval policies, and data boundaries.
+  </Card>
+</CardGroup>

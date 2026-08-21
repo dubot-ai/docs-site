@@ -84,6 +84,16 @@ The customer product remains the source of truth for product state and
 permissions. Product actions still follow the action policies and confirmation
 model described in [Governance and security](/trust/governance-security).
 
+The current product MCP is an authenticated workspace administration surface.
+It should not be described as a generally available path for an external agent
+to execute customer-product actions. That path requires a separate scoped
+customer-product authorization and verification contract.
+
+An external browser agent that independently drives a product UI can bypass a
+Dubot capability entirely. Dubot policy is enforceable when the agent invokes a
+Dubot-governed capability; the host product's own authorization and validation
+remain the final boundary when it does not.
+
 Workflow recording in the browser extension is a separate way to discover
 candidate product actions. Recorded calls still require human review before
 they are added to the action catalog. See [How Dubot learns a

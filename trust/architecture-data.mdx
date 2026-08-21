@@ -1,0 +1,80 @@
+---
+title: "Architecture and data flow"
+description: "How Dubot services, browser execution, model providers, and product data fit together"
+---
+
+## Service architecture
+
+Dubot separates administration, product-session traffic, analytics ingestion, and model processing.
+
+| Layer | Current role |
+| --- | --- |
+| Admin services | Node services running on AWS ECS |
+| SDK traffic | Served through Cloudflare Workers |
+| Analytics | Queued ingestion into ClickHouse |
+| Model processing | Configured external model providers |
+
+Dubot does not train its own foundation model. The product is designed to work with multiple model providers so a customer can evaluate the provider and deployment requirements that fit its security and performance needs.
+
+<Warning>
+  This page intentionally does not publish an AWS region, backup region, or universal data-residency commitment. Those values must be confirmed against the current customer environment and agreement.
+</Warning>
+
+## Browser execution flow
+
+```text
+customer request and journey context
+  -> Browserbot inside the signed-in product session
+    -> relevant live-page evidence and configured model processing
+      -> governed navigation, preparation, or interaction
+        -> observed product result
+```
+
+Browserbot inherits the permissions enforced by the customer's product session. It does not receive a separate privileged identity simply because it operates through the browser.
+
+Relevant journey context can include chat content, product state, elements available to the journey, interactions, and the evidence needed to verify the result. That context may be processed by Dubot and the configured model provider.
+
+## Connected action flow
+
+```text
+resolved customer intent
+  -> reviewed action contract
+    -> configured policy and approval
+      -> customer product authorization and business rules
+        -> typed result and journey verification
+```
+
+The customer's product remains responsible for authorization, validation, and source-of-truth state. A connected action can be more appropriate than browser interaction for stable backend operations, asynchronous work, bulk tasks, or capabilities that are not represented safely in the interface.
+
+## Browser and backend limits
+
+Browser execution is bounded by what the signed-in user can reach and what the current product interface exposes. It is not a replacement for every backend integration.
+
+A server-to-server or external-agent use case needs a separate scoped authorization path. The current Dubot product MCP governs Dubot workspace administration; it should not be treated as a generally available authorization path for customer-product actions.
+
+## Data categories to review
+
+Before customer exposure, document these categories separately:
+
+- configuration and authored product maps;
+- chat and journey context;
+- action and Browserbot run history;
+- customer-visible audit history;
+- analytics events;
+- transient queues;
+- backups and deletion behavior.
+
+<Note>
+  Retention can differ by data category, plan, and customer agreement. Use the current contractual and product-specific retention schedule rather than assuming one duration applies to every category.
+</Note>
+
+## Related review
+
+<CardGroup cols={2}>
+  <Card title="Governance and security" icon="shield-check" href="/trust/governance-security">
+    Review policies, approvals, execution boundaries, data minimization, and reversal.
+  </Card>
+  <Card title="Integrations" icon="plug" href="/integrations/overview">
+    Compare Browserbot with connected action execution and support-system handoff.
+  </Card>
+</CardGroup>

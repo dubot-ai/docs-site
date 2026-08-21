@@ -10,7 +10,7 @@ Before Dubot can act inside a product, it needs to know what the product can do.
     A backend crawl of a public help center. No login required. Produces the knowledge corpus.
   </Card>
   <Card title="Crawl" icon="radar">
-    An in-development browser pass explores the logged-in product and produces candidate actions, page summaries, and brand styles.
+    A committed logged-in browser pass explores the product and contributes pages, semantic targets, available behavior, and account variation to the Product Map.
   </Card>
   <Card title="Record" icon="circle-dot">
     A person uses the product normally while the browser extension records the calls triggered by the workflow. Dubot turns the captured calls into candidate actions for review.
@@ -22,7 +22,7 @@ Before Dubot can act inside a product, it needs to know what the product can do.
 | Input | Requires login | Produces | Status |
 | --- | --- | --- | --- |
 | Ingest | No | Knowledge corpus | Available today |
-| Crawl | Yes | Candidate actions, page summaries, brand styles | In development |
+| Crawl | Yes | Product Map evidence, candidate journeys, and proposed updates | Committed capability |
 | Record | Yes | Candidate actions from a recorded workflow | Available today |
 
 <Note>
@@ -79,3 +79,9 @@ Recording learns from the product calls behind a workflow rather than relying
 only on selectors for visible controls. The reviewed action contract describes
 the operation an agent can use, while navigation is resolved separately at
 runtime. See [How Dubot works](/concepts/how-dubot-works) for the runtime model.
+
+## How crawling supports change
+
+The committed crawl model is designed to refresh the [Product Map](/concepts/product-map), not silently rewrite production journeys. Configurable recrawls can identify changed pages or controls, lower the health of affected journeys, and propose updates for review.
+
+A common product change should improve the shared map. An account-specific difference should update the account overlay rather than create a copied journey.

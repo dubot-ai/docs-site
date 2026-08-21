@@ -9,7 +9,7 @@ The same approved capability can appear differently depending on where the custo
 
 <CardGroup cols={3}>
   <Card title="Browserbot" icon="bot">
-    Works with the live product interface to guide a customer through a reviewed step.
+    Works with the live product interface to guide or perform configured steps in a reviewed journey.
   </Card>
   <Card title="Contextual sidepanel" icon="panel-right">
     Shows context, progress, confirmation, and recovery alongside the product.
@@ -21,18 +21,22 @@ The same approved capability can appear differently depending on where the custo
 
 ## Browserbot
 
-Browserbot works with the existing product interface. In its first version it is descriptive and human-scripted: guided by an intent, it can take the customer to the right place, highlight the relevant control, prompt a click, and explain the step. It is the "show" half of Dubot's runtime, used when a direct action is not available or when a step benefits from being done in context.
+Browserbot works with the existing product interface. Guided by a reviewed goal, it can explain a control, navigate, prepare information, request approval, interact with the interface, and verify what happened. Show and Do describe behavior inside the journey. Browserbot is the adaptive surface that delivers it.
 
 Browserbot is useful when:
 
 - the task already exists in the product interface;
 - the journey spans several screens or UI states;
 - the customer benefits from help in context;
+- the next safe step depends on the current account, page, role, or product state;
+- part of the task can be prepared or completed under an explicit policy;
 - rebuilding the workflow as a separate integration would add unnecessary work.
 
 <Info>
   **Available for evaluation:** Browserbot is the primary surface for testing reviewed journeys and agreed controls with customers.
 </Info>
+
+See [Browserbot](/product/browserbot) for the journey model and [Product Map](/concepts/product-map) for product change and account variation.
 
 ## Contextual sidepanel
 

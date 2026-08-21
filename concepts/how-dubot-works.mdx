@@ -23,8 +23,8 @@ The current Dubot app lets a team configure an agent's model, reasoning budget, 
   <Step title="Check state and policy">
     Dubot evaluates the current product state, the allowed scope, and any required confirmation before continuing.
   </Step>
-  <Step title="Do, or fall back to show">
-    When an approved action exists and is reachable, Dubot performs it. When it does not, Browserbot or the contextual sidepanel guides the customer to the right place and shows them the next step.
+  <Step title="Guide or act through Browserbot">
+    Browserbot can explain, navigate, prepare, or perform a configured step. The intended effect determines whether the step can run automatically, needs approval, or remains unavailable.
   </Step>
   <Step title="Verify the result">
     Dubot checks for the expected state change and reports whether the request was completed, needs attention, or could not continue safely.
@@ -36,11 +36,11 @@ The current Dubot app lets a team configure an agent's model, reasoning budget, 
 Two ideas shape how Dubot behaves once a request is approved.
 
 <CardGroup cols={2}>
-  <Card title="Do, falls back to Show" icon="git-branch">
-    Whether Dubot acts or guides is decided at runtime, not fixed in advance. If the approved action is available it runs; otherwise Dubot navigates the customer to the right screen and shows them the step. The customer is never left at a dead end.
+  <Card title="One journey can Show and Do" icon="git-branch">
+    Show and Do describe behavior inside a journey. Browserbot is the adaptive surface that can explain a step, navigate, prepare information, request approval, act, and verify the result.
   </Card>
-  <Card title="Intent, not selectors" icon="compass">
-    Navigation targets are stored as intent, such as "the settings link in the primary navigation," and resolved against the live interface at runtime by a fast model, with resolutions cached and retried. This avoids brittle stored selectors that break when a product's markup changes.
+  <Card title="Meaning, not one brittle selector" icon="compass">
+    A journey stores reviewed intent and checkpoints. Browserbot resolves the next target against the live interface, records recovery, and stops rather than guessing when it cannot establish the intended target and effect confidently.
   </Card>
 </CardGroup>
 
@@ -60,6 +60,8 @@ Dubot is designed around bounded, approved building blocks rather than open-ende
 | Completion signal | How do we know the intended result occurred? |
 | Failure behavior | What happens if Dubot cannot proceed confidently? |
 
+See [Browserbot](/product/browserbot) for the step model and [Product Map](/concepts/product-map) for account variation and product change.
+
 <Warning>
   Exact runtime, identity, data handling, and audit behavior must be confirmed for each customer environment. This page describes the intended control model, not a universal deployment contract.
 </Warning>
@@ -68,10 +70,10 @@ Dubot is designed around bounded, approved building blocks rather than open-ende
 
 <AccordionGroup>
   <Accordion title="Available for customer evaluation">
-    Agent configuration, attaching capabilities and actions, knowledge ingestion, Browserbot-based interaction, explicit approval points, and outcome verification can be evaluated with a focused first use case.
+    Agent configuration, attaching capabilities and actions, knowledge ingestion, Browserbot-based interaction, configurable action policies, and outcome verification can be evaluated with a focused first use case.
   </Accordion>
   <Accordion title="Coming next">
-    The contextual sidepanel, runtime knowledge retrieval, reusable governance controls, and support-platform connection patterns are in active product development.
+    The contextual sidepanel, runtime knowledge retrieval, logged-in product crawling, configurable recrawls, reusable governance controls, and support-platform connection patterns are in active product development.
   </Accordion>
   <Accordion title="Not promised here">
     General availability, a public API, prebuilt connectors, deployment models, and formal compliance claims are not implied by this documentation.

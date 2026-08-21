@@ -16,7 +16,7 @@ Dubot's intended governance model begins with named capabilities and agreed cont
     The initial rollout covers a small number of reviewed customer outcomes.
   </Card>
   <Card title="Explicit confirmation" icon="circle-check">
-    Sensitive or consequential steps can require customer or agent approval, and actions that write always confirm.
+    Sensitive or consequential steps can require customer or agent approval. The team decides which effects run automatically, confirm first, or remain unavailable.
   </Card>
   <Card title="Known completion" icon="flag">
     Each journey defines evidence of success, failure, or safe stopping.
@@ -36,11 +36,27 @@ Every action carries a policy that decides how it may run.
 | Confirm | Requires customer or agent approval before running |
 | Never | Is not available to the agent |
 
-Actions that write to the product always confirm. Read-only actions can be allowed to run automatically when a team is comfortable with their scope.
+Policy is attached to the intended effect. Opening a section, preparing a form, and submitting a consequential change can therefore use different controls. A customer evaluation must document any action categories that are forced to confirm in that environment.
+
+## Two execution boundaries
+
+### Browser execution
+
+Browserbot operates inside the customer's signed-in product session. It inherits the permissions enforced by the product and uses relevant page, journey, and user context to resolve the next step.
+
+Depending on journey policy, Browserbot can explain, navigate, prepare information, or interact with a product control. A consequential effect can pause for explicit approval. After execution, the journey observes the expected product state and reports completion, failure, recovery, or safe stopping.
+
+### Connected action execution
+
+A connected action uses a reviewed action contract. The customer's product remains responsible for authorization, input validation, business rules, and the resulting source-of-truth state. Dubot applies the configured action policy and records the result available to the journey.
+
+These routes can appear in one journey, but their data flow and enforcement points are different. They should be reviewed separately.
 
 ## What the action layer can see
 
-Through a connected product, Dubot sees the shape of your product's own API responses, the same information a developer would see with the browser network tab open while using the product. It does not receive hidden or privileged access beyond what the connected surface already returns.
+Through a connected product, Dubot can process relevant page context, elements available to the journey, interactions, and the product responses needed to continue or verify an approved task. This does not grant hidden or privileged access beyond the connected surface and signed-in user's permissions.
+
+Relevant journey context may be transmitted to Dubot and the configured model provider. Each customer should review the context included, data minimization, model-provider configuration, and any downstream processing before exposure.
 
 ## How support data is handled
 
@@ -65,11 +81,17 @@ Before customer use moves beyond a controlled test, Dubot and the customer shoul
 - failure, recovery, and support ownership;
 - testing and release approval.
 
+The review should also distinguish configuration retention, chat retention, action-log retention, customer-visible audit history, and backup deletion behavior. These categories may have different terms.
+
 ## Claims that require verification
 
 <Warning>
   This documentation does not make claims about certifications, encryption standards, data residency, subprocessors, penetration testing, uptime, or contractual controls. Those details will be published only when they have been verified against current product and company evidence.
 </Warning>
+
+## Rollback and reversal
+
+Dubot does not promise a universal rollback mechanism. Reversing a completed change requires a product-specific compensating action or a supported UI flow. A journey that cannot establish a safe reversal path should stop, report the outcome, and route the case for review.
 
 ## A practical evaluation principle
 
