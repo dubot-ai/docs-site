@@ -1,0 +1,59 @@
+---
+title: "Product availability"
+description: "How to read product status and what is feasible in the current Dubot build"
+---
+
+## Status means evidence
+
+These docs use status labels to prevent a design, merged implementation, controlled rollout, and
+generally available feature from being treated as the same thing.
+
+| Label | Meaning |
+| --- | --- |
+| Current product build | Implemented in the current Dubot product code and covered by product tests |
+| Controlled rollout | Implemented or actively integrated, but access depends on account flags, workspace setup, or a Dubot-led evaluation |
+| Planned | Documented product direction without a complete current implementation |
+| Design direction | A prototype or visual exploration, not a promise of behavior or timing |
+
+<Note>
+  Access can vary by workspace and deployment. Ask your Dubot contact to confirm that a
+  current-build feature is enabled in the environment you plan to test.
+</Note>
+
+## Current product build
+
+- Wizard authoring with capabilities, knowledge scope, display copy, quick prompts, and one
+  placement.
+- Bubble, inline, sidebar, and fullscreen wizard surfaces in the browser SDK.
+- Session API actions and client-side callbacks with versioned configuration, enablement, risk,
+  and auto-or-confirm policy.
+- Knowledge ingestion from public Help Centers and supported document uploads.
+- Scoped knowledge search and article reading for configured wizards, Guidance, and the Resource
+  Center.
+- Guidance configuration, reviewed guides, runtime controls, and run activity.
+- A page-aware Resource Center with cards, route overrides, knowledge search, Ask, and host
+  callbacks.
+- Test and Production content resolution, explicit publishing, unpublishing, archiving, and
+  version history.
+- Workspace analytics plus per-wizard, action, Guidance, and Resource Center activity.
+- An authenticated authoring MCP for inspecting and changing a granted Dubot workspace.
+
+## Controlled rollout
+
+- The end-user MCP action channel at `mcp.dubot.ai/{workspace-slug}`.
+- Product Crawler connection flows and browser-extension authoring workflows.
+- Customer-specific support-platform handoffs and connector patterns.
+
+## Not part of the current contract
+
+- Unrestricted control of a customer's product.
+- A general catalog of prebuilt support-platform connectors.
+- Backend API actions that run without a live customer product session.
+- Procedures that orchestrate several actions as one reusable tool.
+- Behavior inferred only from a prototype or master design.
+
+<Warning>
+  A source-code implementation is not independent proof of a particular customer deployment.
+  Validate identity, environment, origin, workspace flags, and published configuration in the
+  target environment before calling a journey ready for customer traffic.
+</Warning>

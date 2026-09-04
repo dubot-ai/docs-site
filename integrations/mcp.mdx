@@ -1,119 +1,88 @@
 ---
 title: "MCP servers"
-description: "Choose the public documentation MCP or Dubot's protected product MCP"
+description: "Choose documentation, workspace authoring, or the end-user action channel"
 ---
 
-Dubot offers two MCP servers for different jobs. One reads the public
-documentation. The other works with an authorized Dubot workspace.
+Dubot has three MCP use cases. They are intentionally separate.
 
-## Choose the right MCP
+| Service | Audience | Access | Server URL | Status |
+| --- | --- | --- | --- | --- |
+| Documentation MCP | Anyone reading these docs | Public, read-only | `https://dubot.mintlify.site/mcp` | Available |
+| Authoring MCP | A Dubot workspace member | OAuth plus workspace grant | `https://app.dubot.ai/mcp` | Current product build |
+| Action channel | A customer-product end user | OAuth plus signed product identity and a live tab | `https://mcp.dubot.ai/{workspace-slug}` | Controlled rollout |
 
-| Service | Use it for | Access | Server URL |
-| --- | --- | --- | --- |
-| Documentation MCP | Search and read Dubot's public documentation | Public and read-only | `https://dubot.mintlify.site/mcp` |
-| Product MCP | Inspect workspace configuration, prepare Test changes, and publish approved changes | OAuth and an explicit workspace grant | `https://app.dubot.ai/mcp` |
+Tokens, grants, tools, and consent are not interchangeable across these services.
 
-<Note>
-  The documentation MCP cannot inspect a customer workspace, change Dubot
-  configuration, publish to Production, or run product actions. Use the
-  protected product MCP for workspace administration.
-</Note>
+## Documentation MCP
 
-## Manage a workspace with the product MCP
+Use the documentation server to search and read public Dubot documentation from an MCP-capable
+client. It cannot inspect a workspace, change configuration, publish, or run a customer action.
 
-Dubot provides a protected remote Model Context Protocol (MCP) server for
-authorized workspace administration. An MCP-capable client can use it to
-inspect Dubot configuration, prepare changes in Test, review what would be
-published, and publish approved configuration to Production.
+## Authoring MCP
 
-<Info>
-  **Available now:** The Dubot product MCP is live at
-  `https://app.dubot.ai/mcp`. It requires OAuth authentication and an explicit
-  workspace grant.
-</Info>
-
-## Connect
+The authenticated authoring server lets an AI client work as the connecting Dubot user within
+explicitly granted workspaces.
 
 <Steps>
-  <Step title="Add the remote server">
-    In an MCP-capable client, add `https://app.dubot.ai/mcp` as a remote MCP
-    server.
+  <Step title="Add the server">
+    Add `https://app.dubot.ai/mcp` to an MCP-capable client.
   </Step>
   <Step title="Complete OAuth">
-    Follow the sign-in flow opened by the client. Dubot does not require you to
-    paste an API key into the client.
+    Sign in to Dubot through the authorization flow. Compatible clients register dynamically, so
+    there is no client secret to paste.
   </Step>
-  <Step title="Choose the workspace boundary">
-    Grant access only to the Dubot workspaces the client should be able to
-    inspect or manage.
+  <Step title="Grant workspaces">
+    In your Dubot profile, open MCP connections and select the workspaces that client may access.
   </Step>
-  <Step title="Review before publishing">
-    Keep authoring work in Test, inspect unpublished changes and their
-    dependencies, then approve a separate publish operation when the intended
-    Production change is clear.
+  <Step title="Author in Test">
+    Inspect configuration or create and update drafts. Write tools target Test.
+  </Step>
+  <Step title="Publish separately">
+    Review changes and dependencies before using an explicit Production publish tool. Publishing
+    requires the appropriate admin role.
   </Step>
 </Steps>
 
-The exact labels in the connection flow vary by MCP client. The server URL and
-Dubot authorization boundary stay the same.
-
-## What an authorized client can do
-
-| Area | Examples |
-| --- | --- |
-| Workspace inspection | List the workspaces included in the grant and inspect their Dubot configuration |
-| Agents and capabilities | Read configuration, create or update Test drafts, and inspect relationships |
-| Actions | Review action definitions and activity, then create or update Test drafts |
-| Brand | Inspect or update Test brand configuration |
-| Guidance and activity | Review guidance runs, themes, metrics, and agent conversations available to the workspace |
-| Publishing | List unpublished Test changes, preview transitive dependencies, and publish selected configuration to Production |
+The authoring tool set covers workspace context plus wizards, actions, capabilities, brand, Test
+changes, and publishing. Tool calls still enforce the connecting user's live organization role
+and current workspace grant.
 
 <Warning>
-  Publishing changes or brand configuration affects Production. Review the
-  selected entities, dependencies, and target workspace before approving a
-  publish operation in any MCP client.
+  A successful OAuth login without a workspace grant is intentionally insufficient. Calls fail
+  closed until at least one eligible workspace is selected.
 </Warning>
 
-## What the MCP does not provide
+## End-user action channel
 
-The product MCP is Dubot's authenticated configuration and publishing surface.
-It does not provide anonymous access, grant access to workspaces outside the
-OAuth consent, or turn the public marketing website into an action surface.
+The action channel exposes selected, published Session API actions to an end user's AI client.
+Execution still occurs in that user's signed-in product tab through the same customer-owned
+first-party executor used by wizard actions.
 
-The customer product remains the source of truth for product state and
-permissions. Product actions still follow the action policies and confirmation
-model described in [Governance and security](/trust/governance-security).
+It requires:
 
-Workflow recording in the browser extension is a separate way to discover
-candidate product actions. Recorded calls still require human review before
-they are added to the action catalog. See [How Dubot learns a
-product](/concepts/acquisition).
+- the workspace's action channel to be enabled;
+- a configured resume URL;
+- selected published Session API actions with MCP enabled;
+- a product page running the Dubot SDK;
+- `userId` and a valid `identityToken`;
+- the end user to approve the connecting client;
+- a live eligible product tab when a tool is called.
 
-## Authorization and discovery
+Confirm-gated calls render an in-product Accept or Decline prompt. Completed calls appear in an
+action toast and remain subject to the published action version, input schema, response mask, and
+customer-side permissions.
 
-An unauthenticated connection starts the OAuth discovery flow. The server
-publishes protected-resource and authorization-server metadata so a compatible
-client can locate the authorization service, complete user consent, and retry
-with an access token.
+<Info>
+  The action channel is a controlled-rollout feature. Confirm workspace enablement, identity
+  enforcement, resume behavior, and supported client before giving the URL to end users.
+</Info>
 
-## Recommended operating sequence
+## Do not cross the boundaries
 
-```text
-inspect current configuration
-  -> create or update drafts in Test
-  -> list unpublished changes
-  -> preview selected changes and dependencies
-  -> confirm the workspace and Production effect
-  -> publish the approved selection
-```
-
-Use the smallest workspace grant that supports the task. Remove the connection
-from the MCP client when it is no longer needed.
-
-## Read the docs from an AI client
-
-Connect to `https://dubot.mintlify.site/mcp` when an AI client needs public
-product documentation rather than workspace access. This server is useful for
-questions about Dubot's product model, integration contract, governance,
-workflow recording, and pilot process. It does not require a Dubot workspace
-grant.
+- An authoring token is rejected by the action-channel host.
+- An action-channel token is rejected by the authoring host.
+- Documentation tools cannot use either authenticated surface.
+- Authoring tools change Dubot configuration; action-channel tools run published customer
+  operations.
+- Revoking an end-user grant and revoking an authoring connection are different actions in
+  different user interfaces.

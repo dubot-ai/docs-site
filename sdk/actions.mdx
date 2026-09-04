@@ -1,0 +1,97 @@
+---
+title: "SDK actions"
+description: "Register host callbacks and understand the Session API execution boundary"
+---
+
+## Register client-side callbacks
+
+Use client-side callbacks for operations that belong to the current page, such as navigation or
+updating in-memory application state.
+
+```js
+const actions = [
+  {
+    tool_id: 'clientside_callback_open_billing',
+    input_schema: {
+      type: 'object',
+      properties: {},
+      additionalProperties: false,
+    },
+    execute: async () => {
+      router.navigate('/settings/billing');
+      return { opened: true };
+    },
+  },
+];
+
+await window.Dubot.init({
+  userId: currentUser.id,
+  identityToken,
+  actions,
+});
+```
+
+The callback must also have a reviewed, published governance envelope in Dubot and be reachable
+through a Skill capability attached to the wizard.
+
+## Replace callbacks when page state changes
+
+`setActions()` uses full-set replacement semantics. Pass every callback that should be available
+after the call.
+
+```js
+window.Dubot.setActions([
+  openBillingAction,
+  currentInvoice ? markInvoiceReviewedAction : null,
+].filter(Boolean));
+```
+
+A callback omitted from the new set becomes unavailable to the assistant on the next turn.
+
+## Execute Session API actions
+
+Session API actions are authored in Dubot with a method, endpoint, input schema, response mask,
+risk, and execution policy. The runtime boundary is deliberate:
+
+```text
+SDK requests { tool_id, input }
+  -> customer-owned first-party executor resolves the published registry
+    -> executor uses the application's existing authentication
+      -> customer API returns a result
+        -> response mask reduces the result
+          -> SDK continues the assistant turn
+```
+
+The SDK bundle does not receive an arbitrary destination from the model and should not own the
+customer application's credentials. Dubot provides the first-party executor pattern during
+integration so the customer's engineering team can review and ship it with the application.
+
+## Confirmation and outcomes
+
+Every action has an `auto` or `confirm` execution policy.
+
+- Chat-originated confirms render in the wizard.
+- End-user MCP confirms render in the page action toast.
+- A decline returns a declined outcome without invoking the operation.
+- Errors return a bounded failure result and appear in action activity.
+- Response masks limit which returned fields reach the assistant.
+
+## Resource Center callbacks are separate
+
+A static Resource Center card can run a host callback without advertising that callback as an
+assistant tool:
+
+```js
+await window.Dubot.init({
+  userId: currentUser.id,
+  identityToken,
+  resourceCenterCallbacks: [
+    {
+      id: 'clientside_callback_contact_support',
+      execute: () => supportMessenger.open(),
+    },
+  ],
+});
+```
+
+`resourceCenterCallbacks` and `actions` are intentionally separate registries.

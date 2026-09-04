@@ -1,67 +1,51 @@
 ---
-title: "Integrations"
-description: "How Dubot can connect support intent to product action"
+title: "Integration overview"
+description: "Connect Dubot to a browser product, identity, product actions, and existing support"
 ---
 
-## Keep the support stack. Add an action layer.
+## The minimum browser integration
 
-Dubot is designed to work alongside the tools a CX team already uses. The support platform remains the place where a request is understood. Dubot becomes relevant when resolving that request requires controlled work inside the product.
+Most Dubot experiences need four things:
 
-![Example support entry points connecting through Dubot to the product](/assets/integrations.svg)
+1. the CDN script with a public client token;
+2. a stable signed-in user id;
+3. a server-minted identity token when signed identities are enabled;
+4. customer-owned code for the context and actions that experience needs.
 
-<CardGroup cols={3}>
-  <Card title="Support platforms" icon="headset">
-    Systems such as Zendesk, Intercom, Salesforce, or a custom support experience can be evaluated as conversational entry points.
-  </Card>
-  <Card title="Support AI" icon="sparkles">
-    An AI assistant can identify an eligible action and hand off the context required to begin a reviewed journey.
-  </Card>
-  <Card title="Your product" icon="app-window">
-    Browserbot and the sidepanel help complete the work in the product where the source-of-truth state already lives.
-  </Card>
-</CardGroup>
+Start with the [SDK quickstart](/sdk/quickstart).
+
+## Choose only the integration needed
+
+| Need | Integration |
+| --- | --- |
+| Render a wizard, Guidance, or Resource Center | Browser SDK |
+| Supply current account or page state | `init({ context })` and `setContext()` |
+| Run page-local behavior | Client-side callbacks |
+| Call the customer's authenticated API | Session API action plus customer-owned executor |
+| Configure Dubot from an AI client | Authoring MCP |
+| Let an end user call approved actions from their AI client | Controlled-rollout MCP action channel |
+| Handoff from a support platform | Customer-specific support integration |
+
+## Support-platform handoff
+
+A support system can identify an eligible request and send the customer into a published Dubot
+experience. The first useful contract answers:
+
+| Question | Minimum answer |
+| --- | --- |
+| What starts the experience? | A named support intent or explicit customer choice |
+| What context is passed? | Only fields required for that outcome |
+| How is identity proven? | Stable user id plus an agreed signed-token flow |
+| Where does work occur? | A controlled customer-product origin |
+| What returns to support? | Completed, stopped, error, or needs-attention outcome |
 
 <Warning>
-  The names above describe the integration category and evaluation targets. They do not claim that prebuilt connectors are generally available.
+  Zendesk, Intercom, Salesforce, and other support products are integration categories in this
+  documentation. Their names do not imply a generally available prebuilt connector.
 </Warning>
 
-## How actions relate to your product
+## Keep the boundary small
 
-Dubot adds an action layer, not a new backend. A few properties keep the integration surface small.
-
-- **Configuration, not new code.** Actions are defined against the APIs your product already exposes. Dubot does not add new API endpoints.
-- **Your writes ship from your code.** Anything that changes state in the product runs from your own codebase, shipped by your team, not from Dubot.
-- **It runs where the SDK already is.** The action layer operates inside the SDK you install, so there is no separate service for your team to stand up and deploy.
-- **Reviewable before it runs.** Every action is inspectable, in the Actions interface or over MCP, before it is attached to an agent.
-
-<Card title="Manage Dubot over MCP" icon="plug" href="/integrations/mcp">
-  Connect an authorized AI client to inspect workspace configuration, prepare
-  Test changes, review dependencies, and publish approved configuration.
-</Card>
-
-## The integration contract
-
-A first integration should stay intentionally small. The exact mechanism depends on the support system and product environment, but the contract needs to answer five questions.
-
-| Question | Minimum first-release answer |
-| --- | --- |
-| What starts a journey? | A named support intent or deliberate user choice |
-| What context is passed? | Only the fields needed for the approved journey |
-| How is the user identified? | An agreed identity and session model |
-| Where does action occur? | A controlled product environment and surface |
-| What returns to support? | A clear completed, stopped, or needs-attention result |
-
-## A typical handoff
-
-```text
-Customer request
-  -> support system identifies an eligible journey
-  -> customer or agent chooses to continue
-  -> Dubot receives the minimum required context
-  -> approved journey opens in the product
-  -> result is verified and reported
-```
-
-## What we do not need on day one
-
-A useful first release should not require a broad API program, a complete workflow catalog, or a production-wide rollout. We begin with one valuable request and the narrowest connection that can test it safely.
+A first integration does not need a complete action catalog or broad product access. Choose one
+outcome, expose only its required context and operations, test the failure modes, then expand from
+evidence.

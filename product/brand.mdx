@@ -1,0 +1,34 @@
+---
+title: "Brand"
+description: "Apply workspace brand tokens across Dubot SDK surfaces"
+---
+
+Each workspace can keep several versioned brand configurations and select one published default.
+The SDK resolves that default for wizard, Guidance, Resource Center, and action-channel surfaces.
+
+## What you can configure
+
+- shared foreground, background, border, accent, and status colors;
+- assistant and customer message colors;
+- composer and launcher colors;
+- font family and an external font CSS URL;
+- border-radius tier;
+- default bubble position;
+- Guidance pulse color and motion.
+
+The editor previews wizard, Guidance, and Resource Center scenes and surfaces contrast warnings.
+Blank fields inherit platform defaults.
+
+<Note>
+  Resource Center-specific appearance comes from the shared primitives. Its title, placeholder,
+  content, and trigger belong to the Resource Center configuration, not the brand.
+</Note>
+
+## Lifecycle
+
+Brand changes follow the same draft and publish distinction as other versioned entities. Saving a
+brand updates Test. Publishing makes that version eligible for Production. Setting a brand as the
+workspace default controls which published tokens the SDK resolves.
+
+If no valid published default is available, SDK surfaces fall back field by field to Dubot's
+platform defaults.

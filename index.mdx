@@ -1,64 +1,74 @@
 ---
 title: "Dubot overview"
-description: "The AI action layer for customer experience"
+description: "Build AI experiences that can explain, guide, and take approved action"
 ---
 
 <Info>
-  **Product status:** This documentation distinguishes what is available now, what customers can evaluate, and what is coming next.
+  This documentation separates features in the current product build from controlled-rollout
+  features and future concepts. Start with [Product availability](/start/availability) when
+  evaluating a specific use case.
 </Info>
 
-## Talk is cheap. <span className="brand-accent">Resolution takes action.</span>
+## Move from answers to outcomes
 
-Support AI can explain what a customer should do next. The customer still has to find the right screen, understand the interface, and complete the work themselves.
+Most support AI can explain what a customer should do next. Dubot adds a governed action layer
+inside the product, so an assistant can answer a question, guide the customer through the
+interface, or run an approved action.
 
-Dubot turns a support answer into an approved action inside the product. It gives CX teams a way to help customers complete real tasks while keeping the business in control of what can happen.
+![Dubot connects customer intent to approved product action](/assets/architecture.svg)
 
-![Dubot connects support intent to approved product actions](/assets/architecture.svg)
+## What you can build
 
-## What Dubot adds
-
-<CardGroup cols={3}>
-  <Card title="Understand the request" icon="headset">
-    Receive customer intent and relevant context from a support conversation or product surface.
+<CardGroup cols={2}>
+  <Card title="Wizards" icon="message-circle" href="/product/wizards">
+    Configured assistants that combine instructions, product knowledge, capabilities, and one
+    in-product placement.
   </Card>
-  <Card title="Choose an approved action" icon="shield-check">
-    Match the request to an action the business has reviewed and allowed.
+  <Card title="Guidance" icon="mouse-pointer-click" href="/product/guidance">
+    Reviewed walkthroughs and goal-based help that work with the customer's live interface.
   </Card>
-  <Card title="Help complete the task" icon="target">
-    Guide or perform the approved steps in the product through the appropriate surface.
+  <Card title="Resource Center" icon="panel-right" href="/product/resource-center">
+    Page-aware help with guides, wizards, articles, static resources, search, and Ask.
+  </Card>
+  <Card title="Actions" icon="zap" href="/product/capabilities-actions">
+    Reviewable product operations and client-side callbacks with explicit runtime policy.
   </Card>
 </CardGroup>
 
-## Why CX teams start the conversation
-
-CX leaders see the gap first. Answers are getting faster, but many contacts still end with the customer doing the hard part. Dubot is designed for requests where resolution requires a product action, not another paragraph.
-
-Examples might include updating an account setting, correcting a configuration, or completing a known workflow. Each proposed use case is reviewed during journey design. An example here does not mean that action is generally available.
-
-## What technical evaluators need to know
-
-Dubot is not intended to receive unrestricted access to a product. Customers start with a small set of named journeys and explicit boundaries.
+## How teams work with Dubot
 
 <Steps>
-  <Step title="Define the allowed outcome">
-    CX and product owners choose one high-value customer task.
+  <Step title="Choose a customer outcome">
+    Start with a recurring task that is valuable, measurable, and safe to bound.
   </Step>
-  <Step title="Map the product journey">
-    Dubot identifies the relevant screens, states, and completion signals.
+  <Step title="Assemble the experience">
+    Configure the wizard, capabilities, actions, knowledge, or reviewed guidance needed for that
+    outcome.
   </Step>
-  <Step title="Set the control points">
-    The team agrees what Dubot may suggest, what requires confirmation, and what remains unavailable.
+  <Step title="Integrate the browser SDK">
+    Add one CDN script, identify the signed-in user, and register the context or callbacks your
+    product owns.
   </Step>
-  <Step title="Test before exposure">
-    The journey is evaluated in a controlled environment before it reaches customers.
+  <Step title="Test, then publish">
+    Test reads the latest saved configuration. Production reads only explicitly published
+    versions.
+  </Step>
+  <Step title="Inspect the result">
+    Review conversations, action outcomes, guidance runs, and workspace-level analytics before
+    expanding scope.
   </Step>
 </Steps>
 
-<CardGroup cols={2}>
-  <Card title="See how it works" icon="settings" href="/concepts/how-dubot-works">
-    Follow the request from support conversation to verified outcome.
+## Pick a path
+
+<CardGroup cols={3}>
+  <Card title="Explore the product" icon="blocks" href="/surfaces/overview">
+    Understand the authoring and end-user surfaces.
   </Card>
-  <Card title="Plan your first journey" icon="flag" href="/pilots/pilot-guide">
-    See how CX, product, and technical teams begin with a focused customer outcome.
+  <Card title="Install the SDK" icon="code-2" href="/sdk/quickstart">
+    Add Dubot to a browser application.
+  </Card>
+  <Card title="Plan an evaluation" icon="flag" href="/pilots/pilot-guide">
+    Prove one customer outcome with clear controls and evidence.
   </Card>
 </CardGroup>

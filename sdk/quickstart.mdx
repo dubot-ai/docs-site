@@ -1,0 +1,102 @@
+---
+title: "SDK quickstart"
+description: "Install and initialize the Dubot browser SDK"
+---
+
+<Info>
+  The browser SDK is distributed from Dubot's CDN. It is not published as an npm package.
+</Info>
+
+## Before you begin
+
+You need:
+
+- a Dubot workspace;
+- its public client token;
+- at least one published wizard or Resource Center configuration;
+- an approved origin for the customer application;
+- a stable signed-in user id;
+- a server-minted identity token if the workspace observes or enforces signed identities.
+
+## 1. Add the script
+
+Place the stable SDK entry on every page where Dubot may render.
+
+```html
+<script
+  src="https://cdn.dubot.ai/js-sdk/dubot.js?clientToken=YOUR_CLIENT_TOKEN"
+  crossorigin="anonymous"
+></script>
+```
+
+The client token belongs in the script URL. It is not an argument to `Dubot.init()`.
+`crossorigin="anonymous"` preserves useful SDK error details for telemetry.
+
+## 2. Initialize for the signed-in user
+
+```html
+<script>
+  window.Dubot.init({
+    userId: currentUser.id,
+    email: currentUser.email,
+    identityToken: identityTokenFromYourBackend,
+    context: {
+      plan: currentUser.plan,
+      workspace_role: currentUser.role,
+    },
+  });
+</script>
+```
+
+Only pass context needed by the experience. Context values must be strings, numbers, or booleans.
+
+## 3. Publish and match a surface
+
+A configured placement mounts automatically when its page rules match. You can also render a
+published wizard programmatically:
+
+```js
+window.Dubot.renderAgent({
+  slug: 'billing-help',
+  presentationMode: 'Bubble',
+});
+```
+
+For an inline wizard, supply a selector:
+
+```html
+<div id="billing-assistant"></div>
+
+<script>
+  window.Dubot.renderAgent({
+    slug: 'billing-help',
+    presentationMode: 'InlineWizard',
+    selector: '#billing-assistant',
+  });
+</script>
+```
+
+## 4. Verify the integration
+
+In the browser console:
+
+```js
+window.Dubot.version;
+window.Dubot.getState();
+```
+
+Check that:
+
+- `version` is a published version rather than `dev`;
+- `initProps.userId` matches the signed-in user;
+- `initProps.verified` reflects whether an identity token was supplied;
+- the expected placement or Resource Center appears on a matching page;
+- Test shows the latest saved configuration and Production shows only the published version;
+- a deliberately invalid origin or identity fails as expected.
+
+<Warning>
+  The client token is public. The identity-verification secret is not. Never mint end-user tokens
+  in browser code or include the secret in the page bundle.
+</Warning>
+
+Continue with [Identity and context](/sdk/identity-context) and [SDK actions](/sdk/actions).

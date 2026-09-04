@@ -1,0 +1,73 @@
+---
+title: "Capabilities and actions"
+description: "Give a wizard reusable context and governed product operations"
+---
+
+## Capabilities organize responsibility
+
+A capability is reusable context attached to one or more wizards.
+
+| Type | Category | Can carry actions? |
+| --- | --- | --- |
+| Security | Knowledge | No |
+| Brand Voice | Knowledge | No |
+| Product Domain | Knowledge | No |
+| Skill | Skill | Yes |
+
+A capability can be embedded at the start of a conversation or made available for the assistant
+to load when needed. Priority controls ordering when several capabilities compete for context.
+
+## Two current action types
+
+<CardGroup cols={2}>
+  <Card title="Session API action" icon="server">
+    A reviewed HTTP operation. The published registry owns the method, endpoint, input schema, and
+    response mask. Customer-owned first-party code performs the authenticated request.
+  </Card>
+  <Card title="Client-side callback" icon="code-2">
+    A function registered by the host application through the SDK. The dashboard owns its
+    versioned name, description, response mask, and policy; the host owns its function and input
+    schema.
+  </Card>
+</CardGroup>
+
+Backend API actions and multi-action procedures are not part of the current product contract.
+
+## The execution boundary
+
+```text
+assistant selects a published tool
+  -> Dubot validates the model arguments
+    -> policy runs automatically or requests confirmation
+      -> customer-owned code performs the operation
+        -> response mask removes unneeded fields
+          -> the assistant receives the result
+```
+
+For Session API actions, the browser bundle dispatches a tool id and arguments. It does not choose
+the destination. Customer-owned code resolves the id against the published registry and makes the
+request with the application's existing authentication.
+
+## Review the contract
+
+Before publishing an action, check:
+
+- human title and model-facing description;
+- stable tool key and action type;
+- method and endpoint for Session API actions;
+- JSON input schema;
+- response mask;
+- risk classification;
+- execution policy: auto or confirm;
+- enabled state and capability membership;
+- MCP enablement, when the action channel is in scope;
+- behavior when the operation or host callback is unavailable.
+
+<Warning>
+  Risk classification helps authors choose a policy, but the execution policy is the runtime
+  control. High-risk and destructive choices prefill Confirm in the current editor; reviewers
+  should still verify the saved policy before publishing.
+</Warning>
+
+See [SDK actions](/sdk/actions) for host integration and [Governance and security](/trust/governance-security)
+for the trust boundary.

@@ -1,0 +1,78 @@
+---
+title: "Identity and context"
+description: "Identify the end user without exposing the workspace verification secret"
+---
+
+Dubot uses three different values at the browser boundary.
+
+| Value | Purpose | Secret? |
+| --- | --- | --- |
+| Client token | Selects the workspace and SDK rollout | No |
+| User id | Stable customer-owned identifier for the signed-in user | No |
+| Identity token | Proves that the customer server vouches for that user id | Yes, until delivered to the intended browser session |
+
+## Mint the identity token on your server
+
+Use the workspace identity-verification secret to sign an HS256 JWT. The subject must equal the
+`userId` passed to `Dubot.init()`, and expiration must be no more than seven days in the
+future. Shorter lifetimes are recommended.
+
+```js
+import jwt from 'jsonwebtoken';
+
+const identityToken = jwt.sign(
+  {
+    sub: currentUser.id,
+    exp: Math.floor(Date.now() / 1000) + 60 * 60,
+  },
+  process.env.DUBOT_IDENTITY_VERIFICATION_SECRET,
+  { algorithm: 'HS256' },
+);
+```
+
+Return that token through your authenticated application response, then initialize Dubot in the
+browser:
+
+```js
+await window.Dubot.init({
+  userId: currentUser.id,
+  email: currentUser.email,
+  identityToken,
+});
+```
+
+<Warning>
+  Never expose `DUBOT_IDENTITY_VERIFICATION_SECRET` to the browser. Rotating the secret makes
+  previously minted tokens fail verification immediately.
+</Warning>
+
+## Observe before enforcing
+
+Workspace settings can observe or enforce signed identities separately for Test and Production.
+
+- **Observe** records whether identified sessions present a valid signature without blocking
+  unsigned traffic.
+- **Enforce** rejects missing, invalid, expired, or mismatched identity tokens.
+
+Use the recent coverage summary before changing an environment from Observe to Enforce.
+
+## Supply session context
+
+`context` is a flat map of scalar values. The current SDK bounds it to approximately 2 KB and
+drops nested values or overflow with a console warning.
+
+```js
+window.Dubot.setContext({
+  plan: 'pro',
+  invoice_open: true,
+  open_invoice_id: 'inv_1042',
+});
+```
+
+`setContext()` replaces the complete context set. Rebuild and send the full current snapshot
+when the host state changes.
+
+<Note>
+  Email is used for identity attribution when passed to `init()`. It is not automatically copied
+  into assistant context. Add only the context fields the experience actually needs.
+</Note>

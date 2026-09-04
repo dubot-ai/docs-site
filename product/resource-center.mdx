@@ -1,0 +1,74 @@
+---
+title: "Resource Center"
+description: "Put page-aware help, search, Ask, and approved launches in one panel"
+---
+
+<Info>
+  The Resource Center is implemented in the current product build. Workspace configuration and
+  deployment determine whether it is available in a target environment.
+</Info>
+
+## Help that changes with the page
+
+Each workspace has one versioned Resource Center. It combines a default resource list with
+optional route overrides for the page the customer is viewing.
+
+![A current page-aware Resource Center rendered by the Dubot SDK](/assets/product/resource-center.png)
+
+<Note>
+  This is a current SDK Storybook render with example content. It demonstrates the implemented
+  panel, card, trigger, and composer states.
+</Note>
+
+## Content types
+
+The default list and route overrides can contain:
+
+- published reviewed guides;
+- published wizards;
+- Help Center articles with an external URL;
+- video embeds;
+- hyperlinks;
+- host-provided callback cards;
+- an MCP connector card for the controlled-rollout action channel.
+
+Route overrides can pin, hide, and order content for exact paths or path prefixes without
+duplicating the default list.
+
+## Search and Ask
+
+Search and Ask are independent workspace-wide settings.
+
+- **Search** returns ranked article cards from the published knowledge corpus.
+- **Ask** opens an in-panel conversation with the Resource Center's reserved assistant.
+- Ask receives current route and resolved-content context from the runtime.
+- Static cards do not become search results or Ask grounding.
+- Articles open at their external source rather than in an in-panel reader.
+
+## Triggers
+
+Choose one trigger mode:
+
+| Trigger | Behavior |
+| --- | --- |
+| Floating | Dubot renders the launcher |
+| Injected | Dubot mounts the trigger into a matching host selector |
+| Auto-open | The panel opens when its targeting conditions match |
+| Programmatic | Your application calls `Dubot.openResourceCenter()` |
+
+When a wizard sidebar is mounted, the Resource Center's base launcher and browse panel yield to
+that sidebar. An active Ask conversation remains open.
+
+## Host callbacks
+
+Callback cards run functions supplied through
+`Dubot.init({ resourceCenterCallbacks: [...] })`. They are deliberately separate from
+agent-callable actions: selecting a card invokes the matching host handler directly, and the
+handler is never advertised as a tool to a wizard or MCP client.
+
+## Publishing
+
+The Resource Center has its own draft, publish, unpublish, archive, and version lifecycle.
+Publishing should validate referenced guides, wizards, articles, callbacks, and the embedded Ask
+configuration. In the current product, use the Resource Center page's publish action rather than
+assuming it is included in every bulk publish.

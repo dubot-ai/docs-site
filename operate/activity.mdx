@@ -1,0 +1,50 @@
+---
+title: "Activity and analytics"
+description: "Inspect adoption, outcomes, failures, and cost"
+---
+
+Dubot provides a workspace overview plus activity views attached to the configuration that
+produced the result.
+
+## Workspace overview
+
+Depending on enabled product areas and available data, the Overview can show:
+
+- sessions, median turns, and unique users;
+- resolution rate;
+- action success and errors;
+- session volume over time;
+- common themes;
+- action health;
+- conversion or completion funnel;
+- Guidance performance;
+- token use and estimated spend.
+
+The current date-range controls are 7, 30, and 90 days. Production is the current overview
+environment.
+
+## Detailed activity
+
+| Area | What to inspect |
+| --- | --- |
+| Wizard | Conversation list, transcript, completion, model use, and related tool or Guidance activity |
+| Action | Calls, outcomes, errors, duration, and failure reason |
+| Guidance | Sessions grouped by theme, completion, steps, stop/error outcome, and run timeline |
+| Resource Center | Panel metrics, Ask conversations, and conversation detail |
+
+Guidance outcomes include completed, stopped, error, abandoned, and active. Review the run
+timeline before changing a guide based only on its aggregate completion rate.
+
+## Interpret evidence carefully
+
+- A rendered surface is not the same as a started session.
+- A tool request is not the same as a successful customer-side operation.
+- A completed assistant turn is not necessarily a resolved customer outcome.
+- A draft tested by an operator is not customer adoption.
+- Per-theme Guidance counts can overlap because one run may carry several themes.
+- Cached or unavailable analytics panels should not be treated as zero.
+
+<Note>
+  Product activity supports diagnosis and iteration. Confirm contractual retention, export,
+  security-monitoring, and compliance-audit requirements separately for a customer deployment.
+</Note>

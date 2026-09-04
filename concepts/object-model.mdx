@@ -1,49 +1,67 @@
 ---
 title: "Object model"
-description: "The building blocks Dubot uses to turn intent into controlled action"
+description: "The building blocks behind Dubot experiences"
 ---
 
-Dubot organizes everything around a simple structure: small, reviewable building blocks are grouped into capabilities, and capabilities are given to an agent. Understanding these three layers is the fastest way to read the rest of these docs.
-
-## Three layers
+Dubot separates reusable product knowledge and operations from the customer-facing experience
+that uses them.
 
 ```text
-atomic units (actions, pages, knowledge, journeys)
-  -> capabilities (scoped buckets with a description of when to use them)
-    -> agents (a configured assistant that is given capabilities)
+knowledge + actions
+  -> capabilities
+    -> wizards, Guidance, or the Resource Center
+      -> placements and published end-user surfaces
 ```
 
-## Atomic units
+## Core objects
 
 <CardGroup cols={2}>
-  <Card title="Action" icon="zap">
-    An operation the agent can perform, such as calling a product endpoint. Each action carries a risk level and a policy: act automatically, require confirmation, or never. Actions that write always confirm.
+  <Card title="Wizard" icon="message-circle">
+    The dashboard name for a configured assistant. A wizard combines instructions, capabilities,
+    optional direct knowledge, display settings, and at most one placement. The underlying API
+    and runtime entity is an agent configuration.
   </Card>
-  <Card title="Page" icon="app-window">
-    A summarized inventory of a screen in the product: what is on it, what it links to, and which controls trigger which operations. Captured once and summarized, not stored as raw markup.
+  <Card title="Capability" icon="blocks">
+    Reusable context attached to one or more wizards. Security, Brand Voice, and Product Domain
+    capabilities supply knowledge. Skill capabilities can also supply actions.
+  </Card>
+  <Card title="Action" icon="zap">
+    A named operation available to a wizard or MCP action channel. Session API actions call a
+    reviewed product endpoint through customer-owned code. Client-side callbacks run a function
+    registered by the host application.
   </Card>
   <Card title="Knowledge" icon="book-open">
-    Help center articles and documents ingested into a single reviewable corpus per workspace. See [Knowledge](/product/knowledge) for what exists today.
+    Help Center articles and uploaded documents in the workspace corpus. A wizard can search all
+    content, selected sources, selected articles, or no knowledge.
   </Card>
-  <Card title="Journey" icon="route">
-    A described workflow, stored as editable text: to accomplish something, call this action, go here, highlight this, and fall back to showing the customer. Journeys are authored and reviewable, not rigid recordings.
+  <Card title="Guide" icon="route">
+    A reviewed Guidance sequence containing message, perform, indicate, and ask steps. Guides can
+    launch from the Resource Center or another supported entry point.
+  </Card>
+  <Card title="Placement" icon="panel-right">
+    Where and when one wizard appears. The current modes are bubble, inline, sidebar, and
+    fullscreen, with optional page targeting.
   </Card>
 </CardGroup>
 
+## Workspace-owned objects
+
+Each workspace also has:
+
+- a Resource Center configuration, including its reserved Ask assistant;
+- a reserved Guidance configuration;
+- one or more brand configurations, with an optional default;
+- Test and Production versions of publishable configuration;
+- team, identity, SDK, and MCP settings.
+
+## Naming: wizard and agent
+
+The Dubot application uses **Wizard** for the assistants that end users see. Technical interfaces
+retain **agent** in routes, identifiers, artifacts, and API field names. In these docs, wizard
+means the product experience; agent is used only where the technical name matters.
+
 <Note>
-  A journey is one building block among several, not the top-level catalog. It describes how a task is done and can reference actions, pages, and knowledge.
+  A guide is not a rigid browser recording, and a capability is not a standalone end-user
+  surface. Those distinctions keep reusable context, reviewed behavior, and presentation
+  independently governable.
 </Note>
-
-## Capabilities
-
-A capability is a scoped bucket of atomic units with a description of when it should be used. Capabilities are how a team gives an agent a coherent area of responsibility without granting open-ended access. Guardrails such as security boundaries and brand voice are expressed as high-priority rules that travel with the agent.
-
-## Agents
-
-An agent is a configured assistant. Today the product lets a team set an agent's model, reasoning budget, and customer-facing behavior, then attach capabilities and actions after the agent is created. This is the configuration plane. How the agent behaves at runtime is described in [How Dubot works](/concepts/how-dubot-works).
-
-<Info>
-  **Available today:** creating an agent, configuring its model, reasoning budget, and behavior, and attaching capabilities and actions.
-
-  **In development:** runtime knowledge retrieval and reusable governance controls.
-</Info>
