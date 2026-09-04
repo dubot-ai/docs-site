@@ -37,90 +37,77 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Overview",
-        "icon": "layout-dashboard",
+        "tab": "Guides",
         "groups": [
           {
             "group": "Start here",
             "pages": ["index", "start/availability"]
           },
           {
-            "group": "Concepts",
+            "group": "Understand Dubot",
             "pages": [
               "concepts/how-dubot-works",
               "concepts/object-model",
               "concepts/acquisition"
             ]
-          }
-        ]
-      },
-      {
-        "tab": "Build",
-        "icon": "blocks",
-        "groups": [
+          },
           {
-            "group": "Product",
+            "group": "Experiences",
             "pages": [
               "surfaces/overview",
-              "product/wizards",
-              "product/guidance",
               "product/resource-center",
+              "product/wizards",
+              "product/guidance"
+            ]
+          },
+          {
+            "group": "Configure",
+            "pages": [
               "product/capabilities-actions",
               "product/knowledge",
               "product/brand"
             ]
+          },
+          {
+            "group": "Operate",
+            "pages": [
+              "operate/publishing",
+              "operate/activity",
+              "trust/governance-security"
+            ]
+          },
+          {
+            "group": "Evaluate",
+            "pages": ["pilots/pilot-guide"]
           }
         ]
       },
       {
-        "tab": "Integrate",
-        "icon": "plug",
+        "tab": "SDK",
         "groups": [
+          {
+            "group": "Start integrating",
+            "pages": ["integrations/overview", "sdk/quickstart"]
+          },
           {
             "group": "Browser SDK",
             "pages": [
-              "sdk/quickstart",
               "sdk/identity-context",
               "sdk/actions",
               "sdk/surfaces"
             ]
           },
           {
-            "group": "MCP",
+            "group": "Agent integrations",
             "pages": ["integrations/mcp"]
           }
         ]
       },
       {
-        "tab": "Operate",
-        "icon": "activity",
+        "tab": "API Reference",
         "groups": [
           {
-            "group": "Release and learn",
-            "pages": ["operate/publishing", "operate/activity"]
-          },
-          {
-            "group": "Trust",
-            "pages": ["trust/governance-security"]
-          }
-        ]
-      },
-      {
-        "tab": "Evaluate",
-        "icon": "flag",
-        "groups": [
-          {
-            "group": "Plan an evaluation",
-            "pages": ["integrations/overview", "pilots/pilot-guide"]
-          }
-        ]
-      },
-      {
-        "tab": "Reference",
-        "icon": "book-open",
-        "groups": [
-          {
-            "group": "SDK",
+            "group": "Browser SDK",
             "pages": ["reference/sdk-api"]
           },
           {
