@@ -38,6 +38,7 @@
     "tabs": [
       {
         "tab": "Overview",
+        "icon": "home",
         "groups": [
           {
             "group": "Start here",
@@ -55,6 +56,7 @@
       },
       {
         "tab": "Build",
+        "icon": "blocks",
         "groups": [
           {
             "group": "Product",
@@ -72,6 +74,7 @@
       },
       {
         "tab": "Integrate",
+        "icon": "plug",
         "groups": [
           {
             "group": "Browser SDK",
@@ -90,6 +93,7 @@
       },
       {
         "tab": "Operate",
+        "icon": "activity",
         "groups": [
           {
             "group": "Release and learn",
@@ -103,6 +107,7 @@
       },
       {
         "tab": "Evaluate",
+        "icon": "flag",
         "groups": [
           {
             "group": "Plan an evaluation",
@@ -112,6 +117,7 @@
       },
       {
         "tab": "Reference",
+        "icon": "book-open",
         "groups": [
           {
             "group": "SDK",

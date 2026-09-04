@@ -35,3 +35,23 @@ pre {
 [data-badge] {
   border-radius: 4px;
 }
+
+/* The top-level sections are primary wayfinding, so keep them comfortably readable. */
+nav-tabs {
+  gap: 0.25rem;
+}
+
+.nav-tabs-item,
+mobile-nav-tabs-item {
+  min-height: 2.75rem;
+  padding-inline: 0.75rem !important;
+  font-size: 0.9375rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+}
+
+nav-tabs tab-icon,
+mobile-nav-tabs-item tab-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
