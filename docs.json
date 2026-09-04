@@ -38,7 +38,7 @@
     "tabs": [
       {
         "tab": "Overview",
-        "icon": "home",
+        "icon": "layout-dashboard",
         "groups": [
           {
             "group": "Start here",
