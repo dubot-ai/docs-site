@@ -5,12 +5,12 @@ description: "Current Dubot product and integration terms"
 
 | Term | Meaning |
 | --- | --- |
-| Action | A governed operation available through a wizard or the end-user MCP action channel |
+| Action | A governed operation made available to an agent through a Skill capability, or exposed through the end-user MCP action channel |
 | Action channel | The controlled-rollout MCP path that dispatches a call into a live, signed-in customer-product tab |
 | Action toast | In-product status, confirmation, and outcome UI for action-channel calls |
 | Agent | The technical entity name behind a dashboard Wizard |
 | Authoring MCP | The authenticated MCP at `app.dubot.ai/mcp` for granted Dubot workspaces |
-| Capability | Reusable context; Skill capabilities can also carry actions |
+| Capability | Reusable instructions and context attached to a wizard or the Resource Center Agent; Skill capabilities can also carry actions |
 | Client token | Public, workspace-scoped, rotatable token in the SDK script URL |
 | Client-side callback | A function registered by the host application and governed in Dubot |
 | Current product build | Implemented in current code and covered by product tests; deployment access can still vary |
@@ -21,7 +21,7 @@ description: "Current Dubot product and integration terms"
 | Live | Published configuration resolved in Production for real end-user traffic |
 | Placement | The mode and page rules that determine where one wizard mounts |
 | Production | Workspace environment that resolves published versions only |
-| Resource Center | Page-aware in-product help panel with content, search, Ask, and launches |
+| Resource Center | Versioned, page-aware support destination with curated content, search, a reserved Ask agent, and launches |
 | Response mask | Allowlist of action-result fields returned to the assistant |
 | Session API action | Published HTTP operation executed by customer-owned first-party code |
 | Test | Workspace environment that resolves the latest saved configuration |

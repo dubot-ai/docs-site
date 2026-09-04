@@ -8,10 +8,14 @@ description: "Put page-aware help, search, Ask, and approved launches in one pan
   deployment determine whether it is available in a target environment.
 </Info>
 
-## Help that changes with the page
+## A first-class, workspace-owned help surface
 
 Each workspace has one versioned Resource Center. It combines a default resource list with
 optional route overrides for the page the customer is viewing.
+
+The Resource Center is authored and published as its own product surface. Its dashboard has four
+tabs: **Content**, **Agent**, **Settings**, and **Analytics**. Version history belongs to the
+Resource Center configuration, and the embedded Ask agent publishes as part of the same version.
 
 ![A current page-aware Resource Center rendered by the Dubot SDK](/assets/product/resource-center.png)
 
@@ -19,7 +23,18 @@ optional route overrides for the page the customer is viewing.
   This demonstrates the implemented panel, card, trigger, and composer states.
 </Note>
 
-## Content types
+At runtime, the pieces remain distinct:
+
+```text
+curated content + page overrides -> Browse
+published knowledge corpus       -> Search
+Resource Center Agent
+  + capabilities
+  + knowledge scope              -> Ask
+guides + wizards + callbacks     -> the next customer step
+```
+
+## Content
 
 The default list and route overrides can contain:
 
@@ -34,17 +49,29 @@ The default list and route overrides can contain:
 Route overrides can pin, hide, and order content for exact paths or path prefixes without
 duplicating the default list.
 
+The Content tab shows **All pages** and authored page overrides. On a matched route, pinned items
+appear first and inherited defaults fill **More Resources**. Static components are explicitly
+placed content and are not searchable or used as Ask grounding.
+
 ## Search and Ask
 
-Search and Ask are independent workspace-wide settings.
+Search and Ask are independent workspace-wide features configured on the Resource Center. When
+enabled, they remain available below the contextual content list on every eligible page.
 
 - **Search** returns ranked article cards from the published knowledge corpus.
-- **Ask** opens an in-panel conversation with the Resource Center's reserved assistant.
-- Ask receives current route and resolved-content context from the runtime.
+- **Ask** opens an in-panel conversation with the reserved Resource Center Agent.
+- Ask receives the current route and resolved Resource Center content automatically at runtime.
+- The reserved agent is configured only in the **Agent** tab. Its prompt, explicit knowledge
+  scope, capabilities, and action references are embedded in the versioned Resource Center; it
+  is not a normal placeable wizard and has no separate publish lifecycle.
 - Static cards do not become search results or Ask grounding.
 - Articles open at their external source rather than in an in-panel reader.
 
-## Triggers
+## Settings and triggers
+
+The **Settings** tab controls display copy, trigger behavior, availability, and which Resource
+Center callbacks may be exposed. Display settings include the panel title and Search/Ask
+placeholder.
 
 Choose one trigger mode:
 
@@ -58,6 +85,12 @@ Choose one trigger mode:
 When a wizard sidebar is mounted, the Resource Center's base launcher and browse panel yield to
 that sidebar. An active Ask conversation remains open.
 
+## Analytics
+
+The **Analytics** tab reports panel opens and unique viewers, card impressions and clicks with
+per-item breakdowns, searches and searches with results, and Ask/chat submissions. Search text
+and question text are not retained in Resource Center analytics.
+
 ## Host callbacks
 
 Callback cards run functions supplied through
@@ -69,5 +102,5 @@ handler is never advertised as a tool to a wizard or MCP client.
 
 The Resource Center has its own draft, publish, unpublish, archive, and version lifecycle.
 Publishing should validate referenced guides, wizards, articles, callbacks, and the embedded Ask
-configuration. In the current product, use the Resource Center page's publish action rather than
-assuming it is included in every bulk publish.
+configuration, including its capability and action references. In the current product, use the
+Resource Center page's publish action rather than assuming it is included in every bulk publish.

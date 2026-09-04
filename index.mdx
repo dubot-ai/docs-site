@@ -17,21 +17,33 @@ interface, or run an approved action.
 
 ![Dubot connects customer intent to approved product action](/assets/architecture.svg)
 
-## What you can build
+## Experiences customers use
 
-<CardGroup cols={2}>
+<CardGroup cols={3}>
+  <Card title="Resource Center" icon="panel-right" href="/product/resource-center">
+    A page-aware support destination with curated content, knowledge search, Ask, and launches
+    into guides or wizards.
+  </Card>
   <Card title="Wizards" icon="message-circle" href="/product/wizards">
-    Configured assistants that combine instructions, product knowledge, capabilities, and one
-    in-product placement.
+    Placed assistants that combine instructions, knowledge, and capabilities for a focused job.
   </Card>
   <Card title="Guidance" icon="mouse-pointer-click" href="/product/guidance">
     Reviewed walkthroughs and goal-based help that work with the customer's live interface.
   </Card>
-  <Card title="Resource Center" icon="panel-right" href="/product/resource-center">
-    Page-aware help with guides, wizards, articles, static resources, search, and Ask.
+</CardGroup>
+
+## What powers them
+
+<CardGroup cols={3}>
+  <Card title="Capabilities" icon="blocks" href="/product/capabilities-actions">
+    Reusable bundles of instructions and context. Skill capabilities can also carry actions.
+  </Card>
+  <Card title="Knowledge" icon="book-open" href="/product/knowledge">
+    One searchable workspace corpus, with explicit scope for each agent experience.
   </Card>
   <Card title="Actions" icon="zap" href="/product/capabilities-actions">
-    Reviewable product operations and client-side callbacks with explicit runtime policy.
+    Reviewable product operations and client-side callbacks that Skill capabilities make
+    available to an agent.
   </Card>
 </CardGroup>
 
@@ -42,8 +54,8 @@ interface, or run an approved action.
     Start with a recurring task that is valuable, measurable, and safe to bound.
   </Step>
   <Step title="Assemble the experience">
-    Configure the wizard, capabilities, actions, knowledge, or reviewed guidance needed for that
-    outcome.
+    Choose a Resource Center, wizard, or Guidance journey. Attach the capabilities, knowledge,
+    actions, and content needed for that outcome.
   </Step>
   <Step title="Integrate the browser SDK">
     Add one CDN script, identify the signed-in user, and register the context or callbacks your

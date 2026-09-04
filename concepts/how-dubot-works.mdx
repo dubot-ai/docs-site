@@ -18,12 +18,14 @@ team has published for that workspace.
     verification is enabled, and the minimum flat context the experience needs.
   </Step>
   <Step title="Resolve the allowed knowledge and tools">
-    The active wizard supplies instructions and capabilities. Dubot narrows knowledge to the
-    configured scope and actions to the published, enabled set that the host currently supports.
+    The active wizard, or the page-aware Resource Center Agent, supplies instructions and
+    capabilities. Dubot narrows the workspace knowledge corpus to the configured scope and
+    actions to those exposed through an attached Skill capability and currently supported by the
+    host. Production resolves published versions only.
   </Step>
   <Step title="Answer, guide, or act">
-    Dubot can respond in conversation, launch Guidance against the current interface, collect
-    structured input, or request an approved action.
+    Dubot can respond in conversation, launch reviewed Guidance against the current interface,
+    collect structured input, or request an approved action.
   </Step>
   <Step title="Apply policy at the execution boundary">
     An action runs automatically only when its policy allows it. Confirm-gated actions stop for
@@ -40,8 +42,9 @@ team has published for that workspace.
 ![Wizard configuration in the Dubot application](/assets/product/agent-configuration.png)
 
 The Dubot application is the configuration plane. Teams author wizards, capabilities, actions,
-knowledge, Guidance, Resource Center content, and brand settings there. The browser SDK is the
-runtime plane inside the customer product.
+the knowledge corpus, Guidance, Resource Center content, and brand there. The browser SDK is the
+runtime plane inside the customer product. The Resource Center Agent saves and publishes with the
+Resource Center; it is not a placed Wizard.
 
 | Plane | Reads | Writes |
 | --- | --- | --- |
@@ -53,7 +56,8 @@ runtime plane inside the customer product.
 
 - The public client token identifies a workspace and SDK release. It is not a secret.
 - The identity-verification secret stays on the customer's server.
-- Session API destinations come from the published action registry, not from model output.
+- Session API destinations come from the published action catalog through an attached published
+  Skill capability, not from model output.
 - Customer authentication and credentials remain in customer-owned code.
 - Response masks reduce the result returned to the assistant.
 - Client-side callbacks are registered by the host and are available only while that host

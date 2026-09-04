@@ -5,28 +5,35 @@ description: "Where teams configure Dubot and where customers experience it"
 
 ## Authoring application
 
-The Dubot application organizes the current product into four working areas.
+The current Dubot application groups workspace authoring in the sidebar. This navigation helps
+teams find editors, but it is not the dependency order of the product.
 
 | Area | What teams manage |
 | --- | --- |
 | Overview | Workspace usage, outcomes, action health, Guidance, and token spend |
-| Build | Wizards, Guidance, Resource Center, capabilities, actions, knowledge, and brand |
-| Integrations | The end-user MCP action channel |
-| Configure | Product Crawler, team, workspace, identity, and SDK settings |
+| Your product | Guidance, the action catalog, and the knowledge corpus |
+| Build | Capabilities, wizards, and the Resource Center |
+| Configure | Brand, team, workspace settings, and MCP |
+
+Conceptually, knowledge and actions are workspace resources. Capabilities package those resources
+with reusable instructions. Wizards and the Resource Center Agent consume capabilities to create
+customer-facing experiences. Guidance is governed separately and can be launched from those
+experiences.
 
 ## Browser SDK
 
 The browser SDK provides four distinct end-user surfaces.
 
 <CardGroup cols={2}>
+  <Card title="Resource Center" icon="library" href="/product/resource-center">
+    A page-aware support destination with curated cards, Help Center search, Ask, and launches
+    into wizards or guides.
+  </Card>
   <Card title="Wizard" icon="message-circle" href="/product/wizards">
     Conversational help rendered as a bubble, inline surface, sidebar, or fullscreen experience.
   </Card>
   <Card title="Guidance" icon="mouse-pointer-click" href="/product/guidance">
     A visible overlay that can explain, indicate, ask, and perform reviewed steps in the product.
-  </Card>
-  <Card title="Resource Center" icon="library" href="/product/resource-center">
-    Page-aware cards, Help Center search, Ask, and launches into wizards or guides.
   </Card>
   <Card title="Action toast" icon="bell">
     Status, approval, and outcome feedback for actions requested through the end-user MCP channel.

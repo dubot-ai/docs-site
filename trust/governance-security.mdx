@@ -12,7 +12,7 @@ as unrestricted product authority.
 | --- | --- |
 | Client token | Public workspace and SDK-delivery identifier, optionally constrained by origin |
 | Identity token | Customer-server proof of the current end user |
-| Capability | Reusable context and the outer action allowlist for a wizard |
+| Capability | Reusable context and the outer action allowlist for a wizard or the Resource Center Agent |
 | Published registry | Exact action version, schema, endpoint, mask, and availability |
 | Execution policy | Auto or explicit confirmation |
 | Customer executor | First-party code that owns authentication and performs Session API calls |
@@ -36,7 +36,8 @@ from the model. The customer's application keeps possession of its own bearer to
 CSRF logic, and other credentials.
 
 Client-side callbacks are functions the host explicitly registers. They are available only while
-the current host registration and published wizard capability both allow them.
+the current host registration and a published Skill capability attached to the active agent both
+allow them.
 
 ## Policy and confirmation
 

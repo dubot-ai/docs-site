@@ -7,10 +7,19 @@ Dubot separates reusable product knowledge and operations from the customer-faci
 that uses them.
 
 ```text
-knowledge + actions
+Knowledge corpus + Action catalog
   -> capabilities
-    -> wizards, Guidance, or the Resource Center
-      -> placements and published end-user surfaces
+    -> wizards
+    -> Resource Center Agent
+
+Curated content + Resource Center Agent
+  -> Resource Center
+
+Brand + page rules
+  -> presentation and placement
+
+Reviewed guides
+  -> Guidance
 ```
 
 ## Core objects
@@ -18,21 +27,24 @@ knowledge + actions
 <CardGroup cols={2}>
   <Card title="Wizard" icon="message-circle">
     The dashboard name for a configured assistant. A wizard combines instructions, capabilities,
-    optional direct knowledge, display settings, and at most one placement. The underlying API
-    and runtime entity is an agent configuration.
+    display settings, and at most one placement. The underlying API and runtime entity is an
+    agent configuration.
   </Card>
   <Card title="Capability" icon="blocks">
-    Reusable context attached to one or more wizards. Security, Brand Voice, and Product Domain
-    capabilities supply knowledge. Skill capabilities can also supply actions.
+    A reusable package of instructions and context, sometimes including actions. Capability
+    types are Skill, Product Domain, Security, and Brand Voice. Each capability is delivered as
+    Always, On-demand, or Optional, and can attach to Wizards or the reserved Resource Center
+    Agent.
   </Card>
   <Card title="Action" icon="zap">
-    A named operation available to a wizard or MCP action channel. Session API actions call a
-    reviewed product endpoint through customer-owned code. Client-side callbacks run a function
-    registered by the host application.
+    A named operation in the workspace Action catalog. For an in-product agent, it becomes
+    available through an attached Skill capability. Session API actions call a reviewed product
+    endpoint through customer-owned code. Client-side callbacks run a function registered by the
+    host application. The end-user MCP channel has separate enablement.
   </Card>
   <Card title="Knowledge" icon="book-open">
-    Help Center articles and uploaded documents in the workspace corpus. A wizard can search all
-    content, selected sources, selected articles, or no knowledge.
+    The workspace Knowledge corpus: the governed source material that capabilities and agents
+    can use. It is distinct from the instructions and context packaged by a capability.
   </Card>
   <Card title="Guide" icon="route">
     A reviewed Guidance sequence containing message, perform, indicate, and ask steps. Guides can
@@ -42,14 +54,19 @@ knowledge + actions
     Where and when one wizard appears. The current modes are bubble, inline, sidebar, and
     fullscreen, with optional page targeting.
   </Card>
+  <Card title="Resource Center" icon="library">
+    A first-class, page-aware destination with curated content, Search, Ask Agent, settings,
+    trigger and availability controls, and analytics. Its reserved Resource Center Agent saves
+    and publishes with the Resource Center and has no placement.
+  </Card>
 </CardGroup>
 
 ## Workspace-owned objects
 
 Each workspace also has:
 
-- a Resource Center configuration, including its reserved Ask assistant;
-- a reserved Guidance configuration;
+- a Resource Center configuration and its reserved Resource Center Agent;
+- a separately governed reserved Guidance configuration;
 - one or more brand configurations, with an optional default;
 - Test and Production versions of publishable configuration;
 - team, identity, SDK, and MCP settings.
@@ -62,6 +79,7 @@ means the product experience; agent is used only where the technical name matter
 
 <Note>
   A guide is not a rigid browser recording, and a capability is not a standalone end-user
-  surface. Those distinctions keep reusable context, reviewed behavior, and presentation
+  surface. Guidance is separately governed, and reviewed guides can launch from the Resource
+  Center. Those distinctions keep reusable context, reviewed behavior, and presentation
   independently governable.
 </Note>
