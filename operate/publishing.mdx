@@ -1,0 +1,73 @@
+---
+title: "Test and Production"
+description: "Save, test, publish, unpublish, archive, and restore Dubot configuration"
+---
+
+Dubot workspaces have two fixed content environments. They are resolution rules, not
+customer-created deployment targets.
+
+| Environment | Resolves |
+| --- | --- |
+| Test | Latest saved configuration, including drafts and pending changes |
+| Production | Published versions only |
+
+Saving makes a change testable. It does not make the change live for customer traffic.
+
+## Publish states
+
+| Status | Meaning |
+| --- | --- |
+| Draft | Saved but never published |
+| Published | The latest saved version is the Production version |
+| Published with pending changes | Production still serves an earlier published version |
+| Archived | Removed from Test; an already published Production version remains until it is unpublished |
+
+## A safe release loop
+
+<Steps>
+  <Step title="Save in Test">
+    Finish the configuration and make sure required fields and placement rules are valid.
+  </Step>
+  <Step title="Review dependencies">
+    Check capabilities, actions, knowledge, brand, Guidance, and referenced Resource Center
+    content. For Ask, include the Resource Center Agent's capabilities and knowledge scope.
+  </Step>
+  <Step title="Exercise representative cases">
+    Test success, confirmation, decline, unavailable dependencies, navigation, error, and stop
+    behavior.
+  </Step>
+  <Step title="Publish explicitly">
+    Publish the intended entity and any selected dependencies. Publishing one entity must not be
+    assumed to publish every reference automatically.
+  </Step>
+  <Step title="Verify Production">
+    Confirm the published version, intended page targeting, identity mode, and customer-owned
+    executor in the target environment.
+  </Step>
+</Steps>
+
+## Unpublish and archive
+
+- **Unpublish** removes an entity from Production while its latest saved version remains available
+  in Test.
+- **Archive** removes the entity from Test. If the entity is still published, its Production
+  version remains until a separate unpublish.
+- **Unarchive** returns the saved entity to Test.
+- **Restore version** makes a previous published snapshot the working version for review.
+
+<Warning>
+  Archiving is not a substitute for unpublishing. If Production removal is the goal, verify that
+  the entity has been unpublished.
+</Warning>
+
+## Resource Center and brand
+
+The Resource Center and brand have entity-specific publish controls. The Resource Center's
+Production publish is handled on its own page in the current product. Do not assume a bulk
+workspace publish includes it.
+
+## What “live” means
+
+In these docs, **live** means a published version that Production can resolve for real end-user
+traffic. A merged change, saved draft, Storybook state, Test preview, or design prototype is not
+live.

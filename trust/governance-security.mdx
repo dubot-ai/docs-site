@@ -1,76 +1,78 @@
 ---
 title: "Governance and security"
-description: "The questions that define safe, controlled product action"
+description: "The current browser, identity, action, and publishing boundaries"
 ---
 
-## Authority should be designed, not assumed
+## Authority is explicit
 
-An action layer is useful because it can affect the product. That is also why its authority must be explicit, narrow, and observable.
+Dubot combines several controls rather than treating an installed script or connected AI client
+as unrestricted product authority.
 
-Dubot's intended governance model begins with named capabilities and agreed control points. It does not begin with unrestricted product access.
-
-## Initial rollout safeguards
-
-<CardGroup cols={2}>
-  <Card title="Bounded scope" icon="focus">
-    The initial rollout covers a small number of reviewed customer outcomes.
-  </Card>
-  <Card title="Explicit confirmation" icon="circle-check">
-    Sensitive or consequential steps can require customer or agent approval, and actions that write always confirm.
-  </Card>
-  <Card title="Known completion" icon="flag">
-    Each journey defines evidence of success, failure, or safe stopping.
-  </Card>
-  <Card title="Visible recovery" icon="rotate-ccw">
-    Unexpected state should lead to a clear stop or handoff, not hidden improvisation.
-  </Card>
-</CardGroup>
-
-## How actions are governed
-
-Every action carries a policy that decides how it may run.
-
-| Policy | Behavior |
+| Control | Boundary |
 | --- | --- |
-| Auto | May run without a confirmation step |
-| Confirm | Requires customer or agent approval before running |
-| Never | Is not available to the agent |
+| Client token | Public workspace and SDK-delivery identifier, optionally constrained by origin |
+| Identity token | Customer-server proof of the current end user |
+| Capability | Reusable context and the outer action allowlist for a wizard or the Resource Center Agent |
+| Published registry | Exact action version, schema, endpoint, mask, and availability |
+| Execution policy | Auto or explicit confirmation |
+| Customer executor | First-party code that owns authentication and performs Session API calls |
+| Response mask | Fields that may return to the assistant |
+| Test/Production | Draft visibility versus published customer traffic |
+| MCP workspace grant | Authoring boundary for an external AI client |
 
-Actions that write to the product always confirm. Read-only actions can be allowed to run automatically when a team is comfortable with their scope.
+## Identity
 
-## What the action layer can see
+The workspace identity-verification secret stays on the customer's server. That server signs an
+HS256 JWT whose subject matches the `userId` passed to the SDK. Test and Production can observe
+signature coverage before enforcing it.
 
-Through a connected product, Dubot sees the shape of your product's own API responses, the same information a developer would see with the browser network tab open while using the product. It does not receive hidden or privileged access beyond what the connected surface already returns.
+Unsigned identities should not be allowed to authorize or use the end-user MCP action channel.
 
-## How support data is handled
+## Action execution
 
-When a support conversation is used to measure or improve deflection, that data is read-only and kept to a minimum footprint. Conversation content should be de-identified or reduced to outcome-level signal, according to what the customer's security team prefers. Connector scopes should be requested at the minimum needed for a specific use case, and narrowed when a smaller scope is enough.
+Session API actions are executed by customer-owned first-party code. The SDK asks for a published
+tool by id and supplies validated arguments; it does not accept an arbitrary method or destination
+from the model. The customer's application keeps possession of its own bearer token, cookies,
+CSRF logic, and other credentials.
 
-<Note>
-  Actions are reviewable before use, in the Actions interface or over
-  [MCP](/integrations/mcp), so a security or engineering team can inspect
-  exactly what an action does before it is attached to an agent.
-</Note>
+Client-side callbacks are functions the host explicitly registers. They are available only while
+the current host registration and a published Skill capability attached to the active agent both
+allow them.
 
-## Technical review checklist
+## Policy and confirmation
 
-Before customer use moves beyond a controlled test, Dubot and the customer should document:
+`auto` actions can run without an approval prompt. `confirm` actions show the exact proposed
+operation and wait for approval. High-risk and destructive classifications prefill Confirm in the
+current authoring interface, but reviewers must verify the saved execution policy.
 
-- environments and domains in scope;
-- user identity and session assumptions;
-- credentials or tokens, if any, and how they are stored;
-- the minimum data passed into and out of a journey;
-- actions that are allowed, confirmation-gated, or prohibited;
-- logging, retention, and access expectations;
-- failure, recovery, and support ownership;
-- testing and release approval.
+Confirmation is one control, not a replacement for least-privilege endpoints, server-side
+authorization, input validation, rate limits, or safe failure behavior.
 
-## Claims that require verification
+## Publishing
+
+Production resolves published versions only. Saving, merging code, previewing in Test, or showing
+a Storybook state does not publish customer configuration. Unpublishing and archiving are separate
+operations.
+
+## Review checklist
+
+Before a journey reaches customer traffic, document:
+
+- customer outcome and environments in scope;
+- allowed origins and public client token;
+- user-id source, JWT minting, lifetime, rotation, and enforcement mode;
+- minimum session context;
+- every action, response mask, risk, and execution policy;
+- customer-side authorization and failure handling;
+- knowledge sources and scope;
+- publish, rollback, and unpublish ownership;
+- activity, retention, and escalation expectations;
+- representative success, decline, failure, and unavailable-state tests.
+
+## Claims that require separate evidence
 
 <Warning>
-  This documentation does not make claims about certifications, encryption standards, data residency, subprocessors, penetration testing, uptime, or contractual controls. Those details will be published only when they have been verified against current product and company evidence.
+  These docs do not claim certifications, encryption standards, data residency, subprocessor
+  terms, penetration-test results, uptime commitments, or contractual retention. Confirm those
+  subjects from current security and legal materials for the customer engagement.
 </Warning>
-
-## A practical evaluation principle
-
-The first question is not "Can the system click anything?" It is "Can this one approved customer outcome be completed safely, predictably, and visibly?"

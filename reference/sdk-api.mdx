@@ -1,0 +1,82 @@
+---
+title: "Browser SDK API"
+description: "Current public methods and properties on window.Dubot"
+---
+
+The CDN script installs one browser global: `window.Dubot`.
+
+## Properties and inspection
+
+| Member | Type | Description |
+| --- | --- | --- |
+| `version` | `string` | Exact SDK build version; local builds report `dev` |
+| `initProps` | object or `null` | Last accepted, serializable initialization snapshot; excludes JWT and callback functions |
+| `actionChannel` | object | Published action-channel state and live presence connection state |
+| `getState()` | object | Combined version, initialization, and action-channel snapshot |
+
+## Initialization
+
+### `init(options?)`
+
+Initializes identity, configuration, placements, Resource Center, Guidance resume, analytics, and
+the optional action channel.
+
+| Option | Type | Notes |
+| --- | --- | --- |
+| `userId` | `string` | Stable signed-in customer user id |
+| `email` | `string` | Optional identity attribution |
+| `identityToken` | `string` | Server-minted HS256 JWT with `sub = userId` |
+| `mode` | `bubble`, `inline`, `sidebar`, or `fullscreen` | Default for programmatic wizard rendering |
+| `position` | `bottom-left` or `bottom-right` | Call-site widget-position override |
+| `actions` | array | Initial complete client-side callback set |
+| `resourceCenterCallbacks` | array | Initial complete static-card callback set |
+| `context` | object | Flat scalar session context, approximately 2 KB maximum |
+
+The client token is read from the SDK script URL and is not an `init()` option.
+
+## Wizards and Resource Center
+
+| Method | Description |
+| --- | --- |
+| `renderAgent({ slug, presentationMode?, selector? })` | Renders a published wizard; selector applies to inline mode |
+| `openResourceCenter()` | Opens the published Resource Center when allowed by its trigger state |
+| `closeResourceCenter()` | Closes the Resource Center |
+
+## Host state
+
+| Method | Description |
+| --- | --- |
+| `setActions(actions)` | Replaces the complete client-side callback set |
+| `setContext(context)` | Replaces the complete flat scalar context map |
+
+## Guidance
+
+| Method | Description |
+| --- | --- |
+| `triggerGuidance({ guideId })` | Starts a published reviewed guide |
+| `triggerGuidance({ goal })` | Starts a goal-based run |
+
+The returned session has `stop()`, optional `guidanceSessionId`, and a `done` promise that
+resolves to a terminal outcome.
+
+## End-user MCP action channel
+
+| Method | Description |
+| --- | --- |
+| `listActionChannelGrants()` | Lists grants for the currently verified product identity |
+| `openActionChannelConnections()` | Opens the in-product grant and revocation surface |
+
+These methods return no grants or no-op when the SDK does not have both `userId` and
+`identityToken`.
+
+## Lifecycle
+
+### `destroy()`
+
+Tears down the installed instance. It is safe to call more than once and terminal for that
+instance.
+
+<Note>
+  `setAuthoringMode()` exists for the Dubot browser extension's authoring isolation. It is not a
+  host-application integration API.
+</Note>

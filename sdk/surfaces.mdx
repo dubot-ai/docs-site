@@ -1,0 +1,88 @@
+---
+title: "SDK surfaces"
+description: "Render wizards, open the Resource Center, and start Guidance"
+---
+
+## Wizard placement modes
+
+`Dubot.renderAgent()` supports four presentation values:
+
+- `Bubble`
+- `InlineWizard`
+- `Sidebar`
+- `Fullscreen`
+
+```js
+window.Dubot.renderAgent({
+  slug: 'account-help',
+  presentationMode: 'Sidebar',
+});
+```
+
+If `presentationMode` is omitted, `init({ mode })` supplies the default; otherwise the SDK uses
+bubble. A selector applies only to `InlineWizard`.
+
+Configured placements and programmatic rendering use the same current chat surface. Prefer
+configured page targeting when a wizard should appear automatically; use `renderAgent()` when
+the host owns the launch event.
+
+## Resource Center
+
+```js
+window.Dubot.openResourceCenter();
+window.Dubot.closeResourceCenter();
+```
+
+Programmatic open works when the published Resource Center trigger mode allows it. A mounted
+wizard sidebar takes precedence over the base Resource Center panel.
+
+## Guidance
+
+Start a published reviewed guide:
+
+```js
+const session = window.Dubot.triggerGuidance({
+  guideId: 'guide_invite_teammate',
+});
+```
+
+Or start a goal-based run in a controlled evaluation:
+
+```js
+const session = window.Dubot.triggerGuidance({
+  goal: 'Open billing settings and point out where invoices can be downloaded. Do not download.',
+});
+```
+
+The returned session can be stopped and observed:
+
+```js
+cancelButton.addEventListener('click', () => session.stop());
+
+const outcome = await session.done;
+console.log(outcome.status, outcome.detail);
+```
+
+`done` resolves with `completed`, `stopped`, or `error`; it does not reject.
+
+## End-user MCP connections
+
+When the controlled-rollout action channel is enabled and the user has a verified identity:
+
+```js
+const grants = await window.Dubot.listActionChannelGrants();
+window.Dubot.openActionChannelConnections();
+```
+
+The connections surface lets that end user review and revoke MCP grants for the current product
+identity.
+
+## Tear down
+
+```js
+window.Dubot.destroy();
+```
+
+`destroy()` removes placements, Resource Center, Guidance, action-channel presence, listeners,
+and queued runtime state. It is idempotent and terminal for that SDK instance. Reload the script
+to create a new instance.

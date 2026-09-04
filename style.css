@@ -35,3 +35,113 @@ pre {
 [data-badge] {
   border-radius: 4px;
 }
+
+/* Translate the product shell onto Mintlify's existing desktop navigation. */
+@media (min-width: 1024px) {
+  #sidebar {
+    width: 17rem;
+    background: #fff;
+    border-color: var(--purple-300);
+  }
+
+  #sidebar > ul {
+    width: calc(17rem - 1px);
+  }
+
+  #content-container {
+    margin-left: 17rem;
+  }
+
+  #navbar-transition-maple {
+    left: 17rem;
+    width: calc(100% - 17rem);
+    height: 4rem;
+    padding-inline: 2.25rem;
+    background: #fff;
+    border-color: var(--purple-300);
+  }
+
+  #content-area {
+    margin-top: 4rem;
+  }
+
+  .nav-tabs {
+    gap: 1rem;
+  }
+
+  .nav-tabs-item {
+    min-height: 4rem;
+    padding-inline: 0.625rem !important;
+    color: var(--navy-700) !important;
+    font-size: 1.0625rem !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-tabs-item:hover,
+  .nav-tabs-item[data-active="true"] {
+    color: var(--navy-900) !important;
+  }
+
+  .nav-tabs-item svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .nav-tabs-item[data-active="true"] > div:last-child {
+    height: 2px;
+    background: var(--coral) !important;
+  }
+
+  #sidebar .sidebar-title {
+    color: var(--navy-600);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  #sidebar a.group.flex.items-start {
+    color: var(--navy-900);
+    border-color: transparent !important;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+  }
+
+  #sidebar a.group.flex.items-start:hover {
+    color: var(--navy-950);
+    background: var(--purple-100);
+  }
+
+  #sidebar a.group.flex.items-start[aria-current="page"],
+  #sidebar a.group.flex.items-start[data-active="true"] {
+    color: var(--navy-950) !important;
+    background: var(--purple-200);
+    font-weight: 700;
+  }
+
+  html.dark #sidebar,
+  html.dark #navbar-transition-maple {
+    background: var(--navy-950);
+    border-color: var(--navy-800);
+  }
+
+  html.dark #sidebar .sidebar-title,
+  html.dark #sidebar a.group.flex.items-start,
+  html.dark .nav-tabs-item {
+    color: var(--navy-400) !important;
+  }
+
+  html.dark #sidebar a.group.flex.items-start:hover,
+  html.dark #sidebar a.group.flex.items-start[aria-current="page"],
+  html.dark #sidebar a.group.flex.items-start[data-active="true"] {
+    color: white !important;
+    background: var(--navy-800);
+  }
+
+  html.dark .nav-tabs-item:hover,
+  html.dark .nav-tabs-item[data-active="true"] {
+    color: white !important;
+  }
+}

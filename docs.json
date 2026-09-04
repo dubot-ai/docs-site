@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "maple",
   "name": "Dubot Docs",
-  "description": "Technical documentation for evaluating and piloting Dubot",
+  "description": "Product and integration documentation for Dubot",
   "colors": {
     "primary": "#0D1341",
     "light": "#F4BEAE",
@@ -37,23 +37,95 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
+        "tab": "Overview",
+        "icon": "layout-dashboard",
         "groups": [
           {
             "group": "Start here",
-            "pages": ["index"]
+            "pages": ["index", "start/availability"]
           },
           {
             "group": "Concepts",
-            "pages": ["concepts/object-model", "concepts/how-dubot-works", "concepts/acquisition"]
+            "pages": [
+              "concepts/how-dubot-works",
+              "concepts/object-model",
+              "concepts/acquisition"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Build",
+        "icon": "blocks",
+        "groups": [
+          {
+            "group": "Product",
+            "pages": [
+              "surfaces/overview",
+              "product/wizards",
+              "product/guidance",
+              "product/resource-center",
+              "product/capabilities-actions",
+              "product/knowledge",
+              "product/brand"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Integrate",
+        "icon": "plug",
+        "groups": [
+          {
+            "group": "Browser SDK",
+            "pages": [
+              "sdk/quickstart",
+              "sdk/identity-context",
+              "sdk/actions",
+              "sdk/surfaces"
+            ]
+          },
+          {
+            "group": "MCP",
+            "pages": ["integrations/mcp"]
+          }
+        ]
+      },
+      {
+        "tab": "Operate",
+        "icon": "activity",
+        "groups": [
+          {
+            "group": "Release and learn",
+            "pages": ["operate/publishing", "operate/activity"]
+          },
+          {
+            "group": "Trust",
+            "pages": ["trust/governance-security"]
+          }
+        ]
+      },
+      {
+        "tab": "Evaluate",
+        "icon": "flag",
+        "groups": [
+          {
+            "group": "Plan an evaluation",
+            "pages": ["integrations/overview", "pilots/pilot-guide"]
+          }
+        ]
+      },
+      {
+        "tab": "Reference",
+        "icon": "book-open",
+        "groups": [
+          {
+            "group": "SDK",
+            "pages": ["reference/sdk-api"]
           },
           {
             "group": "Product",
-            "pages": ["surfaces/overview", "product/knowledge", "integrations/overview", "integrations/mcp"]
-          },
-          {
-            "group": "Evaluation",
-            "pages": ["trust/governance-security", "pilots/pilot-guide"]
+            "pages": ["reference/glossary"]
           }
         ]
       }

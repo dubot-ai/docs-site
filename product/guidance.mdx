@@ -1,0 +1,55 @@
+---
+title: "Guidance"
+description: "Help a customer complete work in the product interface"
+---
+
+Guidance operates against the live page with visible controls for the customer. It is useful when
+the task is easier to complete in context than through conversation alone.
+
+![A current reviewed-guide surface in the Dubot SDK](/assets/product/guidance-reviewed-guide.png)
+
+<Note>
+  This demonstrates a reviewed-guide step highlighting a live page target with visible
+  instruction and stop controls.
+</Note>
+
+## Two ways to start
+
+| Mode | Input | Use when |
+| --- | --- | --- |
+| Reviewed guide | A published guide id | The journey and its expected steps have been authored and reviewed |
+| Goal-based Guidance | A free-text goal | A controlled evaluation needs the runtime to reason over the current page |
+
+Reviewed guides are the more predictable customer-facing path. Goal-based Guidance should be
+evaluated with clear constraints and a safe stopping condition before broader use.
+
+## Reviewed guide steps
+
+| Step | What it does |
+| --- | --- |
+| Message | Explains context without acting |
+| Perform | Executes a reviewed interaction such as a click |
+| Indicate | Highlights a target and waits for the customer, a Next action, or a timeout |
+| Ask | Pauses for a choice or free-text response |
+
+The browser extension can help author guides from a real workflow. Captured interactions remain
+review material until the guide is saved and published.
+
+## Runtime controls
+
+- A persistent control lets the customer stop a run.
+- Indicate steps include a visible target, instruction, and Skip option.
+- Guidance can pause for customer input rather than guessing.
+- A run that crosses a hard navigation can resume after the SDK initializes on the next page.
+- Reduced-motion and screen-reader behavior are part of the SDK surface.
+- Completion, stop, error, and abandoned outcomes are recorded for activity review.
+
+## Configure and publish
+
+The Guidance area contains the reserved Guidance configuration, reviewed guides, and Activity.
+Production can run only published Guidance configuration and published guides. A Resource Center
+guide card should not be treated as ready until its guide and Guidance dependency work in the
+target environment.
+
+Developers can start Guidance through `Dubot.triggerGuidance()`. See
+[SDK surfaces](/sdk/surfaces) for the supported call shapes.

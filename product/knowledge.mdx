@@ -1,77 +1,76 @@
 ---
 title: "Knowledge"
-description: "How Dubot builds a reviewable source of product knowledge"
+description: "Ingest, scope, search, and read product documentation"
 ---
 
-## Give every approved journey the same product context
+## Build one reviewable workspace corpus
 
-CX teams already maintain the answers that explain how their product works. Dubot brings those sources into a workspace corpus so the team can inspect what has been collected, keep it current, and prepare it for use by approved journeys.
+Dubot can ingest product guidance from a public Help Center or supported document uploads, then
+make a defined scope available to wizards, Guidance, and the Resource Center.
 
 <CardGroup cols={3}>
   <Card title="Crawl a Help Center" icon="globe">
-    Add a public Help Center as a source and collect the pages available to the crawler.
+    Add a public source and collect the pages available under its configured path.
   </Card>
   <Card title="Upload documents" icon="file-text">
-    Add PDF, DOCX, Markdown, and text files that contain relevant product guidance.
+    Add PDF, DOCX, Markdown, and text files.
   </Card>
-  <Card title="Review the corpus" icon="database">
-    Inspect sources and extracted articles, then monitor size, sync status, and content health.
+  <Card title="Scope retrieval" icon="search">
+    Let an experience use all knowledge, selected sources, selected articles, or none.
   </Card>
 </CardGroup>
 
-## What exists today
+![A current Dubot knowledge-source crawl in progress](/assets/product/knowledge-crawl-progress.png)
 
-The current product supports the ingestion and review side of the knowledge system.
+<Note>
+  This demonstrates the live heartbeat, moving discovery and crawl counts, failures, and the
+  existing corpus remaining available during a re-crawl.
+</Note>
 
-- Add a public Help Center URL or upload supported documents.
-- Inspect the sources and articles collected for a workspace.
-- Re-crawl an individual source or sync all crawl sources manually.
-- Enable a weekly sync for crawl sources.
-- Review article count, corpus size, sync status, and content that is no longer linked from its source.
-- Remove a source and its extracted content from the workspace corpus.
+## Current product behavior
+
+- Inspect sources and extracted articles for the workspace.
+- Re-crawl an individual web source or sync all crawl sources.
+- Enable weekly synchronization for crawl sources.
+- Review article count, corpus size, sync state, and content no longer linked from its source.
+- Remove a source and its extracted content.
+- Search the configured scope during a wizard, Guidance, or Resource Center request.
+- Read a matching article in bounded windows rather than loading the entire corpus into every
+  request.
 
 <Info>
-  Knowledge ingestion is available in the product today. Runtime retrieval, where an agent searches this corpus while helping complete a journey, is still in development.
+  Runtime knowledge retrieval is implemented in the current product build. The previous public
+  documentation that described retrieval as future work is no longer accurate.
 </Info>
 
-## How ingestion works
+## Retrieval flow
 
 ```text
-Public Help Center or uploaded documents
+public Help Center or uploaded documents
   -> deterministic extraction
-  -> workspace corpus
-  -> source and article review
-  -> approved journey context (in development)
+    -> workspace corpus
+      -> experience-specific scope
+        -> search matching articles
+          -> read the relevant article content
 ```
 
-Ingestion is deterministic. Dubot extracts and normalizes source content without using AI to rewrite it during ingestion. This makes the collected material easier to inspect before it becomes part of an agent experience.
-
-Each workspace has one corpus assembled from its connected sources. Crawl sources can be refreshed. Uploaded files are static and must be uploaded again when their content changes.
+The current runtime exposes server-side knowledge search and article reading to eligible
+assistants. It does not imply unrestricted access to every article, authenticated Help Center
+crawling, or a particular future retrieval architecture.
 
 ## Current boundaries
 
 | Area | Current behavior |
 | --- | --- |
-| Crawl access | Publicly accessible Help Center pages |
+| Web access | Publicly accessible Help Center pages |
 | Crawl rules | Source robots directives are honored |
-| Uploaded formats | PDF, DOCX, Markdown, and TXT |
-| Freshness | Manual sync or optional weekly sync for crawl sources |
-| Private sources | Authenticated crawling is not currently supported |
-| Agent retrieval | In development and not yet part of the runtime contract |
+| Uploads | PDF, DOCX, Markdown, and TXT |
+| Freshness | Manual sync or optional weekly sync for web sources |
+| Private sources | Authenticated crawling is not part of the current contract |
+| Scope | All content, selected sources, selected articles, or none |
+| Resource Center search | Published article cards only; raw search text is not retained as analytics content |
 
 <Warning>
-  Adding a source does not mean every article should be available to every journey. Source scope, exclusions, and access expectations should be reviewed before retrieval is enabled.
+  Ingestion and access are separate decisions. Review source ownership, exclusions, sensitivity,
+  freshness, and experience-level scope before publishing knowledge-backed behavior.
 </Warning>
-
-## Decide what belongs in the first release
-
-A useful knowledge setup starts with a narrow, owned source set. CX and technical teams should agree on:
-
-- which Help Center or documents are authoritative;
-- who owns the accuracy of each source;
-- how often crawl sources need to be refreshed;
-- which sections or documents should be excluded;
-- whether any source contains customer, employee, or other sensitive information;
-- which approved journeys will eventually need this context.
-
-The first goal is not to import everything. It is to establish a corpus the team understands and can review before connecting it to agent behavior.

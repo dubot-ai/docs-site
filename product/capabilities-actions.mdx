@@ -1,0 +1,102 @@
+---
+title: "Capabilities and actions"
+description: "Compose agent behavior from reusable context and governed product operations"
+---
+
+## Capabilities are the composition layer
+
+Capabilities are Dubot's reusable bundles of context. Attach them to a wizard or to the Resource
+Center Agent, then compose the active experience from the bundles it needs. Each capability has an
+agent prompt, a model-facing description, and a priority. Priority controls ordering when several
+capabilities contribute context.
+
+| Type | What it contributes |
+| --- | --- |
+| Skill | Reusable guidance and, when configured, actions |
+| Product domain | Product knowledge; it may also define a knowledge scope |
+| Security | Security guidance |
+| Brand voice | Voice and communication guidance |
+
+Delivery is configured per capability:
+
+| Delivery | Runtime behavior |
+| --- | --- |
+| Always | Include the capability in the agent context by default |
+| On-demand | Make it discoverable so the model can load it when relevant |
+| Optional | Let the attachment choose whether it is embedded or load-on-demand |
+
+The delivery setting controls context delivery, not action availability. A capability or action
+that exists in the catalog is not automatically available to an experience. The active agent must
+include a Skill capability that contains the action. Test resolves the latest saved versions;
+Production requires the relevant agent, capability, and action versions to be published. A Skill
+is the only capability type that carries Session API actions and client-side callbacks.
+
+## Actions are catalog contracts
+
+Actions define the governed operation contract. They are included in a Skill capability;
+publishing an action alone does not attach it to a wizard or the Resource Center Agent. The
+controlled-rollout end-user MCP channel has separate action enablement.
+
+```text
+action catalog
+  -> Skill capability
+    -> wizard or Resource Center Agent
+      -> available in that customer experience
+```
+
+## Two current action types
+
+<CardGroup cols={2}>
+  <Card title="Session API action" icon="server">
+    A reviewed HTTP operation. The published registry owns the method, endpoint, input schema, and
+    response mask. Customer-owned first-party code performs the authenticated request.
+  </Card>
+  <Card title="Client-side callback" icon="code">
+    A function registered by the host application through the SDK. The dashboard owns its
+    versioned name, description, response mask, and policy; the host owns its function and input
+    schema.
+  </Card>
+</CardGroup>
+
+Backend API actions and multi-action procedures are not part of the current product contract.
+
+## The execution boundary
+
+```text
+assistant selects a published tool
+  -> Dubot validates the model arguments
+    -> policy runs automatically or requests confirmation
+      -> customer-owned code performs the operation
+        -> response mask removes unneeded fields
+          -> the assistant receives the result
+```
+
+For Session API actions, the browser bundle dispatches a tool id and arguments. It does not choose
+the destination. Customer-owned code resolves the id against the published registry and makes the
+request with the application's existing authentication. For client-side callbacks, the host
+application runs the registered function. If the host callback or operation is unavailable, the
+action cannot complete.
+
+## Review the contract
+
+Before publishing an action, check:
+
+- human title and model-facing description;
+- stable tool key and action type;
+- method and endpoint for Session API actions;
+- JSON input schema;
+- response mask;
+- risk classification;
+- execution policy: auto or confirm;
+- enabled state and capability membership;
+- MCP enablement, when the action channel is in scope;
+- behavior when the operation or host callback is unavailable.
+
+<Warning>
+  Risk classification helps authors choose a policy, but the execution policy is the runtime
+  control. High-risk and destructive choices prefill Confirm in the current editor; reviewers
+  should still verify the saved policy before publishing.
+</Warning>
+
+See [SDK actions](/sdk/actions) for host integration and [Governance and security](/trust/governance-security)
+for the trust boundary.
