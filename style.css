@@ -100,16 +100,19 @@ pre {
   background: white !important;
   border-color: var(--purple-300) !important;
   box-shadow: var(--dubot-shadow);
+}
+
+a.card {
   transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 
-.card:hover {
+a.card:hover {
   border-color: var(--navy-900) !important;
   box-shadow: 0 8px 28px rgba(74, 90, 138, 0.12);
   transform: translateY(-1px);
 }
 
-.card:focus-visible {
+a.card:focus-visible {
   outline: 2px solid var(--coral);
   outline-offset: 2px;
 }
@@ -129,9 +132,28 @@ pre {
   background-color: currentColor !important;
 }
 
-.card:hover [data-component-part="card-icon"] {
+a.card:hover [data-component-part="card-icon"] {
   color: var(--coral) !important;
   fill: var(--coral) !important;
+}
+
+/* Frame product evidence consistently without letting portrait captures dominate a page. */
+#content img[src*="/assets/product/"] {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2.25rem 0 !important;
+  padding: 0.5rem;
+  background: #fff;
+  border: 1px solid var(--purple-300);
+  border-radius: 0.75rem;
+  box-shadow: var(--dubot-shadow);
+  box-sizing: border-box;
+}
+
+#content img[src*="/wizard-bubble.png"] {
+  max-width: 26rem;
+  margin-inline: auto !important;
 }
 
 /* Give structured content the white-card treatment used by the marketing site. */
@@ -145,6 +167,10 @@ html:not(.dark) #pagination {
 html:not(.dark) #content div:has(> table) {
   border-radius: 0.5rem;
   overflow: hidden;
+}
+
+#content [data-component-part="scroll-area-content"] > div:has(> table) {
+  padding-inline: 0 !important;
 }
 
 html:not(.dark) #pagination {
@@ -173,6 +199,12 @@ html:not(.dark) #pagination {
 #content td {
   padding: 0.75rem 1rem;
   border-color: var(--purple-300);
+}
+
+/* Keep ordinary documentation lists compact while leaving Steps untouched. */
+#content ul:not([class]) > li,
+#content ol:not([class]) > li {
+  margin-block: 0.25rem !important;
 }
 
 /* Use the product notification language for documentation callouts. */
@@ -316,7 +348,7 @@ html.dark .card {
   box-shadow: none;
 }
 
-html.dark .card:hover {
+html.dark a.card:hover {
   border-color: var(--coral) !important;
 }
 
@@ -325,9 +357,14 @@ html.dark .card [data-component-part="card-icon"] {
   fill: var(--dark-muted) !important;
 }
 
-html.dark .card:hover [data-component-part="card-icon"] {
+html.dark a.card:hover [data-component-part="card-icon"] {
   color: var(--coral) !important;
   fill: var(--coral) !important;
+}
+
+html.dark #content img[src*="/assets/product/"] {
+  border-color: var(--dark-border);
+  box-shadow: none;
 }
 
 html.dark #content-area :is(h1, h2, h3, h4) {
