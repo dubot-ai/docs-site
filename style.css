@@ -12,27 +12,30 @@
   --purple-300: #E4E5F1;
   --purple-200: #ECEDF8;
   --purple-100: #F7F8FF;
-  --dark-canvas: #0D1117;
-  --dark-surface: #161B22;
-  --dark-border-subtle: #21262D;
-  --dark-border: #30363D;
-  --dark-text: #E6EDF3;
-  --dark-muted: #ADBAC7;
+  --dark-canvas: #0D1341;
+  --dark-surface: #070C2D;
+  --dark-border-subtle: #192050;
+  --dark-border: #192050;
+  --dark-text: #FFFFFF;
+  --dark-muted: #9EA8C8;
   --dubot-shadow: 0 0 32px 0 rgba(74, 90, 138, 0.08);
   --background-light: 247 248 255;
   --color-background-light: rgb(247 248 255);
 }
 
 html.dark {
-  --background-dark: 13 17 23;
-  --color-background-dark: rgb(13 17 23);
-  --default-border-color: 48 54 61;
-  --gray-300: 230 237 243;
-  --gray-400: 173 186 199;
-  --gray-500: 139 148 158;
-  --gray-800: 48 54 61;
-  --gray-900: 33 38 45;
-  --gray-950: 13 17 23;
+  --primary-light: 234 98 66;
+  --background-dark: 13 19 65;
+  --color-background-dark: rgb(13 19 65);
+  --default-border-color: 25 32 80;
+  --gray-300: 228 229 241;
+  --gray-400: 158 168 200;
+  --gray-500: 74 90 138;
+  --gray-600: 53 65 117;
+  --gray-700: 25 32 80;
+  --gray-800: 25 32 80;
+  --gray-900: 7 12 45;
+  --gray-950: 7 12 45;
 }
 
 .approval-accent {
@@ -56,7 +59,7 @@ pre {
   border-radius: 4px;
 }
 
-/* Match the product's light workspace and dark surface ladder. */
+/* Match the product's light workspace and the marketing site's branded dark mode. */
 #background-color {
   background: var(--purple-100);
 }
@@ -79,6 +82,20 @@ html.dark .card {
 
 html.dark .card {
   box-shadow: none;
+}
+
+html.dark #content-area :is(h1, h2, h3, h4) {
+  color: var(--dark-text);
+}
+
+html.dark .callout,
+html.dark .code-block-background {
+  background: var(--dark-surface) !important;
+}
+
+html.dark .callout,
+html.dark .code-block {
+  border-color: var(--dark-border) !important;
 }
 
 /* Translate the product shell onto Mintlify's existing desktop navigation. */
