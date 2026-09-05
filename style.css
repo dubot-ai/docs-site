@@ -98,21 +98,26 @@ pre {
 
 .card {
   background: white !important;
-  border-color: var(--purple-300) !important;
-  box-shadow: var(--dubot-shadow);
+  border-color: transparent !important;
+  box-shadow: none;
 }
 
-a.card {
+.card[role="link"],
+a.card[href] {
+  border-color: var(--purple-300) !important;
+  box-shadow: var(--dubot-shadow);
   transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 
-a.card:hover {
+.card[role="link"]:hover,
+a.card[href]:hover {
   border-color: var(--navy-900) !important;
   box-shadow: 0 8px 28px rgba(74, 90, 138, 0.12);
   transform: translateY(-1px);
 }
 
-a.card:focus-visible {
+.card[role="link"]:focus-visible,
+a.card[href]:focus-visible {
   outline: 2px solid var(--coral);
   outline-offset: 2px;
 }
@@ -132,7 +137,8 @@ a.card:focus-visible {
   background-color: currentColor !important;
 }
 
-a.card:hover [data-component-part="card-icon"] {
+.card[role="link"]:hover [data-component-part="card-icon"],
+a.card[href]:hover [data-component-part="card-icon"] {
   color: var(--coral) !important;
   fill: var(--coral) !important;
 }
@@ -348,7 +354,13 @@ html.dark .card {
   box-shadow: none;
 }
 
-html.dark a.card:hover {
+html.dark .card[role="link"],
+html.dark a.card[href] {
+  border-color: var(--dark-border) !important;
+}
+
+html.dark .card[role="link"]:hover,
+html.dark a.card[href]:hover {
   border-color: var(--coral) !important;
 }
 
@@ -357,7 +369,8 @@ html.dark .card [data-component-part="card-icon"] {
   fill: var(--dark-muted) !important;
 }
 
-html.dark a.card:hover [data-component-part="card-icon"] {
+html.dark .card[role="link"]:hover [data-component-part="card-icon"],
+html.dark a.card[href]:hover [data-component-part="card-icon"] {
   color: var(--coral) !important;
   fill: var(--coral) !important;
 }
