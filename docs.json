@@ -10,11 +10,11 @@
   },
   "fonts": {
     "heading": {
-      "family": "Schibsted Grotesk",
+      "family": "DM Sans",
       "weight": 700
     },
     "body": {
-      "family": "Schibsted Grotesk",
+      "family": "DM Sans",
       "weight": 400
     }
   },

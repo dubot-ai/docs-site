@@ -12,27 +12,39 @@
   --purple-300: #E4E5F1;
   --purple-200: #ECEDF8;
   --purple-100: #F7F8FF;
-  --dark-canvas: #0D1117;
-  --dark-surface: #161B22;
-  --dark-border-subtle: #21262D;
-  --dark-border: #30363D;
-  --dark-text: #E6EDF3;
-  --dark-muted: #ADBAC7;
+  --success-bg: #E8F7EE;
+  --success-border: #B8E2C8;
+  --success-text: #0D7A49;
+  --warning-bg: #FFF8DC;
+  --warning-border: #F2D499;
+  --warning-text: #92650A;
+  --danger-bg: #FEF2F2;
+  --danger-border: #FECACA;
+  --danger-text: #B91C1C;
+  --dark-canvas: #0D1341;
+  --dark-surface: #070C2D;
+  --dark-border-subtle: #192050;
+  --dark-border: #192050;
+  --dark-text: #FFFFFF;
+  --dark-muted: #9EA8C8;
   --dubot-shadow: 0 0 32px 0 rgba(74, 90, 138, 0.08);
   --background-light: 247 248 255;
   --color-background-light: rgb(247 248 255);
 }
 
 html.dark {
-  --background-dark: 13 17 23;
-  --color-background-dark: rgb(13 17 23);
-  --default-border-color: 48 54 61;
-  --gray-300: 230 237 243;
-  --gray-400: 173 186 199;
-  --gray-500: 139 148 158;
-  --gray-800: 48 54 61;
-  --gray-900: 33 38 45;
-  --gray-950: 13 17 23;
+  --primary-light: 234 98 66;
+  --background-dark: 13 19 65;
+  --color-background-dark: rgb(13 19 65);
+  --default-border-color: 25 32 80;
+  --gray-300: 228 229 241;
+  --gray-400: 158 168 200;
+  --gray-500: 74 90 138;
+  --gray-600: 53 65 117;
+  --gray-700: 25 32 80;
+  --gray-800: 25 32 80;
+  --gray-900: 7 12 45;
+  --gray-950: 7 12 45;
 }
 
 .approval-accent {
@@ -53,18 +65,279 @@ pre {
 }
 
 [data-badge] {
-  border-radius: 4px;
+  border-radius: 4px !important;
+  padding: 4px 8px !important;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.625rem !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.08em;
 }
 
-/* Match the product's light workspace and dark surface ladder. */
+[data-badge][data-color="gray"] {
+  background: var(--purple-200) !important;
+  color: var(--navy-600) !important;
+}
+
+[data-badge][data-color="green"] {
+  background: var(--success-bg) !important;
+  border: 1px solid var(--success-border);
+  color: var(--success-text) !important;
+}
+
+[data-badge][data-color="yellow"] {
+  background: var(--warning-bg) !important;
+  border: 1px solid var(--warning-border);
+  color: var(--warning-text) !important;
+}
+
+/* Match the product's light workspace and the marketing site's branded dark mode. */
 #background-color {
   background: var(--purple-100);
 }
 
 .card {
   background: white !important;
+  border-color: transparent !important;
+  box-shadow: none;
+}
+
+.card[role="link"],
+a.card[href] {
   border-color: var(--purple-300) !important;
   box-shadow: var(--dubot-shadow);
+  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.card[role="link"]:hover,
+a.card[href]:hover {
+  border-color: var(--navy-900) !important;
+  box-shadow: 0 8px 28px rgba(74, 90, 138, 0.12);
+  transform: translateY(-1px);
+}
+
+.card[role="link"]:focus-visible,
+a.card[href]:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 2px;
+}
+
+.card [data-component-part="card-icon"],
+.card [data-component-part="card-icon"] > svg {
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+}
+
+.card [data-component-part="card-icon"] {
+  color: var(--navy-600) !important;
+  fill: var(--navy-600) !important;
+}
+
+.card [data-component-part="card-icon"] > svg {
+  background-color: currentColor !important;
+}
+
+.card[role="link"]:hover [data-component-part="card-icon"],
+a.card[href]:hover [data-component-part="card-icon"] {
+  color: var(--coral) !important;
+  fill: var(--coral) !important;
+}
+
+/* Frame product evidence consistently without letting portrait captures dominate a page. */
+#content img[src*="/assets/product/"] {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2.25rem 0 !important;
+  padding: 0.5rem;
+  background: #fff;
+  border: 1px solid var(--purple-300);
+  border-radius: 0.75rem;
+  box-shadow: var(--dubot-shadow);
+  box-sizing: border-box;
+}
+
+#content img[src*="/wizard-bubble.png"] {
+  max-width: 26rem;
+  margin-inline: auto !important;
+}
+
+/* Give structured content the white-card treatment used by the marketing site. */
+html:not(.dark) #content div:has(> table),
+html:not(.dark) #pagination {
+  background: #fff !important;
+  border: 1px solid var(--purple-300);
+  box-shadow: var(--dubot-shadow);
+}
+
+html:not(.dark) #content div:has(> table) {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+#content [data-component-part="scroll-area-content"] > div:has(> table) {
+  padding-inline: 0 !important;
+}
+
+html:not(.dark) #pagination {
+  border-radius: 1rem;
+}
+
+/* Map Mintlify tables to the product table hierarchy. */
+#content table {
+  font-size: 0.875rem;
+}
+
+#content thead {
+  background: var(--purple-200);
+}
+
+#content th {
+  color: var(--navy-600);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#content th,
+#content td {
+  padding: 0.75rem 1rem;
+  border-color: var(--purple-300);
+}
+
+/* Keep ordinary documentation lists compact while leaving Steps untouched. */
+#content ul:not([class]) > li,
+#content ol:not([class]) > li {
+  margin-block: 0.25rem !important;
+}
+
+/* Use the product notification language for documentation callouts. */
+.callout {
+  position: relative;
+  gap: 0.75rem !important;
+  padding: 0.75rem 0.75rem 0.75rem 1.25rem !important;
+  border-radius: 0.5rem !important;
+  box-shadow: none !important;
+}
+
+.callout::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--navy-700);
+}
+
+.callout[data-callout-type="note"],
+.callout[data-callout-type="info"] {
+  background: var(--purple-200) !important;
+  border-color: var(--purple-300) !important;
+  color: var(--navy-700) !important;
+}
+
+.callout[data-callout-type="warning"] {
+  background: var(--warning-bg) !important;
+  border-color: var(--warning-border) !important;
+  color: var(--warning-text) !important;
+}
+
+.callout[data-callout-type="warning"]::before {
+  background: var(--warning-text);
+}
+
+.callout [data-component-part="callout-content"],
+.callout [data-component-part="callout-icon"],
+.callout .link {
+  color: inherit !important;
+}
+
+.callout [data-component-part="callout-content"] {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Keep code dark in both themes, as specified by the product component. */
+.code-block {
+  overflow: hidden;
+  border-color: var(--navy-800) !important;
+  border-radius: 0.5rem !important;
+  background: var(--navy-900) !important;
+}
+
+.code-block-background {
+  background: var(--navy-900) !important;
+  border-radius: 0 !important;
+}
+
+.code-block [data-testid="copy-code-button"] {
+  background: var(--navy-800) !important;
+  color: var(--navy-400) !important;
+  border-radius: 4px !important;
+  backdrop-filter: none !important;
+}
+
+.code-block [data-testid="copy-code-button"]:hover {
+  color: #fff !important;
+}
+
+.code-block [data-testid="copy-code-button"] svg {
+  color: inherit !important;
+}
+
+.code-block [data-fade-overlay] {
+  --fade-color-light: #0D1341 !important;
+  --fade-color-dark: #0D1341 !important;
+}
+
+html:not(.dark) .code-block .shiki,
+html:not(.dark) .code-block .shiki span {
+  color: var(--shiki-dark) !important;
+}
+
+/* Carry the text-or-number icon primitive into static documentation steps. */
+[data-component-part="step-number"] {
+  margin-left: -11px !important;
+}
+
+[data-component-part="step-number"] > div {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  background: #fff !important;
+  border: 1px solid var(--purple-300);
+  color: var(--navy-600) !important;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+}
+
+/* Apply the compact link and secondary-button states where Mintlify exposes them. */
+#content a.link {
+  color: var(--navy-700);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+#content a.link:hover {
+  color: var(--navy-900);
+}
+
+#pagination a {
+  border-radius: 0.75rem;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+#pagination a:hover {
+  background: var(--purple-100);
+  color: var(--navy-900);
+}
+
+#pagination a:focus-visible,
+#search-bar-entry:focus-visible {
+  outline: 1px solid var(--navy-900);
+  outline-offset: 1px;
 }
 
 html.dark #background-color {
@@ -79,6 +352,116 @@ html.dark .card {
 
 html.dark .card {
   box-shadow: none;
+}
+
+html.dark .card[role="link"],
+html.dark a.card[href] {
+  border-color: var(--dark-border) !important;
+}
+
+html.dark .card[role="link"]:hover,
+html.dark a.card[href]:hover {
+  border-color: var(--coral) !important;
+}
+
+html.dark .card [data-component-part="card-icon"] {
+  color: var(--dark-muted) !important;
+  fill: var(--dark-muted) !important;
+}
+
+html.dark .card[role="link"]:hover [data-component-part="card-icon"],
+html.dark a.card[href]:hover [data-component-part="card-icon"] {
+  color: var(--coral) !important;
+  fill: var(--coral) !important;
+}
+
+html.dark #content img[src*="/assets/product/"] {
+  border-color: var(--dark-border);
+  box-shadow: none;
+}
+
+html.dark #content-area :is(h1, h2, h3, h4) {
+  color: var(--dark-text);
+}
+
+html.dark .callout,
+html.dark .code-block-background {
+  background: var(--dark-surface) !important;
+}
+
+html.dark .callout,
+html.dark .code-block {
+  border-color: var(--dark-border) !important;
+}
+
+html.dark .callout {
+  color: var(--dark-muted) !important;
+}
+
+html.dark .callout::before {
+  background: var(--dark-muted);
+}
+
+html.dark .callout[data-callout-type="warning"] {
+  color: var(--warning-border) !important;
+}
+
+html.dark .callout[data-callout-type="warning"]::before {
+  background: var(--warning-border);
+}
+
+html.dark #content div:has(> table) {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+
+html.dark #content thead {
+  background: var(--navy-800);
+}
+
+html.dark #content th,
+html.dark #content td {
+  border-color: var(--dark-border);
+}
+
+html.dark #content th {
+  color: var(--dark-muted);
+}
+
+html.dark [data-badge][data-color="gray"] {
+  background: var(--navy-800) !important;
+  color: var(--dark-muted) !important;
+}
+
+html.dark [data-badge][data-color="green"] {
+  background: rgba(18, 154, 92, 0.14) !important;
+  border-color: rgba(184, 226, 200, 0.35);
+  color: var(--success-border) !important;
+}
+
+html.dark [data-badge][data-color="yellow"] {
+  background: rgba(146, 101, 10, 0.18) !important;
+  border-color: rgba(242, 212, 153, 0.35);
+  color: var(--warning-border) !important;
+}
+
+html.dark [data-component-part="step-number"] > div {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border);
+  color: var(--dark-muted) !important;
+}
+
+html.dark #content a.link {
+  color: var(--dark-muted);
+}
+
+html.dark #content a.link:hover {
+  color: var(--dark-text);
+}
+
+html.dark #pagination a:hover {
+  background: var(--navy-800);
+  color: var(--dark-text);
 }
 
 /* Translate the product shell onto Mintlify's existing desktop navigation. */
@@ -117,9 +500,10 @@ html.dark .card {
   .nav-tabs-item {
     min-height: 3.75rem;
     padding-inline: 0.75rem !important;
-    color: var(--navy-700) !important;
-    font-size: 0.9375rem !important;
-    font-weight: 600 !important;
+    color: var(--navy-600) !important;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
     letter-spacing: 0;
   }
 
