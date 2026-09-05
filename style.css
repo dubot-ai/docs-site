@@ -152,9 +152,10 @@ html.dark .code-block {
   .nav-tabs-item {
     min-height: 3.75rem;
     padding-inline: 0.75rem !important;
-    color: var(--navy-700) !important;
-    font-size: 0.9375rem !important;
-    font-weight: 600 !important;
+    color: var(--navy-600) !important;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
     letter-spacing: 0;
   }
 
