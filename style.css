@@ -160,6 +160,11 @@ a.card[href]:hover [data-component-part="card-icon"] {
 #content img[src*="/wizard-bubble.png"] {
   max-width: 26rem;
   margin-inline: auto !important;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* Give structured content the white-card treatment used by the marketing site. */
@@ -322,6 +327,15 @@ html:not(.dark) .code-block .shiki span {
 
 #content a.link:hover {
   color: var(--navy-900);
+}
+
+/* Inline prose links should read with the sentence, not like compact UI controls. */
+#content [data-as="p"] a.link {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
 
 #pagination a {
