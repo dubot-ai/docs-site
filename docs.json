@@ -69,6 +69,13 @@
             ]
           },
           {
+            "group": "Build with Dubot",
+            "pages": [
+              "guides/enable-guidance",
+              "guides/add-actions-with-extension"
+            ]
+          },
+          {
             "group": "Operate",
             "pages": [
               "operate/publishing",
