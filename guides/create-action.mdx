@@ -1,0 +1,56 @@
+---
+title: "Create an action"
+description: "Define a governed Session API operation or client-side callback"
+---
+
+<Info>
+  Actions are versioned, publishable contracts. Creating or publishing an action does not make it
+  available to an experience until a published Skill capability includes it and that capability is
+  attached to the active agent.
+</Info>
+
+## Start with the shared contract
+
+Give the action a human title, model-facing description, response mask, and execution policy.
+Choose `auto` or `confirm`. Dubot derives the stable tool key from the title when the action is
+created. The action also has an enabled state, and MCP availability is a separate opt-in when that
+channel is in scope.
+
+## Choose an execution branch
+
+<Tabs>
+  <Tab title="Session API">
+    Use this for an authenticated operation in the customer's product API. Define the HTTP method
+    and endpoint, input schema, response mask, risk classification, and `auto` or `confirm` policy.
+    Customer-owned first-party code resolves the published tool key and performs the request with
+    the application's existing authentication.
+  </Tab>
+  <Tab title="Client-side callback">
+    Use this for an operation owned by the current page or host application. Define the callback's
+    title, model-facing description, and policy. After creation, install the matching callback in
+    the host application. Its input schema is observed from the SDK registration and is not entered
+    in the dashboard. The host runs the registered function when the callback is invoked.
+  </Tab>
+</Tabs>
+
+<Warning>
+  The browser SDK does not choose an arbitrary Session API destination, and Dubot does not own the
+  customer's credentials. A callback that is not registered by the host is unavailable at runtime.
+</Warning>
+
+## Save, review, and publish
+
+<Steps>
+  <Step title="Create the draft">Choose the action type, complete its required fields, and select **Create**.</Step>
+  <Step title="Review and install">Check schema evidence, response fields, risk, policy, enabled state, and availability behavior. Install a client-side callback in the host before expecting it to run.</Step>
+  <Step title="Publish">Publish the version that should be eligible for runtime use.</Step>
+  <Step title="Attach through a Skill">Add the published action to a Skill capability, then publish that capability.</Step>
+</Steps>
+
+High-risk and destructive choices currently prefill `confirm` in the editor, but the saved
+execution policy is the runtime control and still requires review.
+
+Backend API actions are shown as a future action type and are not part of the current product
+contract.
+
+See [SDK actions](/sdk/actions) for registration and the execution boundary.

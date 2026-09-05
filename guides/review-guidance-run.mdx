@@ -1,0 +1,68 @@
+---
+title: "Turn a Guidance run into a guide"
+description: "Review a completed journey, save the cleanest run, and publish it as a reusable guide"
+---
+
+Guidance records each customer journey as a run. Save a representative run when the same job
+should become a reviewed, reusable guide.
+
+## Before you start
+
+- [Enable Guidance](/guides/enable-guidance) and exercise the journey in Test.
+- Use a safe example account and stop before any action that should remain customer-owned.
+- Install the Dubot browser extension if you need to change the guide's steps on the live page.
+
+## Review the run
+
+<Steps>
+  <Step title="Open Guidance Analytics">
+    Open **Guidance**, then **Analytics**. Start with the workspace totals, then choose the theme
+    that contains the journey. A run can have several themes, so theme counts can overlap.
+  </Step>
+  <Step title="Choose a representative session">
+    Filter the theme's sessions by outcome. Prefer a clean completed run with the intended start,
+    path, and stopping point. A completed outcome alone does not prove that every step was correct.
+  </Step>
+  <Step title="Inspect the timeline">
+    Open the run and review its pages, steps, targets, customer-owned interactions, tool activity,
+    errors, and final outcome. Add or correct themes when they will make later analysis clearer.
+  </Step>
+  <Step title="Save it as a guide">
+    Select **Save as guide**. Dubot creates a draft guide from the reviewed run and opens its guide
+    detail page. The source run remains linked as evidence.
+  </Step>
+</Steps>
+
+## Review and publish the guide
+
+<Steps>
+  <Step title="Edit the guide details">
+    Confirm the title and goal, then add one trigger phrase per line. Trigger phrases stay off
+    until the guide is published.
+  </Step>
+  <Step title="Review the composition">
+    Check the generated sequence and remove accidental or redundant interactions. A guide must
+    contain at least one step before it can be published.
+  </Step>
+  <Step title="Edit steps in the extension">
+    Select **Edit in the extension** when the targets or instructions need work on the live product
+    page. Choose a safe starting URL and save the edited composition back to the guide draft.
+  </Step>
+  <Step title="Publish the guide">
+    Save the draft, then select **Publish guide**. The published version enters the workspace guide
+    catalog. A newer draft does not replace the live version until you publish the changes.
+  </Step>
+  <Step title="Add it to the Resource Center">
+    In **Resource Center**, add the published guide to **All pages** or a page override, then publish
+    the Resource Center. Guidance must also remain enabled in the target environment.
+  </Step>
+</Steps>
+
+![A published reviewed guide waiting for the customer to complete a highlighted step](/assets/product/guidance-reviewed-guide.png)
+
+The published guide should preserve the reviewed intent while still resolving targets against the
+customer's current page. Re-test after meaningful product-interface changes, and return to the
+source run when you need to understand why the guide was created.
+
+See [Guidance](/product/guidance) for the runtime model and
+[Activity and analytics](/operate/activity) for outcome definitions.

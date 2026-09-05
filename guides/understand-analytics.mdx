@@ -1,0 +1,68 @@
+---
+title: "Understand analytics and activity"
+description: "Move from workspace trends to the conversation, run, or call that produced them"
+---
+
+Dubot separates the workspace-level Overview from the activity attached to each product object.
+Use Overview to find a pattern, then open the relevant Wizard, Guidance theme, Resource Center
+conversation, action, or capability to diagnose it.
+
+## Start with Overview
+
+Open **Overview** and choose 7, 30, or 90 days. Depending on the features enabled and available
+data, the page can show:
+
+- sessions, median turns, resolution rate, and unique users;
+- action success, errors, latency, and action health;
+- sessions over time and common themes;
+- the agent-surface funnel;
+- Guidance performance; and
+- token use and estimated spend.
+
+Overview currently reports Production activity. A cached or unavailable panel is not the same as
+zero activity.
+
+## Open the supporting activity
+
+| Start here | Inspect next | Use it to answer |
+| --- | --- | --- |
+| **Wizard → Activity** | Conversation and transcript | What the customer asked, what the agent used, and how the session ended |
+| **Guidance → Analytics** | Theme, session, and run timeline | Which journeys complete, stop, error, or go quiet, and at which step |
+| **Resource Center → Analytics** | Opens, viewers, card clicks, searches, chats, and conversation detail | Whether people open the panel and which help path they use |
+| **Action → Activity** | Calls, outcome, user, agent, duration, and failure detail | Whether a specific operation is reliable and available |
+| **Capability → Activity** | Calls from the actions in that capability | Whether the attached bundle is being used successfully |
+
+## Diagnose before changing configuration
+
+<Steps>
+  <Step title="Identify the pattern">
+    Use the date range, theme ranking, action-health table, or feature metrics to find a repeated
+    outcome. Do not optimize around a single unusual session.
+  </Step>
+  <Step title="Open the underlying record">
+    Read the full transcript, run timeline, or action call. Confirm the user, agent, page, duration,
+    and result belong to the behavior you are investigating.
+  </Step>
+  <Step title="Find the responsible version">
+    Check whether the activity came from the live published configuration or a later draft tested
+    by an operator. Draft testing is not customer adoption.
+  </Step>
+  <Step title="Change one dependency">
+    Update the smallest responsible object, test it, and publish deliberately. Revisit the same
+    activity view after enough comparable sessions have accumulated.
+  </Step>
+</Steps>
+
+<Note>
+  Resource Center Analytics does not retain the customer's search or question text as an aggregate
+  metric. Ask conversation detail is available separately to authorized workspace users.
+</Note>
+
+<Warning>
+  Product activity is operational evidence, not a contractual security or compliance audit log.
+  Confirm retention, export, access, and compliance requirements from the current customer
+  agreement and security materials.
+</Warning>
+
+See [Activity and analytics](/operate/activity) for metric interpretation and
+[Test and Production](/operate/publishing) for the version model.

@@ -1,0 +1,57 @@
+---
+title: "Create and publish a capability"
+description: "Compose reusable context and Skill actions for an active agent"
+---
+
+<Info>
+  A capability is a reusable bundle of context. Attach it to a wizard or the Resource Center
+  Agent to compose an experience from shared behavior.
+</Info>
+
+## Create the capability
+
+Set a name, then choose one type. Dubot derives the immutable slug when you create the capability.
+
+| Type | Use it for |
+| --- | --- |
+| Security | Security guidance |
+| Brand voice | Voice and communication guidance |
+| Product domain | Product knowledge and, when needed, a knowledge scope |
+| Skill | Reusable guidance plus actions |
+
+Add the agent prompt, model-facing description, and priority. Choose delivery for the capability:
+
+| Delivery | Meaning |
+| --- | --- |
+| Always | Include it in agent context by default |
+| On-demand | Let the model load it when relevant |
+| Optional | Let the agent attachment choose embedded or load-on-demand delivery |
+
+## Add knowledge or actions
+
+Product domain capabilities may define a knowledge scope to limit the product knowledge available
+to that capability. Only Skill capabilities can include Session API actions and client-side callbacks.
+An action's catalog presence or published state alone does not make it available to a wizard or the
+Resource Center Agent.
+
+## Publish and attach
+
+<Steps>
+  <Step title="Save the capability">Review its type, delivery, prompt, description, priority, and included content.</Step>
+  <Step title="Publish the capability">Publish the version that should be eligible for runtime use.</Step>
+  <Step title="Attach it to an agent">Select the published capability on a wizard or the Resource Center Agent.</Step>
+  <Step title="Publish the experience">Publish the Wizard, or publish the Resource Center that contains its reserved Agent configuration.</Step>
+</Steps>
+
+For an optional capability, the attachment can decide whether to embed it or make it load-on-demand.
+For Always and On-demand capabilities, the attachment does not override the capability's own
+delivery mode.
+
+<Warning>
+  Draft or unpublished capability versions and unpublished included actions are omitted from the
+  Production runtime. A Skill must be published and attached to the active agent for its actions
+  to be offered.
+</Warning>
+
+See [Wizards](/product/wizards) and [Capabilities and actions](/product/capabilities-actions) for
+the composition model and runtime boundary.

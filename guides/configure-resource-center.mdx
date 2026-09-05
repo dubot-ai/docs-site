@@ -1,0 +1,72 @@
+---
+title: "Configure and publish the Resource Center"
+description: "Create page-aware help with content, Search, Ask, callbacks, and a tested publish"
+---
+
+## What you will do
+
+You will configure the single versioned Resource Center for your workspace, preview it against a
+route, and publish the complete configuration.
+
+![A page-aware Resource Center with curated content, Search, and Ask](/assets/product/resource-center.png)
+
+## Configure Content
+
+Open **Resource Center** and use the **Content** tab. Add default content under **All pages**,
+then create route overrides for exact paths or path prefixes. On a matched route, pinned content
+appears first and inherited defaults fill **More Resources**. Overrides can hide inherited content
+for that route without changing the default list.
+
+The current addable types are reviewed guides, Help Center articles with a resolvable external
+URL, **Video embed**, **Callback**, **Hyperlink**, and **MCP connector**. Articles open
+externally. Static components are explicitly placed and are never Search results or Ask grounding.
+There is no directly pinnable Wizard content type.
+
+## Enable Search and Ask
+
+Search and Ask are independent availability controls below the contextual content.
+
+- **Search the knowledge base** searches the published knowledge corpus and returns ranked article
+  cards.
+- **Ask in your own words** opens in-panel chat with the reserved Resource Center Agent.
+
+Configure that reserved agent in the **Agent** tab. Its prompt, explicit knowledge scope,
+capabilities, and action references are embedded in the Resource Center version. Actions reach Ask
+through Skill capabilities. The agent is not a normal placeable wizard and has no independent
+publish lifecycle. Ask receives the current route and resolved Resource Center context at runtime.
+
+## Configure Settings
+
+In **Settings**, set display copy, the Search/Ask placeholder, and one trigger: Floating, Injected,
+Auto-open, or Programmatic. Configure Resource Center callback keys, labels, and descriptions.
+Callback cards invoke matching host handlers registered through
+`Dubot.init({ resourceCenterCallbacks: [...] })`; they are separate from agent-callable actions
+and are not advertised as tools.
+
+## Preview, test, and publish
+
+<Steps>
+  <Step title="Preview the selected route">
+    Use **Preview** to check route resolution, inherited content, card behavior, Search, and Ask.
+  </Step>
+  <Step title="Test dependencies">
+    Confirm referenced guides, articles, callbacks, connector availability, and the reserved
+    agent's capabilities and actions are published and available in the target environment.
+  </Step>
+  <Step title="Test on a product page">
+    From the **Agent** tab, start a Test session for a representative route. Open the Resource
+    Center and exercise its content, Search, Ask, and any callback cards with the saved draft.
+  </Step>
+  <Step title="Publish">
+    Use the Resource Center page's **Publish** action. It publishes the versioned Resource Center
+    and its embedded Ask configuration together. Saving a draft does not make it available in
+    Production.
+  </Step>
+</Steps>
+
+Use **Unpublish** to remove the Production pointer, or archive the Resource Center to remove the
+panel from Test. Review Analytics for opens, viewers, card interactions, searches, and Ask/chat
+submissions after launch.
+
+See [Preview Dubot with the browser extension](/guides/preview-with-browser-extension) for the Test
+session workflow and [Test and Production](/operate/publishing) for the version model.
