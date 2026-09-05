@@ -70,6 +70,24 @@ pre {
   box-shadow: var(--dubot-shadow);
 }
 
+/* Give structured content the white-card treatment used by the marketing site. */
+html:not(.dark) #content div:has(> table),
+html:not(.dark) .callout,
+html:not(.dark) #pagination {
+  background: #fff !important;
+  border: 1px solid var(--purple-300);
+  box-shadow: var(--dubot-shadow);
+}
+
+html:not(.dark) #content div:has(> table) {
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+html:not(.dark) #pagination {
+  border-radius: 1rem;
+}
+
 html.dark #background-color {
   background: var(--dark-canvas);
 }
