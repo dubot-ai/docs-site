@@ -12,7 +12,27 @@
   --purple-300: #E4E5F1;
   --purple-200: #ECEDF8;
   --purple-100: #F7F8FF;
+  --dark-canvas: #0D1117;
+  --dark-surface: #161B22;
+  --dark-border-subtle: #21262D;
+  --dark-border: #30363D;
+  --dark-text: #E6EDF3;
+  --dark-muted: #ADBAC7;
   --dubot-shadow: 0 0 32px 0 rgba(74, 90, 138, 0.08);
+  --background-light: 247 248 255;
+  --color-background-light: rgb(247 248 255);
+}
+
+html.dark {
+  --background-dark: 13 17 23;
+  --color-background-dark: rgb(13 17 23);
+  --default-border-color: 48 54 61;
+  --gray-300: 230 237 243;
+  --gray-400: 173 186 199;
+  --gray-500: 139 148 158;
+  --gray-800: 48 54 61;
+  --gray-900: 33 38 45;
+  --gray-950: 13 17 23;
 }
 
 .approval-accent {
@@ -34,6 +54,31 @@ pre {
 
 [data-badge] {
   border-radius: 4px;
+}
+
+/* Match the product's light workspace and dark surface ladder. */
+#background-color {
+  background: var(--purple-100);
+}
+
+.card {
+  background: white !important;
+  border-color: var(--purple-300) !important;
+  box-shadow: var(--dubot-shadow);
+}
+
+html.dark #background-color {
+  background: var(--dark-canvas);
+}
+
+html.dark #mobile-nav,
+html.dark .card {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+
+html.dark .card {
+  box-shadow: none;
 }
 
 /* Translate the product shell onto Mintlify's existing desktop navigation. */
@@ -119,20 +164,20 @@ pre {
 
   html.dark #sidebar,
   html.dark #navbar-transition-maple {
-    background: var(--navy-950);
-    border-color: var(--navy-800);
+    background: var(--dark-surface);
+    border-color: var(--dark-border-subtle);
   }
 
   html.dark #sidebar .sidebar-title,
   html.dark #sidebar a.group.flex.items-start,
   html.dark .nav-tabs-item {
-    color: var(--navy-400) !important;
+    color: var(--dark-muted) !important;
   }
 
   html.dark #sidebar a.group.flex.items-start:hover,
   html.dark #sidebar a.group.flex.items-start[aria-current="page"],
   html.dark #sidebar a.group.flex.items-start[data-active="true"] {
-    color: white !important;
+    color: var(--dark-text) !important;
     background: transparent !important;
   }
 
@@ -147,6 +192,6 @@ pre {
 
   html.dark .nav-tabs-item:hover,
   html.dark .nav-tabs-item[data-active="true"] {
-    color: white !important;
+    color: var(--dark-text) !important;
   }
 }
