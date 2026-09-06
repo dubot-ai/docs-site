@@ -68,26 +68,19 @@
             "group": "Build",
             "pages": [
               {
-                "group": "Foundations",
+                "group": "Knowledge",
                 "expanded": false,
                 "pages": [
                   "product/knowledge",
-                  "guides/add-knowledge",
-                  "product/brand",
-                  "guides/set-up-your-brand"
+                  "guides/add-knowledge"
                 ]
               },
               {
-                "group": "Experiences",
+                "group": "Brand",
                 "expanded": false,
                 "pages": [
-                  "product/resource-center",
-                  "guides/configure-resource-center",
-                  "product/wizards",
-                  "guides/build-and-publish-wizard",
-                  "product/guidance",
-                  "guides/enable-guidance",
-                  "guides/review-guidance-run"
+                  "product/brand",
+                  "guides/set-up-your-brand"
                 ]
               },
               {
@@ -98,6 +91,31 @@
                   "guides/create-action",
                   "guides/add-actions-with-extension",
                   "guides/create-capability"
+                ]
+              },
+              {
+                "group": "Resource Center",
+                "expanded": false,
+                "pages": [
+                  "product/resource-center",
+                  "guides/configure-resource-center"
+                ]
+              },
+              {
+                "group": "Wizards",
+                "expanded": false,
+                "pages": [
+                  "product/wizards",
+                  "guides/build-and-publish-wizard"
+                ]
+              },
+              {
+                "group": "Guidance",
+                "expanded": false,
+                "pages": [
+                  "product/guidance",
+                  "guides/enable-guidance",
+                  "guides/review-guidance-run"
                 ]
               }
             ]
