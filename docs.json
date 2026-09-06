@@ -41,7 +41,7 @@
         "groups": [
           {
             "group": "Start here",
-            "pages": ["index", "start/availability"]
+            "pages": ["index", "start/first-value", "start/availability"]
           },
           {
             "group": "Understand Dubot",
@@ -101,6 +101,7 @@
             "group": "Operate",
             "pages": [
               "operate/publishing",
+              "operate/recovery",
               "operate/activity",
               "trust/governance-security"
             ]
@@ -116,7 +117,7 @@
         "groups": [
           {
             "group": "Start integrating",
-            "pages": ["integrations/overview", "sdk/quickstart"]
+            "pages": ["integrations/overview", "sdk/quickstart", "sdk/troubleshooting"]
           },
           {
             "group": "Browser SDK",

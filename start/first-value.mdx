@@ -1,0 +1,75 @@
+---
+title: "Reach your first customer-visible result"
+description: "A recommended path from an empty workspace to one verified Dubot experience"
+---
+
+The fastest way to learn Dubot is to publish one small, useful experience before adding actions,
+multiple placements, or broad page coverage. For most new workspaces, start with a Resource Center
+that contains one useful resource and can search a small, reviewed knowledge corpus.
+
+## Before you begin
+
+You need:
+
+- a Dubot workspace and an **Admin** or **Owner** role;
+- a safe product page for Test;
+- the public client token and an approved product origin; and
+- one customer question or task with an observable result.
+
+If editing or publishing controls are unavailable, ask a workspace Admin or Owner to complete those
+steps. Product availability can also vary by workspace. See [Product availability](/start/availability).
+
+## Choose the first experience
+
+| Choose | When the customer needs | First success looks like |
+| --- | --- | --- |
+| **Resource Center** | A place to browse, search, or ask for help across the product | The panel opens on the intended page and returns one useful resource or answer |
+| **Wizard** | A focused conversation for one job | The intended placement appears and completes one representative conversation |
+| **Guidance** | Help completing work in the live interface | A reviewed guide highlights the correct target and reaches its stopping point |
+
+The Resource Center is the recommended first path because you can begin with static content and
+Search, then add Ask, reviewed guides, callbacks, and MCP connectors deliberately.
+
+## Build the first path
+
+<Steps>
+  <Step title="Connect a safe Test page">
+    Install the [browser SDK](/sdk/quickstart), or use a provisioned
+    [browser-extension Test session](/guides/preview-with-browser-extension). Confirm the target
+    page can load Dubot before configuring a larger experience.
+  </Step>
+  <Step title="Add a small knowledge set">
+    [Crawl or upload](/guides/add-knowledge) only the material needed for the chosen customer job.
+    Review the extracted articles before making them available to an experience.
+  </Step>
+  <Step title="Configure one Resource Center path">
+    Add one reviewed article, guide, video, hyperlink, callback, or MCP connector. Enable
+    **Search the knowledge base** if the indexed corpus should be searchable. Enable
+    **Ask in your own words** only after configuring its reserved Agent.
+  </Step>
+  <Step title="Save and exercise Test">
+    Use the same page and example question each time. Confirm the panel opens, the expected card
+    appears, and Search or Ask uses only the intended knowledge and capabilities.
+  </Step>
+  <Step title="Publish the dependency chain">
+    Confirm referenced knowledge is healthy, then publish referenced actions, capabilities,
+    guides, and Brand changes before publishing the Resource Center. Saving a draft does not
+    change Production.
+  </Step>
+  <Step title="Verify Production">
+    Load the approved product origin without a Test session. Repeat the safe example and confirm
+    the published experience, identity, page targeting, content, and activity record.
+  </Step>
+</Steps>
+
+## You are ready to expand when
+
+- a representative customer can find or complete the intended job;
+- Test and Production show the versions you expect;
+- unavailable content or actions fail clearly;
+- the result appears in the relevant Activity or Analytics view; and
+- you know how to [unpublish or recover the configuration](/operate/recovery).
+
+Next, add only the dependency that improves the chosen outcome: a
+[Wizard](/guides/build-and-publish-wizard), [reviewed guide](/guides/review-guidance-run), or
+[governed action](/guides/create-action).

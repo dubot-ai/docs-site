@@ -13,7 +13,7 @@ You need:
 
 - a Dubot workspace;
 - its public client token;
-- at least one published wizard or Resource Center configuration;
+- a saved Test configuration or a published Production configuration to verify;
 - an approved origin for the customer application;
 - a stable signed-in user id;
 - a server-minted identity token if the workspace observes or enforces signed identities.
@@ -76,6 +76,18 @@ For an inline wizard, supply a selector:
 </script>
 ```
 
+To open a published Resource Center programmatically:
+
+```js
+window.Dubot.openResourceCenter();
+```
+
+To start a published reviewed guide:
+
+```js
+window.Dubot.triggerGuidance({ guideId: 'guide_invite_teammate' });
+```
+
 ## 4. Verify the integration
 
 In the browser console:
@@ -87,9 +99,10 @@ window.Dubot.getState();
 
 Check that:
 
-- `version` is a published version rather than `dev`;
+- `version` identifies the deployed SDK build rather than a local `dev` build;
 - `initProps.userId` matches the signed-in user;
-- `initProps.verified` reflects whether an identity token was supplied;
+- `initProps.verified` reflects whether an identity token was supplied, not whether the server
+  accepted its signature;
 - the expected placement or Resource Center appears on a matching page;
 - Test shows the latest saved configuration and Production shows only the published version;
 - a deliberately invalid origin or identity fails as expected.
@@ -99,4 +112,14 @@ Check that:
   in browser code or include the secret in the page bundle.
 </Warning>
 
+If the surface does not appear, follow [Troubleshoot the browser SDK](/sdk/troubleshooting).
 Continue with [Identity and context](/sdk/identity-context) and [SDK actions](/sdk/actions).
+
+## Before Production
+
+- Match the exact HTTPS product origins that should load Dubot.
+- Allow the agreed Dubot CDN and runtime connections in the host Content Security Policy.
+- Initialize only after the application knows the signed-in user and has obtained a fresh
+  server-minted identity token.
+- Send only the context and callbacks required by the active experience.
+- Verify one allowed case and deliberately rejected origin, identity, and action case.

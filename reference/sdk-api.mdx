@@ -36,6 +36,13 @@ The client token is read from the SDK script URL and is not an `init()` option.
 
 ## Wizards and Resource Center
 
+The two presentation fields use different public values:
+
+| Field | Values | Purpose |
+| --- | --- | --- |
+| `init({ mode })` | `bubble`, `inline`, `sidebar`, `fullscreen` | Default for later programmatic Wizard rendering |
+| `renderAgent({ presentationMode })` | `Bubble`, `InlineWizard`, `Sidebar`, `Fullscreen` | Presentation for this rendered Wizard |
+
 | Method | Description |
 | --- | --- |
 | `renderAgent({ slug, presentationMode?, selector? })` | Renders a published wizard; selector applies to inline mode |
@@ -80,3 +87,5 @@ instance.
   `setAuthoringMode()` exists for the Dubot browser extension's authoring isolation. It is not a
   host-application integration API.
 </Note>
+
+For runtime diagnosis, see [Troubleshoot the browser SDK](/sdk/troubleshooting).

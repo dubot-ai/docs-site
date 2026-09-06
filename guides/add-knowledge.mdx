@@ -41,6 +41,19 @@ content that is no longer found at its source. Treat those entries as potential 
 when Dubot could not verify the missing pages, and remove only verified orphaned articles. Delete a
 source only when you intend to remove every article extracted from it.
 
+## Resolve ingestion problems
+
+| Problem | What to do |
+| --- | --- |
+| A crawl is Failed | Open the source for its failure detail, confirm the page is public and allowed by `robots.txt`, then re-crawl |
+| A PDF has no text layer | Convert the scan with OCR to a searchable PDF, or export its content as text before uploading |
+| A file exceeds 20 MB | Split it into smaller owned sources |
+| Extracted text exceeds 4 MB for one article | Split the document by topic before uploading |
+| The workspace corpus would exceed 20 MB | Remove verified obsolete material or split the intended corpus across an agreed workspace strategy |
+
+Re-crawling preserves the existing corpus until Dubot accepts the replacement. Do not delete a
+healthy source merely to retry a failed refresh.
+
 ## Scope the knowledge
 
 When configuring a Wizard, Guidance, a Product domain capability, or the Resource Center Agent,
@@ -53,3 +66,13 @@ uses the published indexed corpus.
   Authenticated crawling of private sources is not part of the current contract. Validate source
   ownership, exclusions, freshness, and the target experience's scope before publishing.
 </Warning>
+
+## Expected result
+
+The source reports a healthy sync, its intended articles are visible and readable, and each
+experience uses an explicit scope. A source existing in Knowledge does not make it available to
+every customer surface automatically.
+
+Next, configure the [Resource Center](/guides/configure-resource-center), a
+[Wizard](/guides/build-and-publish-wizard), or [Guidance](/guides/enable-guidance). For safe source
+removal, follow [Recover or roll back configuration](/operate/recovery#knowledge-removal).
