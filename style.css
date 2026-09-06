@@ -157,6 +157,48 @@ a.card[href]:hover [data-component-part="card-icon"] {
   box-sizing: border-box;
 }
 
+#content .product-figure {
+  margin: 2.25rem 0;
+  padding: 0.5rem;
+  background: #fff;
+  border: 1px solid var(--purple-300);
+  border-radius: 0.875rem;
+  box-shadow: var(--dubot-shadow);
+}
+
+#content .product-figure > img[src*="/assets/product/"] {
+  width: 100%;
+  max-width: none;
+  margin: 0 !important;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: none;
+}
+
+#content .product-figure figcaption {
+  margin: 0;
+  padding: 0.625rem 0.5rem 0.125rem;
+  color: var(--navy-600);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+#content .product-figure-portrait {
+  max-width: 26rem;
+  margin-inline: auto;
+}
+
+html.dark #content .product-figure {
+  background: var(--dark-surface);
+  border-color: var(--dark-border);
+}
+
+html.dark #content .product-figure figcaption {
+  color: var(--dark-muted);
+}
+
 #content img[src*="/wizard-bubble.png"] {
   max-width: 26rem;
   margin-inline: auto !important;

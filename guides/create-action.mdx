@@ -14,12 +14,38 @@ Create the contract manually when you already know the operation. If you need to
 existing product workflow first, use controlled-rollout
 [Action Discovery](/guides/add-actions-with-extension).
 
+Open **Actions**, select **New action**, and choose the execution branch that owns the operation.
+Session API actions call a reviewed product endpoint. Client-side callbacks run a function
+registered by the host application. Backend API actions are shown as coming later.
+
+<figure className="product-figure">
+  <img
+    src="/assets/product/action-type-picker.png"
+    alt="The action type picker with Session API and client-side callback options"
+  />
+  <figcaption>
+    Choose the execution branch that owns the operation. Backend API actions are not yet
+    available.
+  </figcaption>
+</figure>
+
 ## Start with the shared contract
 
 Give the action a human title, model-facing description, response mask, and execution policy.
 Choose `auto` or `confirm`. Dubot derives the stable tool key from the title when the action is
 created. The action also has an enabled state, and MCP availability is a separate opt-in when that
 channel is in scope.
+
+<figure className="product-figure">
+  <img
+    src="/assets/product/action-configuration.png"
+    alt="An action configuration with its model-facing description, risk, policy, method, and endpoint"
+  />
+  <figcaption>
+    Review the description, risk, policy, method, endpoint, schema, and response mask before
+    publishing.
+  </figcaption>
+</figure>
 
 ## Choose an execution branch
 

@@ -7,11 +7,37 @@ description: "Help a customer complete work in the product interface"
 Guidance operates against the live page with visible controls for the customer. It is useful when
 the task is easier to complete in context than through conversation alone.
 
-![A current reviewed-guide surface in the Dubot SDK](/assets/product/guidance-reviewed-guide.png)
+## What the customer sees
+
+An active run keeps its job and **Stop** control visible while it works on the page. The action
+card stays anchored to the target so the customer can see what is happening.
+
+<figure className="product-figure">
+  <img
+    src="/assets/product/guidance-run-progress.png"
+    alt="Guidance applying a change on an invoice while the job and Stop control remain visible"
+  />
+  <figcaption>
+    The active job and Stop control remain visible while Guidance applies the change.
+  </figcaption>
+</figure>
+
+When a step belongs to the customer, Guidance highlights the target and waits instead of taking
+over. The customer can complete the step or choose the offered handoff.
+
+<figure className="product-figure">
+  <img
+    src="/assets/product/guidance-customer-step.png"
+    alt="Guidance highlighting the Send test control and waiting for the customer to act"
+  />
+  <figcaption>
+    Guidance can highlight a target and wait when the next action belongs to the customer.
+  </figcaption>
+</figure>
 
 <Note>
-  This demonstrates a reviewed-guide step highlighting a live page target with visible
-  instruction and stop controls.
+  The HoneyBook workspace shown in these examples is a demo account. The exact host-product
+  styling can vary, but the visible run, target, and stop controls are the important behavior.
 </Note>
 
 ## Two ways to start
@@ -33,6 +59,16 @@ evaluated with clear constraints and a safe stopping condition before broader us
 | Indicate | Highlights a target and waits for the customer, a Next action, or a timeout |
 | Ask | Pauses for a choice or free-text response |
 
+<figure className="product-figure">
+  <img
+    src="/assets/product/guidance-reviewed-guide.png"
+    alt="A reviewed guide waiting for the customer to complete a highlighted step"
+  />
+  <figcaption>
+    An Indicate step keeps the target, instruction, Skip option, and Stop control visible.
+  </figcaption>
+</figure>
+
 The browser extension can help author guides from a real workflow. Captured interactions remain
 review material until the guide is saved and published.
 
@@ -44,6 +80,20 @@ review material until the guide is saved and published.
 - A run that crosses a hard navigation can resume after the SDK initializes on the next page.
 - Reduced-motion and screen-reader behavior are part of the SDK surface.
 - Completion, stop, error, and abandoned outcomes are recorded for activity review.
+
+A completed action should show both the changed page state and a bounded result in the panel. In
+this demo, the updated date is visible in the invoice and Dubot reports that it verified the value
+on the page.
+
+<figure className="product-figure">
+  <img
+    src="/assets/product/guidance-verified-outcome.png"
+    alt="A completed Guidance action with the updated invoice state and a verified result"
+  />
+  <figcaption>
+    The completed state shows the updated page value and Dubot's verified result.
+  </figcaption>
+</figure>
 
 ## Configure and publish
 
