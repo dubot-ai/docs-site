@@ -1,0 +1,40 @@
+---
+title: "Set up your brand"
+description: "Create, configure, preview, and publish a workspace brand"
+---
+
+Brand controls the look and feel shared by Dubot surfaces. A workspace can have multiple brands,
+with one selected as the default.
+
+## 1. Create or select a brand
+
+Open **Brand**. Select an existing brand from the brand switcher, or choose **New brand** and name
+it. To make the selected brand the workspace default, use its menu and choose **Set as default**.
+
+## 2. Configure the tabs
+
+Use the tabs that are implemented in the editor:
+
+- **Primitives** controls the shared color, typography, shape, and other base tokens.
+- **Agent Chat** controls chat-specific branding.
+- **Guidance** controls the Guidance overlay tokens.
+- **Resource Center** is a surface view with no separate token set. Its specific branding comes
+  from Primitives.
+
+## 3. Preview and save
+
+Select **Preview** to inspect the live preview. Switch its scene to Chat, Guidance, or Resource
+Center as needed. Make edits, then select **Save draft**.
+
+![The Brand editor previewing an unsaved draft against Agent Chat](/assets/product/brand-editor-preview.png)
+
+## 4. Publish
+
+Select **Publish** after saving. Publishing saves the current editor state first, then publishes
+the brand version. Production uses the published brand. Selecting a default brand changes which
+brand the workspace resolves by default; it does not itself publish unsaved token edits.
+
+<Note>
+  Blank fields inherit the platform default. Use **Reset to defaults** when you want to clear every
+  authored token while preserving the brand identity and version history.
+</Note>

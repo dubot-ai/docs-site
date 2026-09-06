@@ -1,0 +1,55 @@
+---
+title: "Add knowledge to your workspace"
+description: "Crawl a public Help Center or upload documents, then review and scope the corpus"
+---
+
+## What you will do
+
+You will add a public Help Center or supported documents to the workspace corpus, check source
+health, and review extracted articles before making knowledge available to an experience.
+
+## Add a source
+
+<Steps>
+  <Step title="Open Knowledge">
+    In the Dubot dashboard, open **Knowledge**, select **Add source**, and choose **Crawl a URL** or
+    **Upload documents**.
+  </Step>
+  <Step title="Crawl a Help Center">
+    Enter the full start URL. Choose **This page only** or **Index pages under**, then confirm the
+    same-origin path Dubot should include. The crawler respects `robots.txt`; allowlist
+    `dubot-crawler` if the source blocks it.
+  </Step>
+  <Step title="Upload documents">
+    Upload PDF, DOCX, Markdown, or TXT files, up to 20 MB each. Review ownership and sensitivity
+    before adding them to a workspace corpus.
+  </Step>
+</Steps>
+
+## Check health and sync
+
+Review the source status, article count, corpus size, extraction failures, and the latest sync.
+You can re-crawl one web source or sync all crawl sources. Optional weekly synchronization is
+available for web sources. The existing corpus remains available during a re-crawl.
+
+![A Help Center re-crawl adding pages to the workspace knowledge base](/assets/product/knowledge-crawl-progress.png)
+
+## Inspect articles
+
+Open extracted articles to confirm titles, links, content, and the source they came from. Look for
+content that is no longer found at its source. Treat those entries as potential orphans. Re-crawl
+when Dubot could not verify the missing pages, and remove only verified orphaned articles. Delete a
+source only when you intend to remove every article extracted from it.
+
+## Scope the knowledge
+
+When configuring a Wizard, Guidance, a Product domain capability, or the Resource Center Agent,
+choose the entire knowledge base or selected articles. A Wizard, Guidance, or the Resource Center
+Agent can also leave direct knowledge unattached. Ingestion and retrieval access are separate
+decisions. A Resource Center static card is not knowledge grounding, and Resource Center Search
+uses the published indexed corpus.
+
+<Warning>
+  Authenticated crawling of private sources is not part of the current contract. Validate source
+  ownership, exclusions, freshness, and the target experience's scope before publishing.
+</Warning>

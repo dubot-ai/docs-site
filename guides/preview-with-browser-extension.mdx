@@ -1,0 +1,36 @@
+---
+title: "Preview Dubot on your product with the browser extension"
+description: "Run a current Test session against a target URL"
+---
+
+The browser extension provides a temporary Test session against a product page. It loads the saved
+Test configuration without changing Production.
+
+## Start a Test session
+
+1. In the dashboard, open the **Test session** card and enter the target URL.
+2. If needed, open **Test session overrides**. The effective inject script can inherit the workspace
+   setting or use your personal override. Save your overrides when prompted.
+3. Optionally enable **Auto-open agent after inject**, choose an agent, and choose **Bubble**,
+   **Sidebar**, or **Fullscreen** for its presentation. With auto-open off, the extension
+   initializes the page but does not open the agent.
+4. Select **Start test session**. The extension navigates to the target URL, injects the test setup,
+   and reports the session status on the page and in the extension popup.
+
+Use the page as a real user would, including identity and page context checks. When finished, choose
+**End test session**. The indicator reports active, error, or ended status.
+
+Review [Identity and page context](/sdk/identity-context) before testing customer-specific behavior.
+The optional auto-open selection uses an existing [Wizard](/product/wizards); the Resource Center
+has a separate Test session entry point in its [Agent configuration](/guides/configure-resource-center).
+
+<Warning>
+  A Test session is not Action Discovery and is not guide authoring. Action Discovery investigates
+  product actions. Guide authoring records or reviews Guidance content. This flow previews an existing
+  Dubot runtime configuration on a target page.
+</Warning>
+
+<Note>
+  Standby pages skip test-session overrides and initialization. A target URL and a supported browser
+  page are required for an active session.
+</Note>

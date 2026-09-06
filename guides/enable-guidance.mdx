@@ -1,0 +1,75 @@
+---
+title: "Enable Guidance"
+description: "Configure and publish Guidance for a workspace"
+---
+
+<Badge color="gray" size="sm">Current product build</Badge>
+
+Guidance has one workspace-level configuration. Publishing that configuration turns Guidance on
+for the workspace. Reviewed guides keep their own draft and publish lifecycle.
+
+<Note>
+  If Guidance does not appear in the workspace navigation, it is not available for that
+  organization yet. Contact Dubot before planning an implementation around it.
+</Note>
+
+## Before you start
+
+- Install the Dubot browser SDK on the pages where Guidance will run.
+- Make sure the SDK supplies the current user and page context.
+- Add workspace knowledge if the planner should ground steps in product documentation.
+- Choose a safe Test journey with an explicit stopping point.
+
+## Configure the workspace
+
+<Steps>
+  <Step title="Open Guidance">
+    Select **Guidance**, then open **Settings**. The status beside the page actions shows
+    whether Guidance is currently Enabled or Disabled.
+  </Step>
+  <Step title="Choose what Guidance knows">
+    In **Knowledge**, turn on **Attach knowledge base**. Use the entire knowledge base or limit
+    retrieval to selected articles. Guidance can be published without knowledge, but its plans
+    will not be grounded in your product documentation.
+  </Step>
+  <Step title="Set behavior and stop conditions">
+    Use **Contextual booster** for standing product instructions: tone, pacing, handoff copy,
+    actions the customer must complete, and conditions that should stop the walkthrough. Keep
+    these instructions true across guides and pages.
+  </Step>
+  <Step title="Save the Test draft">
+    Select **Save draft**. Saving changes Test only. If Guidance is already enabled, Production
+    continues to use the last published version until you publish again.
+  </Step>
+  <Step title="Exercise a representative walkthrough">
+    Start a reviewed guide or a tightly constrained goal in the Test installation. Check target
+    selection, navigation, customer-owned steps, stop behavior, and the final outcome.
+  </Step>
+  <Step title="Enable and publish">
+    When Guidance is disabled, select **Enable & publish** and confirm the version. When it is
+    already enabled, select **Publish** to replace the Production configuration.
+  </Step>
+  <Step title="Verify Production">
+    Start the same safe journey against the Production installation. Confirm that the published
+    guide and its Guidance dependency both work before linking the guide from the Resource Center.
+  </Step>
+</Steps>
+
+## What the workspace setting controls
+
+Enabling Guidance publishes the configuration used by the Guidance runtime. It allows the SDK to
+start goal-based Guidance and reviewed guides for the workspace. It does not publish every
+reviewed guide automatically.
+
+If a Resource Center card launches a guide, the card is ready only when the Resource Center, the
+guide, and Guidance are all published for the same environment.
+
+## Update or disable Guidance
+
+Save and test configuration changes before publishing them. To turn Guidance off, select
+**Disable**. Disabling removes the published Guidance configuration and stops new walkthroughs;
+saved guide drafts and versions remain available for later review.
+
+See [Guidance](/product/guidance) for runtime behavior and [Test and Production](/operate/publishing)
+for the broader publishing model. After collecting a representative run, follow
+[Turn a Guidance run into a guide](/guides/review-guidance-run).

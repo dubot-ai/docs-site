@@ -1,0 +1,101 @@
+---
+title: "Add actions with the browser extension"
+description: "Record a product workflow and turn captured calls into reviewed actions"
+---
+
+<Badge color="yellow" size="sm">Controlled rollout</Badge>
+
+Action Discovery observes a workflow in a signed-in product and proposes Session API actions from
+the calls it sees. The recording is evidence for an author. It does not publish an action or make
+the action available to an agent by itself.
+
+<Info>
+  Browser-extension action discovery is available only to selected workspaces. Confirm access and
+  the intended Test environment with Dubot before following this workflow.
+</Info>
+
+<Frame caption="A controlled-rollout recording captures one product workflow, submits the observed calls for analysis, and hands candidate actions to Dubot for review.">
+  <video
+    controls
+    playsInline
+    src="/assets/product/action-discovery-extension.mp4"
+    alt="The Dubot Action Discovery extension recording invoice-detail requests and sending candidate actions to Dubot for analysis"
+  >
+    Your browser does not support embedded video. Continue with the written workflow below.
+  </video>
+</Frame>
+
+## Record one product operation
+
+<Steps>
+  <Step title="Choose a narrow outcome">
+    Record one operation with a clear result, such as loading invoice details. Use a safe account
+    and example record. Do not combine unrelated tasks in the same recording.
+  </Step>
+  <Step title="Start Action Discovery">
+    Open the customer product at the page where the operation begins, then start a recording from
+    the Dubot extension. Confirm that the recording indicator is active before continuing.
+  </Step>
+  <Step title="Perform the operation normally">
+    Use the product as an end user would. Action Discovery observes the requests caused by the
+    workflow and separates likely product operations from background traffic.
+  </Step>
+  <Step title="Finish the recording">
+    Stop as soon as the intended result is visible. Submit the recording and wait while Dubot
+    filters inferred calls, compacts candidate definitions, and compares them with the existing
+    action catalog.
+  </Step>
+</Steps>
+
+## Review the candidate contract
+
+Open each candidate in **Actions** and check the contract before saving it in Test:
+
+- the title and model-facing description describe one operation;
+- the HTTP method and endpoint identify a stable product route;
+- the input schema exposes only the values the operation needs;
+- example identifiers or captured customer data are not treated as fixed inputs;
+- the response mask returns only fields the agent needs;
+- risk classification and execution policy match the effect of the operation;
+- failure behavior is understandable when the product route is unavailable.
+
+<Warning>
+  A successful capture proves that the operation occurred in the recorded session. It does not
+  prove that the proposed contract is safe, stable, or suitable for every user. Review it before
+  testing or publishing.
+</Warning>
+
+## Make the action available
+
+<Steps>
+  <Step title="Save the action in Test">
+    Correct the candidate definition and save it. Keep it unpublished while the contract is still
+    changing.
+  </Step>
+  <Step title="Add it to a Skill capability">
+    Open or create a **Skill** capability and include the action. Actions in the catalog are not
+    available to an experience until a Skill carries them.
+  </Step>
+  <Step title="Attach the Skill to an experience">
+    Add the Skill to the wizard or Resource Center Agent that needs the operation. Choose its
+    delivery behavior separately from the action's execution policy.
+  </Step>
+  <Step title="Test success and failure paths">
+    Run the experience in Test with representative inputs. Exercise authorization failures,
+    missing records, unexpected response shapes, and every confirmation boundary.
+  </Step>
+  <Step title="Publish the dependency chain">
+    Publish the reviewed action and Skill, then publish the experience that uses them. Verify the
+    same safe case in Production and inspect Activity for the recorded outcome.
+  </Step>
+</Steps>
+
+<Note>
+  This workflow proposes Session API actions from observed requests. Add a client-side callback
+  from the Actions area instead, because a browser recording cannot infer a function registered
+  by the host application.
+</Note>
+
+See [Capabilities and actions](/product/capabilities-actions) for the object model,
+[SDK actions](/sdk/actions) for host execution, and [Test and Production](/operate/publishing) for
+publishing rules.

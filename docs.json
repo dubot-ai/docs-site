@@ -69,6 +69,35 @@
             ]
           },
           {
+            "group": "Set up Dubot",
+            "pages": [
+              "guides/add-knowledge",
+              "guides/set-up-your-brand",
+              "guides/preview-with-browser-extension"
+            ]
+          },
+          {
+            "group": "Build experiences",
+            "pages": [
+              "guides/configure-resource-center",
+              "guides/build-and-publish-wizard",
+              "guides/enable-guidance",
+              "guides/review-guidance-run"
+            ]
+          },
+          {
+            "group": "Capabilities and actions",
+            "pages": [
+              "guides/create-action",
+              "guides/add-actions-with-extension",
+              "guides/create-capability"
+            ]
+          },
+          {
+            "group": "Measure and improve",
+            "pages": ["guides/understand-analytics"]
+          },
+          {
             "group": "Operate",
             "pages": [
               "operate/publishing",

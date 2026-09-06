@@ -31,7 +31,7 @@ published knowledge corpus       -> Search
 Resource Center Agent
   + capabilities
   + knowledge scope              -> Ask
-guides + wizards + callbacks     -> the next customer step
+guides + articles + callbacks    -> help customers can open or start
 ```
 
 ## Content
@@ -39,7 +39,6 @@ guides + wizards + callbacks     -> the next customer step
 The default list and route overrides can contain:
 
 - published reviewed guides;
-- published wizards;
 - Help Center articles with an external URL;
 - video embeds;
 - hyperlinks;
@@ -101,6 +100,9 @@ handler is never advertised as a tool to a wizard or MCP client.
 ## Publishing
 
 The Resource Center has its own draft, publish, unpublish, archive, and version lifecycle.
-Publishing should validate referenced guides, wizards, articles, callbacks, and the embedded Ask
+Publishing should validate referenced guides, articles, callbacks, and the embedded Ask
 configuration, including its capability and action references. In the current product, use the
 Resource Center page's publish action rather than assuming it is included in every bulk publish.
+
+Follow [Configure and publish the Resource Center](/guides/configure-resource-center) for the
+current Content, Agent, Settings, Test session, and publish workflow.

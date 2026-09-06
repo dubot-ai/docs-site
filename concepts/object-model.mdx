@@ -25,39 +25,30 @@ Reviewed guides
 ## Core objects
 
 <CardGroup cols={2}>
-  <Card title="Wizard" icon="message-circle">
-    The dashboard name for a configured assistant. A wizard combines instructions, capabilities,
-    display settings, and at most one placement. The underlying API and runtime entity is an
-    agent configuration.
+  <Card title="Wizard" icon="message-circle" href="/product/wizards">
+    A configured assistant that combines instructions, capabilities, display settings, and one
+    placement.
   </Card>
-  <Card title="Capability" icon="blocks">
-    A reusable package of instructions and context, sometimes including actions. Capability
-    types are Skill, Product Domain, Security, and Brand Voice. Each capability is delivered as
-    Always, On-demand, or Optional, and can attach to Wizards or the reserved Resource Center
-    Agent.
+  <Card title="Capability" icon="blocks" href="/product/capabilities-actions#capabilities-are-the-composition-layer">
+    A reusable package of instructions and context. Skill capabilities can also expose approved
+    actions.
   </Card>
-  <Card title="Action" icon="zap">
-    A named operation in the workspace Action catalog. For an in-product agent, it becomes
-    available through an attached Skill capability. Session API actions call a reviewed product
-    endpoint through customer-owned code. Client-side callbacks run a function registered by the
-    host application. The end-user MCP channel has separate enablement.
+  <Card title="Action" icon="zap" href="/product/capabilities-actions#actions-are-catalog-contracts">
+    A governed product operation exposed through a Skill capability. Current types are Session
+    API actions and client-side callbacks.
   </Card>
-  <Card title="Knowledge" icon="book-open">
-    The workspace Knowledge corpus: the governed source material that capabilities and agents
-    can use. It is distinct from the instructions and context packaged by a capability.
+  <Card title="Knowledge" icon="book-open" href="/product/knowledge">
+    The reviewable workspace corpus available to experiences through an explicit retrieval scope.
   </Card>
-  <Card title="Guide" icon="route">
-    A reviewed Guidance sequence containing message, perform, indicate, and ask steps. Guides can
-    launch from the Resource Center or another supported entry point.
+  <Card title="Guide" icon="route" href="/product/guidance">
+    A reviewed Guidance sequence containing message, perform, indicate, and ask steps.
   </Card>
-  <Card title="Placement" icon="panel-right">
-    Where and when one wizard appears. The current modes are bubble, inline, sidebar, and
-    fullscreen, with optional page targeting.
+  <Card title="Placement" icon="panel-right" href="/product/wizards#choose-a-placement">
+    Where and when a wizard appears: bubble, inline, sidebar, or fullscreen, optionally targeted
+    by page.
   </Card>
-  <Card title="Resource Center" icon="library">
-    A first-class, page-aware destination with curated content, Search, Ask Agent, settings,
-    trigger and availability controls, and analytics. Its reserved Resource Center Agent saves
-    and publishes with the Resource Center and has no placement.
+  <Card title="Resource Center" icon="library" href="/product/resource-center">
+    Page-aware support with curated content, Search, Ask, and its reserved Resource Center Agent.
   </Card>
 </CardGroup>
 
