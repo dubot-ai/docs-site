@@ -1,0 +1,81 @@
+---
+title: "Troubleshoot the browser SDK"
+description: "Diagnose missing surfaces, identity failures, unavailable actions, and stale configuration"
+---
+
+Start with the browser console on the affected product page:
+
+```js
+typeof window.Dubot;
+window.Dubot?.version;
+window.Dubot?.getState();
+```
+
+`version` identifies the loaded SDK build. `getState()` shows the last accepted, serializable
+initialization snapshot. It does not expose the identity token or prove that the server accepted
+its signature.
+
+## When nothing appears
+
+| What you see | Likely cause | What to check |
+| --- | --- | --- |
+| `window.Dubot` is `undefined` | The script did not load or has not executed | Network response, SDK URL, Content Security Policy, and script timing |
+| `init() halted: no clientToken` | The script URL does not include a client token | Put `?clientToken=...` on the `dubot.js` URL, not in `init()` |
+| `placement config fetch failed; no agents rendered` | Configuration delivery was rejected or unavailable | Client token, approved origin, network response, and environment availability |
+| No error and no automatic surface | No published placement matches the current page | Wizard publish status, include and exclude rules, and the exact URL after SPA navigation |
+| `invalid-selector` | An Inline placement has an invalid CSS selector | Correct the selector and save the Wizard |
+| Inline Wizard renders nothing | The selector is valid but no matching host element exists | Mount the element before Dubot evaluates the page, or choose another placement |
+| `renderAgent: missing agent slug` | Programmatic rendering omitted the Wizard slug | Pass the published Wizard slug to `renderAgent()` |
+
+After publishing, reload an already-open product tab. Configuration can remain cached briefly even
+after the publish cache is cleared, so allow up to two minutes before treating the old version as a
+deployment failure.
+
+## Identity requests fail
+
+For a `401` or `403` response, confirm that:
+
+- `userId` is stable and exactly matches the JWT `sub`;
+- the JWT is signed with the current workspace secret using HS256;
+- `exp` is in the future and no more than seven days away;
+- the token was minted by the customer server, not the browser; and
+- the intended environment is in **Observe** or **Enforce** as expected.
+
+`getState().initProps.verified` means a non-empty token was supplied to the SDK. Use a successful
+server request and the workspace identity coverage view to verify acceptance.
+
+## An action is unavailable
+
+Check the complete chain in order:
+
+1. The action is reviewed, enabled, and published.
+2. A published **Skill** capability contains the action.
+3. The Skill is attached to the active Wizard or Resource Center Agent.
+4. The experience is published.
+5. For a client-side callback, the current page includes it in `init({ actions })` or the latest
+   complete `setActions()` replacement.
+6. For a Session API action, the customer-owned executor recognizes the published tool key.
+
+Open the action's **Activity** tab to distinguish unavailable, declined, invalid-input, and failed
+outcomes. See [Recover or roll back configuration](/operate/recovery) before changing Production.
+
+## Resource Center or Guidance is incomplete
+
+- For Resource Center Search, confirm the knowledge articles are indexed and published.
+- For Ask, confirm **Ask in your own words** is enabled and its reserved Agent has the intended
+  published capabilities and knowledge scope.
+- For a reviewed guide, confirm both the guide and workspace Guidance configuration are published.
+- For a goal-based Guidance run, confirm Guidance is enabled and the target page is supported.
+- For a stale Resource Center card, confirm its referenced guide, article, callback, or connector is
+  still available, then republish the Resource Center.
+
+## The SDK was destroyed
+
+`destroy()` is terminal for that installed SDK instance. Repeating `init()` after `destroy()` is
+ignored. Reload the script to create a new instance.
+
+## Collect evidence before escalating
+
+Record the product URL, time, workspace, Test or Production context, SDK version, affected entity
+and version, relevant Network status, and the exact `[dubot]` console message. Avoid including the
+identity token, verification secret, customer content, or unnecessary personal data.

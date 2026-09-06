@@ -50,6 +50,12 @@ A callback omitted from the new set becomes unavailable to the assistant on the 
 
 ## Execute Session API actions
 
+<Info>
+  The customer-owned Session API executor is currently delivered and reviewed during integration;
+  it is not yet a stable self-service public API. Confirm its request and registry contract with
+  Dubot before implementing the first authenticated operation.
+</Info>
+
 Session API actions are authored in Dubot with a method, endpoint, input schema, response mask,
 risk, and execution policy. The runtime boundary is deliberate:
 

@@ -1,0 +1,67 @@
+---
+title: "Recover or roll back configuration"
+description: "Remove a bad Production version, restore a known version, and repair dependencies safely"
+---
+
+Use the smallest reversible change that stops the customer impact. Saving a new draft affects Test;
+unpublishing changes what Production can resolve; archiving changes what appears in Test.
+
+## Choose the right control
+
+| Goal | Control | Result |
+| --- | --- | --- |
+| Remove the current Production version | **Unpublish** | Production stops resolving the entity; its latest saved version remains in Test |
+| Remove an entity from normal Test lists | **Archive** | The entity leaves Test; a separately published Production version remains live until unpublished |
+| Recover an archived entity | **Unarchive** | The saved entity returns to Test |
+| Reuse a known published snapshot | **Restore version** | The selected snapshot becomes the working version for review; publish it explicitly to change Production |
+| Correct a live issue without immediate removal | **Save draft** | Test receives the repair while Production continues using the last published version |
+
+<Warning>
+  Archive is not an emergency stop. Unpublish first when the goal is to remove customer access.
+</Warning>
+
+## Stop a customer-facing problem
+
+<Steps>
+  <Step title="Identify the smallest affected entity">
+    Open the supporting conversation, run, or action call. Confirm the active Wizard, guide,
+    action, capability, Resource Center, and version before changing configuration.
+  </Step>
+  <Step title="Remove or isolate the live dependency">
+    Unpublish the affected experience when the whole surface is unsafe. For a single action,
+    disable or unpublish the action and remove it from the Skill when needed. For a guide, unpublish
+    it and remove or replace Resource Center cards that depend on it.
+  </Step>
+  <Step title="Repair in Test">
+    Restore a known version or save a corrected draft. Exercise the original failure plus one safe
+    success case and one unavailable or declined case.
+  </Step>
+  <Step title="Republish in dependency order">
+    Publish the repaired action before its Skill, the Skill before its Wizard or Resource Center,
+    and a guide before the Resource Center card that launches it.
+  </Step>
+  <Step title="Verify Production and Activity">
+    Repeat the original customer job on the approved origin, then inspect the new conversation,
+    run, or call rather than relying only on the rendered surface.
+  </Step>
+</Steps>
+
+## Knowledge removal
+
+Re-crawl a source before removing articles that merely appear missing. Remove verified orphaned
+articles only when they are no longer intended for retrieval. Deleting a source removes every
+article extracted from it and can change Search, Ask, Wizard, Guidance, and Product domain
+capability results that depend on those articles.
+
+## Dependency-specific checks
+
+| If you changed | Also check |
+| --- | --- |
+| Action | Enabled state, execution policy, response mask, Skill membership, host callback or executor, and Activity |
+| Capability | **Wizards** usage, Resource Center Agent attachment, included actions, delivery mode, and published version |
+| Guide | Workspace Guidance status, Resource Center cards, source run, targets, and trigger phrases |
+| Wizard | Placement, page rules, direct knowledge, capabilities, Brand, and SDK identity/context |
+| Resource Center | Default and route content, Search, Ask Agent, callbacks, trigger, and page availability |
+
+See [Test and Production](/operate/publishing) for lifecycle definitions and
+[Understand analytics and activity](/guides/understand-analytics) for finding the supporting record.

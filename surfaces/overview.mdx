@@ -11,14 +11,23 @@ teams find editors, but it is not the dependency order of the product.
 | Area | What teams manage |
 | --- | --- |
 | Overview | Workspace usage, outcomes, action health, Guidance, and token spend |
-| Your product | Guidance, the action catalog, and the knowledge corpus |
-| Build | Capabilities, wizards, and the Resource Center |
-| Configure | Brand, team, workspace settings, and MCP |
+| Build | Wizards, Guidance, Resource Center, Capabilities, Actions, Knowledge, and Brand |
+| Integrations | MCP connections and configuration |
+| Configure | Product Crawler, Team, and Workspace settings |
 
 Conceptually, knowledge and actions are workspace resources. Capabilities package those resources
 with reusable instructions. Wizards and the Resource Center Agent consume capabilities to create
 customer-facing experiences. Guidance is governed separately and can be launched from those
 experiences.
+
+## Choose a customer surface
+
+| Surface | Choose it for | Configuration model |
+| --- | --- | --- |
+| Resource Center | A page-aware destination for browsing, Search, Ask, and explicit next steps | One versioned Resource Center per workspace |
+| Wizard | A focused conversational job in a specific part of the product | One placement per Wizard; create additional Wizards for other placements or targeting |
+| Guidance | A reviewed walkthrough or a constrained goal completed against the live page | One workspace Guidance configuration with separately versioned guides |
+| Action toast | Status, confirmation, and outcomes for the end-user MCP action channel | Appears only when that controlled-rollout channel requests an action |
 
 ## Browser SDK
 
@@ -27,7 +36,7 @@ The browser SDK provides four distinct end-user surfaces.
 <CardGroup cols={2}>
   <Card title="Resource Center" icon="library" href="/product/resource-center">
     A page-aware support destination with curated cards, Help Center search, Ask, and launches
-    into wizards or guides.
+    into reviewed guides or host actions.
   </Card>
   <Card title="Wizard" icon="message-circle" href="/product/wizards">
     Conversational help rendered as a bubble, inline surface, sidebar, or fullscreen experience.

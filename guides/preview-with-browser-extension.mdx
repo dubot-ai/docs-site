@@ -6,6 +6,19 @@ description: "Run a current Test session against a target URL"
 The browser extension provides a temporary Test session against a product page. It loads the saved
 Test configuration without changing Production.
 
+## Before you start
+
+- Confirm that browser-extension access is enabled and the extension is provisioned for your
+  workspace.
+- Sign in to both the Dubot dashboard and the customer product.
+- Save the Test configuration you want to exercise.
+- Choose a safe page and example account where the workflow cannot affect real customer data.
+
+<Info>
+  Extension access is provisioned during the current rollout. If it is not available to the
+  workspace or browser profile, ask your Dubot contact for the supported installation path.
+</Info>
+
 ## Start a Test session
 
 1. In the dashboard, open the **Test session** card and enter the target URL.
@@ -34,3 +47,12 @@ has a separate Test session entry point in its [Agent configuration](/guides/con
   Standby pages skip test-session overrides and initialization. A target URL and a supported browser
   page are required for an active session.
 </Note>
+
+## Expected result
+
+The target page reports an active Test session and loads the saved Test configuration without
+changing Production. Ending the session removes that temporary preview state.
+
+If the session is active but no surface appears, follow
+[Troubleshoot the browser SDK](/sdk/troubleshooting#when-nothing-appears). Action Discovery is a
+separate [controlled-rollout workflow](/guides/add-actions-with-extension).

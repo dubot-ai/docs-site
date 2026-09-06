@@ -56,6 +56,17 @@ Workspace settings can observe or enforce signed identities separately for Test 
 
 Use the recent coverage summary before changing an environment from Observe to Enforce.
 
+`getState().initProps.verified` means the browser supplied a non-empty identity token. It does not
+prove the server accepted that token. Verify acceptance with a successful authenticated request
+and the workspace identity coverage view.
+
+## Recover from an enforcement failure
+
+If Enforce blocks intended users, return the affected environment to Observe while you repair the
+integration. Confirm the user id and JWT subject match, mint a fresh token with the current secret,
+and watch coverage before enabling Enforce again. Rotating the secret is appropriate only when you
+intend to invalidate every outstanding token.
+
 ## Supply session context
 
 `context` is a flat map of scalar values. The current SDK bounds it to approximately 2 KB and
@@ -72,7 +83,29 @@ window.Dubot.setContext({
 `setContext()` replaces the complete context set. Rebuild and send the full current snapshot
 when the host state changes.
 
+For a single-page application, update the snapshot after route or relevant account state changes;
+do not call `init()` again only to refresh context.
+
+```js
+function syncDubotContext() {
+  window.Dubot.setContext({
+    route: window.location.pathname,
+    plan: currentAccount.plan,
+    invoice_open: Boolean(currentInvoice),
+  });
+}
+
+router.onRouteChange(syncDubotContext);
+accountStore.onChange(syncDubotContext);
+```
+
+The subscription APIs above are placeholders for the equivalent hooks in your application. The
+important contract is to send one complete, flat snapshot whenever relevant host state changes.
+
 <Note>
   Email is used for identity attribution when passed to `init()`. It is not automatically copied
   into assistant context. Add only the context fields the experience actually needs.
 </Note>
+
+See [Troubleshoot the browser SDK](/sdk/troubleshooting#identity-requests-fail) for the failure
+checklist.

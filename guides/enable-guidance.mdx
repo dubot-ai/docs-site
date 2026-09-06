@@ -70,6 +70,13 @@ Save and test configuration changes before publishing them. To turn Guidance off
 **Disable**. Disabling removes the published Guidance configuration and stops new walkthroughs;
 saved guide drafts and versions remain available for later review.
 
+## Expected result
+
+The representative Test journey selects the intended targets, pauses for customer-owned work, and
+reaches its stopping point. After publishing, the same safe Production journey creates a Guidance
+run that can be inspected by outcome and timeline.
+
 See [Guidance](/product/guidance) for runtime behavior and [Test and Production](/operate/publishing)
 for the broader publishing model. After collecting a representative run, follow
-[Turn a Guidance run into a guide](/guides/review-guidance-run).
+[Turn a Guidance run into a guide](/guides/review-guidance-run). If Guidance fails to start or uses
+stale configuration, follow [Troubleshoot the browser SDK](/sdk/troubleshooting#resource-center-or-guidance-is-incomplete).

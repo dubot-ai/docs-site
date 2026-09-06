@@ -9,6 +9,10 @@ description: "Define a governed Session API operation or client-side callback"
   attached to the active agent.
 </Info>
 
+Create the contract manually when you already know the operation. If you need to observe an
+existing product workflow first, use controlled-rollout
+[Action Discovery](/guides/add-actions-with-extension).
+
 ## Start with the shared contract
 
 Give the action a human title, model-facing description, response mask, and execution policy.
@@ -53,4 +57,13 @@ execution policy is the runtime control and still requires review.
 Backend API actions are shown as a future action type and are not part of the current product
 contract.
 
-See [SDK actions](/sdk/actions) for registration and the execution boundary.
+## Expected result
+
+The published action appears through the intended published Skill and experience. A safe Test call
+returns only the masked response fields, applies the reviewed confirmation policy, and creates an
+Activity record for success or failure.
+
+Next, [create or update the Skill capability](/guides/create-capability) that will carry the action.
+See [SDK actions](/sdk/actions) for registration and the execution boundary, and
+[Troubleshoot the browser SDK](/sdk/troubleshooting#an-action-is-unavailable) when the runtime does
+not offer it.
