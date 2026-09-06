@@ -46,6 +46,23 @@
       "permanent": true
     }
   ],
+  "navbar": {
+    "links": [
+      {
+        "label": "Security",
+        "href": "https://www.dubot.ai/security"
+      },
+      {
+        "label": "Support",
+        "href": "https://www.dubot.ai/support"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Open Dubot",
+      "href": "https://app.dubot.ai"
+    }
+  },
   "navigation": {
     "tabs": [
       {
@@ -175,6 +192,38 @@
     ]
   },
   "footer": {
-    "socials": {}
+    "socials": {},
+    "links": [
+      {
+        "header": "Dubot",
+        "items": [
+          {
+            "label": "Main site",
+            "href": "https://www.dubot.ai"
+          },
+          {
+            "label": "Security",
+            "href": "https://www.dubot.ai/security"
+          },
+          {
+            "label": "Support",
+            "href": "https://www.dubot.ai/support"
+          }
+        ]
+      },
+      {
+        "header": "Get started",
+        "items": [
+          {
+            "label": "Open Dubot",
+            "href": "https://app.dubot.ai"
+          },
+          {
+            "label": "Talk to us",
+            "href": "https://www.dubot.ai/demo"
+          }
+        ]
+      }
+    ]
   }
 }
