@@ -69,25 +69,25 @@
             "pages": [
               {
                 "group": "Knowledge",
+                "root": "product/knowledge",
                 "expanded": false,
                 "pages": [
-                  "product/knowledge",
                   "guides/add-knowledge"
                 ]
               },
               {
                 "group": "Brand",
+                "root": "product/brand",
                 "expanded": false,
                 "pages": [
-                  "product/brand",
                   "guides/set-up-your-brand"
                 ]
               },
               {
                 "group": "Actions and capabilities",
+                "root": "product/capabilities-actions",
                 "expanded": false,
                 "pages": [
-                  "product/capabilities-actions",
                   "guides/create-action",
                   "guides/add-actions-with-extension",
                   "guides/create-capability"
@@ -95,25 +95,25 @@
               },
               {
                 "group": "Resource Center",
+                "root": "product/resource-center",
                 "expanded": false,
                 "pages": [
-                  "product/resource-center",
                   "guides/configure-resource-center"
                 ]
               },
               {
                 "group": "Wizards",
+                "root": "product/wizards",
                 "expanded": false,
                 "pages": [
-                  "product/wizards",
                   "guides/build-and-publish-wizard"
                 ]
               },
               {
                 "group": "Guidance",
+                "root": "product/guidance",
                 "expanded": false,
                 "pages": [
-                  "product/guidance",
                   "guides/enable-guidance",
                   "guides/review-guidance-run"
                 ]

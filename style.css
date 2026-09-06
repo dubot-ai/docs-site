@@ -157,7 +157,7 @@ a.card[href]:hover [data-component-part="card-icon"] {
   box-sizing: border-box;
 }
 
-#content .product-figure {
+#content .frame:has(img[src*="/assets/product/"]) {
   margin: 2.25rem 0;
   padding: 0.5rem;
   background: #fff;
@@ -166,7 +166,11 @@ a.card[href]:hover [data-component-part="card-icon"] {
   box-shadow: var(--dubot-shadow);
 }
 
-#content .product-figure > img[src*="/assets/product/"] {
+#content .frame:has(img[src*="/assets/product/"]) > div:first-child {
+  display: none;
+}
+
+#content .frame img[src*="/assets/product/"] {
   width: 100%;
   max-width: none;
   margin: 0 !important;
@@ -177,7 +181,7 @@ a.card[href]:hover [data-component-part="card-icon"] {
   box-shadow: none;
 }
 
-#content .product-figure figcaption {
+#content .frame:has(img[src*="/assets/product/"]) figcaption {
   margin: 0;
   padding: 0.625rem 0.5rem 0.125rem;
   color: var(--navy-600);
@@ -185,17 +189,17 @@ a.card[href]:hover [data-component-part="card-icon"] {
   line-height: 1.5;
 }
 
-#content .product-figure-portrait {
+#content .frame:has(img[src*="/wizard-bubble.png"]) {
   max-width: 26rem;
   margin-inline: auto;
 }
 
-html.dark #content .product-figure {
+html.dark #content .frame:has(img[src*="/assets/product/"]) {
   background: var(--dark-surface);
   border-color: var(--dark-border);
 }
 
-html.dark #content .product-figure figcaption {
+html.dark #content .frame:has(img[src*="/assets/product/"]) figcaption {
   color: var(--dark-muted);
 }
 
@@ -588,7 +592,16 @@ html.dark #pagination a:hover {
     font-size: 0.9375rem;
   }
 
-  #sidebar a.group.flex.items-start:hover {
+  #sidebar button.group.flex.items-start {
+    color: var(--navy-800);
+    border-radius: 0;
+    background: transparent !important;
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+
+  #sidebar a.group.flex.items-start:hover,
+  #sidebar button.group.flex.items-start:hover {
     color: var(--navy-950) !important;
     border-left-color: var(--coral-border) !important;
     background: transparent !important;
@@ -610,18 +623,21 @@ html.dark #pagination a:hover {
 
   html.dark #sidebar .sidebar-title,
   html.dark #sidebar a.group.flex.items-start,
+  html.dark #sidebar button.group.flex.items-start,
   html.dark .nav-tabs-item {
     color: var(--dark-muted) !important;
   }
 
   html.dark #sidebar a.group.flex.items-start:hover,
+  html.dark #sidebar button.group.flex.items-start:hover,
   html.dark #sidebar a.group.flex.items-start[aria-current="page"],
   html.dark #sidebar a.group.flex.items-start[data-active="true"] {
     color: var(--dark-text) !important;
     background: transparent !important;
   }
 
-  html.dark #sidebar a.group.flex.items-start:hover {
+  html.dark #sidebar a.group.flex.items-start:hover,
+  html.dark #sidebar button.group.flex.items-start:hover {
     border-left-color: var(--coral-border) !important;
   }
 
