@@ -20,6 +20,8 @@ Set a name, then choose one type. Dubot derives the immutable slug when you crea
 | Product domain | Product knowledge and, when needed, a knowledge scope |
 | Skill | Reusable guidance plus actions |
 
+![A Skill capability selected with its name, model-facing description, and priority](/assets/product/capability-configuration.png)
+
 Add the agent prompt, model-facing description, and priority. Choose delivery for the capability:
 
 | Delivery | Meaning |
@@ -34,6 +36,11 @@ Product domain capabilities may define a knowledge scope to limit the product kn
 to that capability. Only Skill capabilities can include Session API actions and client-side callbacks.
 An action's catalog presence or published state alone does not make it available to a wizard or the
 Resource Center Agent.
+
+Before publishing a Skill, review every included action in the dependency list. Hold back any
+draft or unsafe dependency rather than publishing it accidentally with the capability.
+
+![The capability publish review listing the Skill and each included action dependency](/assets/product/capability-publish-dependencies.png)
 
 ## Publish and attach
 

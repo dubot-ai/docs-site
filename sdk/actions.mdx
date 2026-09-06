@@ -34,6 +34,11 @@ await window.Dubot.init({
 The callback must also have a reviewed, published governance envelope in Dubot and be reachable
 through a Skill capability attached to the wizard.
 
+The action detail shows whether the callback has been observed from the SDK. Registration supplies
+the schema and unlocks publishing; an unregistered callback remains unavailable at runtime.
+
+![A client-side callback waiting to be registered from the SDK before it can be published](/assets/product/clientside-callback-installation.png)
+
 ## Replace callbacks when page state changes
 
 `setActions()` uses full-set replacement semantics. Pass every callback that should be available
