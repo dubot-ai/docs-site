@@ -111,7 +111,7 @@ a.card[href] {
 
 .card[role="link"]:hover,
 a.card[href]:hover {
-  border-color: var(--navy-900) !important;
+  border-color: var(--coral) !important;
   box-shadow: 0 8px 28px rgba(74, 90, 138, 0.12);
   transform: translateY(-1px);
 }
@@ -372,7 +372,7 @@ html:not(.dark) .code-block .shiki span {
 }
 
 #content a.link:hover {
-  color: var(--navy-900);
+  color: var(--coral-strong);
 }
 
 /* Inline prose links should read with the sentence, not like compact UI controls. */
@@ -391,13 +391,23 @@ html:not(.dark) .code-block .shiki span {
 
 #pagination a:hover {
   background: var(--purple-100);
-  color: var(--navy-900);
+  color: var(--coral-strong);
 }
 
 #pagination a:focus-visible,
 #search-bar-entry:focus-visible {
-  outline: 1px solid var(--navy-900);
+  outline: 1px solid var(--coral);
   outline-offset: 1px;
+}
+
+#table-of-contents-content a:hover {
+  color: var(--coral-strong) !important;
+  border-left-color: var(--coral-border) !important;
+}
+
+#table-of-contents-content li[data-active] > a {
+  color: var(--coral-strong) !important;
+  border-left-color: var(--coral) !important;
 }
 
 html.dark #background-color {
@@ -521,7 +531,12 @@ html.dark #content a.link:hover {
 
 html.dark #pagination a:hover {
   background: var(--navy-800);
-  color: var(--dark-text);
+  color: var(--coral-border);
+}
+
+html.dark #table-of-contents-content a:hover,
+html.dark #table-of-contents-content li[data-active] > a {
+  color: var(--coral-border) !important;
 }
 
 /* Translate the product shell onto Mintlify's existing desktop navigation. */
@@ -569,7 +584,7 @@ html.dark #pagination a:hover {
 
   .nav-tabs-item:hover,
   .nav-tabs-item[data-active="true"] {
-    color: var(--navy-900) !important;
+    color: var(--coral-strong) !important;
   }
 
   .nav-tabs-item[data-active="true"] > div:last-child {
@@ -602,14 +617,14 @@ html.dark #pagination a:hover {
 
   #sidebar a.group.flex.items-start:hover,
   #sidebar button.group.flex.items-start:hover {
-    color: var(--navy-950) !important;
+    color: var(--coral-strong) !important;
     border-left-color: var(--coral-border) !important;
     background: transparent !important;
   }
 
   #sidebar a.group.flex.items-start[aria-current="page"],
   #sidebar a.group.flex.items-start[data-active="true"] {
-    color: var(--navy-950) !important;
+    color: var(--coral-strong) !important;
     border-left-color: var(--coral) !important;
     background: transparent !important;
     font-weight: 600;
@@ -632,7 +647,7 @@ html.dark #pagination a:hover {
   html.dark #sidebar button.group.flex.items-start:hover,
   html.dark #sidebar a.group.flex.items-start[aria-current="page"],
   html.dark #sidebar a.group.flex.items-start[data-active="true"] {
-    color: var(--dark-text) !important;
+    color: var(--coral-border) !important;
     background: transparent !important;
   }
 
@@ -648,6 +663,6 @@ html.dark #pagination a:hover {
 
   html.dark .nav-tabs-item:hover,
   html.dark .nav-tabs-item[data-active="true"] {
-    color: var(--dark-text) !important;
+    color: var(--coral-border) !important;
   }
 }
