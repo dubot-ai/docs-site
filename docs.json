@@ -34,6 +34,18 @@
       "canonical": "https://dubot.mintlify.site"
     }
   },
+  "redirects": [
+    {
+      "source": "/start/availability",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/operate/activity",
+      "destination": "/guides/understand-analytics",
+      "permanent": true
+    }
+  ],
   "navigation": {
     "tabs": [
       {
@@ -41,56 +53,61 @@
         "groups": [
           {
             "group": "Start here",
-            "pages": ["index", "start/first-value", "start/availability"]
+            "pages": ["index", "start/first-value"]
           },
           {
             "group": "Understand Dubot",
             "pages": [
               "concepts/how-dubot-works",
+              "surfaces/overview",
               "concepts/object-model",
               "concepts/acquisition"
             ]
           },
           {
-            "group": "Experiences",
+            "group": "Build",
             "pages": [
-              "surfaces/overview",
-              "product/resource-center",
-              "product/wizards",
-              "product/guidance"
+              {
+                "group": "Foundations",
+                "expanded": false,
+                "pages": [
+                  "product/knowledge",
+                  "guides/add-knowledge",
+                  "product/brand",
+                  "guides/set-up-your-brand"
+                ]
+              },
+              {
+                "group": "Experiences",
+                "expanded": false,
+                "pages": [
+                  "product/resource-center",
+                  "guides/configure-resource-center",
+                  "product/wizards",
+                  "guides/build-and-publish-wizard",
+                  "product/guidance",
+                  "guides/enable-guidance",
+                  "guides/review-guidance-run"
+                ]
+              },
+              {
+                "group": "Actions and capabilities",
+                "expanded": false,
+                "pages": [
+                  "product/capabilities-actions",
+                  "guides/create-action",
+                  "guides/add-actions-with-extension",
+                  "guides/create-capability"
+                ]
+              }
             ]
           },
           {
-            "group": "Configure",
+            "group": "Test and launch",
             "pages": [
-              "product/capabilities-actions",
-              "product/knowledge",
-              "product/brand"
-            ]
-          },
-          {
-            "group": "Set up Dubot",
-            "pages": [
-              "guides/add-knowledge",
-              "guides/set-up-your-brand",
-              "guides/preview-with-browser-extension"
-            ]
-          },
-          {
-            "group": "Build experiences",
-            "pages": [
-              "guides/configure-resource-center",
-              "guides/build-and-publish-wizard",
-              "guides/enable-guidance",
-              "guides/review-guidance-run"
-            ]
-          },
-          {
-            "group": "Capabilities and actions",
-            "pages": [
-              "guides/create-action",
-              "guides/add-actions-with-extension",
-              "guides/create-capability"
+              "guides/preview-with-browser-extension",
+              "operate/publishing",
+              "operate/recovery"
             ]
           },
           {
@@ -98,17 +115,8 @@
             "pages": ["guides/understand-analytics"]
           },
           {
-            "group": "Operate",
-            "pages": [
-              "operate/publishing",
-              "operate/recovery",
-              "operate/activity",
-              "trust/governance-security"
-            ]
-          },
-          {
-            "group": "Evaluate",
-            "pages": ["pilots/pilot-guide"]
+            "group": "Plan and govern",
+            "pages": ["trust/governance-security", "pilots/pilot-guide"]
           }
         ]
       },
@@ -128,7 +136,7 @@
             ]
           },
           {
-            "group": "Agent integrations",
+            "group": "AI clients and MCP",
             "pages": ["integrations/mcp"]
           }
         ]
