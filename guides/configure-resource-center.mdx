@@ -35,6 +35,23 @@ URL, **Video embed**, **Callback**, **Hyperlink**, and **MCP connector**. Articl
 externally. Static components are explicitly placed and are never Search results or Ask grounding.
 There is no directly pinnable Wizard content type.
 
+### Use defaults sparingly
+
+Start with one or two resources that are useful almost everywhere, such as the documentation home
+and a first-value path. Put task-specific help in page overrides instead of growing one long global
+list. On each route, lead with the smallest set of resources that helps the customer understand the
+page or complete its likely next task.
+
+Do not pin a default resource again in a page override. The default already appears under **More
+Resources**. If the default is not useful on that route, hide the inherited item there. Hiding it
+changes only that page override.
+
+<Note>
+  **Preview** resolves the latest saved Resource Center draft. The ordinary customer-facing panel
+  continues to resolve the published version. If page-aware content appears in Preview but not on
+  the product page, check whether the Resource Center is **Pending** before changing its route rule.
+</Note>
+
 ## Enable Search and Ask
 
 Search and Ask are independent availability controls below the contextual content.
@@ -47,6 +64,11 @@ Configure that reserved agent in the **Agent** tab. Its prompt, explicit knowled
 capabilities, and action references are embedded in the Resource Center version. Actions reach Ask
 through Skill capabilities. The agent is not a normal placeable wizard and has no independent
 publish lifecycle. Ask receives the current route and resolved Resource Center context at runtime.
+
+In the agent prompt, tell Ask to answer a specific question before recommending a next step. For an
+exploratory request, recommend no more than three relevant paths and prioritize the current route's
+resources before global content. This keeps Ask useful without turning every answer into a copy of
+the workspace navigation.
 
 ## Configure Settings
 
@@ -64,7 +86,9 @@ and are not advertised as tools.
   </Step>
   <Step title="Test dependencies">
     Confirm referenced guides, articles, callbacks, connector availability, and the reserved
-    agent's capabilities and actions are published and available in the target environment.
+    agent's capabilities and actions are published and available in the target environment. A
+    guide that contains an Indicate step is Test-only today and cannot be used as a working
+    Production destination.
   </Step>
   <Step title="Test on a product page">
     From the **Agent** tab, start a Test session for a representative route. Open the Resource

@@ -34,7 +34,9 @@ preview.
 
 1. Confirm the target URL in the **Test session** card.
 2. If needed, open **Test session overrides**. The effective inject script can inherit the workspace
-   setting or use your personal override. Save your overrides when prompted.
+   setting or use your personal override. **Starter (not saved)** means Dubot is showing its built-in
+   starter script and no script has been stored. Select **Save my overrides** only when you intend to
+   keep a personal script or auto-open choice.
 3. Optionally enable **Auto-open agent after inject**, choose an agent, and choose **Bubble**,
    **Sidebar**, or **Fullscreen** for its presentation. With auto-open off, the extension
    initializes the page but does not open the agent.
@@ -43,6 +45,11 @@ preview.
 
 Use the page as a real user would, including identity and page context checks. When finished, choose
 **End test session**. The indicator reports active, error, or ended status.
+
+Personal overrides apply only to your operator account. An administrator can deliberately choose
+**Save as workspace default** to replace the shared script for teammates who inherit it. Promoting a
+script clears the administrator's personal script overlay afterward, while auto-open remains a
+personal setting. Review the script before changing the workspace default.
 
 Review [Identity and page context](/sdk/identity-context) before testing customer-specific behavior.
 The optional auto-open selection uses an existing [Wizard](/product/wizards); the Resource Center

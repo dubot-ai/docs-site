@@ -7,6 +7,12 @@ description: "Review a completed journey, save the cleanest run, and publish it 
 Guidance records each customer journey as a run. Save a representative run when the same job
 should become a reviewed, reusable guide.
 
+<Note>
+  In the current authoring flow, **New guide** opens Guidance Analytics because every new guide
+  starts from a saved realtime run. There is no blank guide composer. Keep a run that fails before
+  its first useful step as troubleshooting evidence rather than saving it as a guide.
+</Note>
+
 ## Before you start
 
 - [Enable Guidance](/guides/enable-guidance) and exercise the journey in Test.
@@ -43,15 +49,17 @@ should become a reviewed, reusable guide.
   </Step>
   <Step title="Review the composition">
     Check the generated sequence and remove accidental or redundant interactions. A guide must
-    contain at least one step before it can be published.
+    contain at least one step before it can be published. If the sequence contains an Indicate
+    step, keep the guide in Test: the current product blocks that step type from Production.
   </Step>
   <Step title="Edit steps in the extension">
     Select **Edit in the extension** when the targets or instructions need work on the live product
     page. Choose a safe starting URL and save the edited composition back to the guide draft.
   </Step>
   <Step title="Publish the guide">
-    Save the draft, then select **Publish guide**. The published version enters the workspace guide
-    catalog. A newer draft does not replace the live version until you publish the changes.
+    For a Production-compatible composition, save the draft, then select **Publish guide**. The
+    published version enters the workspace guide catalog. A newer draft does not replace the live
+    version until you publish the changes.
   </Step>
   <Step title="Add it to the Resource Center">
     In **Resource Center**, add the published guide to **All pages** or a page override, then publish
@@ -59,10 +67,17 @@ should become a reviewed, reusable guide.
   </Step>
 </Steps>
 
-<Frame caption="A published reviewed guide waits on the highlighted customer-owned step.">
+<Warning>
+  A guide with an **Indicate** interaction cannot currently be published. Save and test it as a
+  draft instead. This is a platform-wide compatibility gate, not a workspace SDK setting. Do not
+  replace Indicate with Perform just to publish: that would make Dubot execute an interaction that
+  was intentionally left to the customer.
+</Warning>
+
+<Frame caption="A reviewed guide in Test waits on the highlighted customer-owned step.">
   <img
     src="/assets/product/guidance-reviewed-guide.png"
-    alt="A published reviewed guide waiting for the customer to complete a highlighted step"
+    alt="A reviewed guide in Test waiting for the customer to complete a highlighted step"
   />
 </Frame>
 
@@ -72,8 +87,10 @@ source run when you need to understand why the guide was created.
 
 ## Expected result
 
-The guide retains a link to its source run, contains only reviewed steps, starts from an intended
-trigger or Resource Center card, and reaches the same stopping point in Test and Production.
+The guide retains a link to its source run, contains only reviewed steps, and starts from an
+intended trigger or Resource Center card. A Production-compatible guide reaches the same stopping
+point in Test and Production; an Indicate guide remains a tested draft until the Production format
+supports it.
 
 See [Guidance](/product/guidance) for the runtime model and
 [Understand analytics and activity](/guides/understand-analytics) for outcome definitions. Use
