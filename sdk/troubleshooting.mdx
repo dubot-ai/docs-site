@@ -69,6 +69,22 @@ outcomes. See [Recover or roll back configuration](/operate/recovery) before cha
 - For a stale Resource Center card, confirm its referenced guide, article, callback, or connector is
   still available, then republish the Resource Center.
 
+## Guidance stops before the first useful step
+
+Retry the same safe Test goal once. If it fails again with the same message before selecting a
+target or presenting an instruction:
+
+1. End the Test session so its temporary token is revoked.
+2. Confirm the saved Guidance draft, attached knowledge, and target URL are still the intended
+   inputs.
+3. Open **Guidance → Analytics** and inspect the failed run timeline instead of relying only on its
+   generated theme or aggregate outcome.
+4. Record the exact time, environment, workspace, goal, page URL, and visible error before
+   escalating.
+
+A failure before the first useful step does not by itself identify a bad target, prompt, model, or
+service. Preserve the run evidence so the responsible layer can be diagnosed without guessing.
+
 ## The SDK was destroyed
 
 `destroy()` is terminal for that installed SDK instance. Repeating `init()` after `destroy()` is
