@@ -60,6 +60,14 @@ evaluated with clear constraints and a safe stopping condition before broader us
 | Indicate | Highlights a target and waits for the customer, a Next action, or a timeout |
 | Ask | Pauses for a choice or free-text response |
 
+<Warning>
+  **Indicate is currently Test-only.** You can author, save, and test an Indicate step, but the
+  current product will not publish a guide that contains one. This is a platform compatibility
+  gate, not something an individual workspace can unlock by upgrading its SDK. Keep the guide as
+  a draft until Production supports the richer guide format. Do not change Indicate to Perform
+  merely to bypass the gate because Perform would take the customer-owned action.
+</Warning>
+
 <Frame caption="An Indicate step keeps the target, instruction, Skip option, and Stop control visible.">
   <img
     src="/assets/product/guidance-reviewed-guide.png"
@@ -68,7 +76,8 @@ evaluated with clear constraints and a safe stopping condition before broader us
 </Frame>
 
 The browser extension can help author guides from a real workflow. Captured interactions remain
-review material until the guide is saved and published.
+review material until the guide is saved and, when its step types are Production-compatible,
+published.
 
 ## Runtime controls
 
@@ -94,8 +103,9 @@ on the page.
 
 The Guidance area contains the reserved Guidance configuration, reviewed guides, and Activity.
 Production can run only published Guidance configuration and published guides. A Resource Center
-guide card should not be treated as ready until its guide and Guidance dependency work in the
-target environment.
+guide card should not be treated as ready until its guide can be published and its Guidance
+dependency works in the target environment. A draft guide containing Indicate steps can be tested,
+but it cannot currently become a Production Resource Center destination.
 
 Follow [Enable Guidance](/guides/enable-guidance) to configure the workspace, test a representative
 walkthrough, and turn Guidance on. Then follow
