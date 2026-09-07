@@ -531,12 +531,12 @@ html.dark #content a.link:hover {
 
 html.dark #pagination a:hover {
   background: var(--navy-800);
-  color: var(--coral-border);
+  color: var(--coral);
 }
 
 html.dark #table-of-contents-content a:hover,
 html.dark #table-of-contents-content li[data-active] > a {
-  color: var(--coral-border) !important;
+  color: var(--coral) !important;
 }
 
 /* Translate the product shell onto Mintlify's existing desktop navigation. */
@@ -647,7 +647,7 @@ html.dark #table-of-contents-content li[data-active] > a {
   html.dark #sidebar button.group.flex.items-start:hover,
   html.dark #sidebar a.group.flex.items-start[aria-current="page"],
   html.dark #sidebar a.group.flex.items-start[data-active="true"] {
-    color: var(--coral-border) !important;
+    color: var(--coral) !important;
     background: transparent !important;
   }
 
@@ -663,6 +663,6 @@ html.dark #table-of-contents-content li[data-active] > a {
 
   html.dark .nav-tabs-item:hover,
   html.dark .nav-tabs-item[data-active="true"] {
-    color: var(--coral-border) !important;
+    color: var(--coral) !important;
   }
 }
