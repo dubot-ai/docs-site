@@ -23,6 +23,13 @@ then create route overrides for exact paths or path prefixes. On a matched route
 appears first and inherited defaults fill **More Resources**. Overrides can hide inherited content
 for that route without changing the default list.
 
+<Note>
+  To match a page and its descendants, enter the route root, such as `/dubot/actions`, and select
+  **Prefix**. Do not append `/*`; the route field treats those characters literally. Test the root
+  page itself in a browser-extension Test session because selecting an override in the editor can
+  display its cards before the live URL match has been verified.
+</Note>
+
 <Frame caption="All pages defines the default content; route overrides and Search and Ask availability are configured in the same version.">
   <img
     src="/assets/product/resource-center-configuration.png"
@@ -92,7 +99,8 @@ and are not advertised as tools.
   </Step>
   <Step title="Test on a product page">
     From the **Agent** tab, start a Test session for a representative route. Open the Resource
-    Center and exercise its content, Search, Ask, and any callback cards with the saved draft.
+    Center and exercise its content, Search, Ask, and any callback cards with the saved draft. For
+    every Prefix override, test both its root route and one descendant route when one exists.
   </Step>
   <Step title="Publish">
     Use the Resource Center page's **Publish** action. It publishes the versioned Resource Center
