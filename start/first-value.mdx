@@ -13,22 +13,22 @@ You need:
 
 - a Dubot workspace and an **Admin** or **Owner** role;
 - a safe product page for Test;
+- a provisioned [browser-extension Test session](/guides/preview-with-browser-extension);
 - the public client token and an approved product origin; and
 - one customer question or task with an observable result.
 
 If editing or publishing controls are unavailable, ask a workspace Admin or Owner to complete those
 steps. A missing product area may also require workspace enablement from Dubot.
 
-## Choose the first experience
+## The example you will build
 
-| Choose | When the customer needs | First success looks like |
-| --- | --- | --- |
-| **Resource Center** | A place to browse, search, or ask for help across the product | The panel opens on the intended page and returns one useful resource or answer |
-| **Wizard** | A focused conversation for one job | The intended placement appears and completes one representative conversation |
-| **Guidance** | Help completing work in the live interface | A reviewed guide highlights the correct target and reaches its stopping point |
+Help a customer find the article **Invite a teammate** from your product's team-settings page.
+Use your own public article and actual product path in place of this example. Success is simple:
+the Resource Center opens, its article card opens the right help page, and searching for
+**invite** returns that article.
 
-The Resource Center is the recommended first path because you can begin with static content and
-Search, then add Ask, reviewed guides, callbacks, and MCP connectors deliberately.
+This first experience uses an article and Search. Leave Ask off until you are ready to configure
+and test its Agent.
 
 ## Build the first path
 
@@ -38,27 +38,33 @@ Search, then add Ask, reviewed guides, callbacks, and MCP connectors deliberatel
     [browser-extension Test session](/guides/preview-with-browser-extension). Confirm the target
     page can load Dubot before configuring a larger experience.
   </Step>
-  <Step title="Add a small knowledge set">
-    [Crawl or upload](/guides/add-knowledge) only the material needed for the chosen customer job.
-    Review the extracted articles before making them available to an experience.
+  <Step title="Index one public article">
+    In **Knowledge**, choose **Crawl a URL**, enter your public Invite a teammate article URL,
+    and select **This page only**. Open **View articles** after the crawl and confirm the title,
+    URL, and instructions. Knowledge is delivered automatically; there is no article Publish step.
   </Step>
   <Step title="Configure one Resource Center path">
-    Add one reviewed article, guide, video, hyperlink, callback, or MCP connector. Enable
-    **Search the knowledge base** if the indexed corpus should be searchable. Enable
-    **Ask in your own words** only after configuring its reserved Agent.
+    Open [Resource Center](/guides/configure-resource-center). In **Content**, create an **Exact**
+    route override for your team-settings path, such as `/settings/team`, and add the indexed
+    **Invite a teammate** article. Enable **Search the knowledge base** and leave **Ask in your
+    own words** off. In **Settings**, choose **Floating** so the customer can open the panel.
   </Step>
   <Step title="Save and exercise Test">
-    Use the same page and example question each time. Confirm the panel opens, the expected card
-    appears, and Search or Ask uses only the intended knowledge and capabilities.
+    Save the Resource Center draft. From its **Agent** tab, start a browser-extension Test session
+    on your team-settings page. Open the floating panel, open the article card, then search for
+    **invite**. Confirm the search result has the expected title and destination. If your workspace
+    already has other sources, Search can return those articles too; route overrides organize
+    cards but do not limit Search to that page's cards.
   </Step>
-  <Step title="Publish the dependency chain">
-    Confirm referenced knowledge is healthy, then publish referenced actions, capabilities,
-    guides, and Brand changes before publishing the Resource Center. Saving a draft does not
-    change Production.
+  <Step title="Publish the Resource Center">
+    After the Test checks pass, select **Publish** on the Resource Center page. This example
+    needs no actions, Skill capabilities, or guides. If you changed Brand, publish those changes
+    as well. Saving a draft alone does not update the customer-facing panel.
   </Step>
   <Step title="Verify Production">
-    Load the approved product origin without a Test session. Repeat the safe example and confirm
-    the published experience, identity, page targeting, content, and activity record.
+    End the Test session and load the same page with the installed SDK on an approved Production
+    origin. Repeat the card and Search checks, and confirm the Resource Center analytics record.
+    The extension alone does not install Dubot for your customers.
   </Step>
 </Steps>
 
@@ -70,6 +76,11 @@ Search, then add Ask, reviewed guides, callbacks, and MCP connectors deliberatel
 - the result appears in the relevant Activity or Analytics view; and
 - you know how to [unpublish or recover the configuration](/operate/recovery).
 
-Next, add only the dependency that improves the chosen outcome: a
-[Wizard](/guides/build-and-publish-wizard), [reviewed guide](/guides/review-guidance-run), or
-[governed action](/guides/create-action).
+## Choose the next improvement
+
+| Customer need | Add next |
+| --- | --- |
+| Ask a question in their own words | [Configure and test the Resource Center Agent](/guides/configure-resource-center#enable-search-and-ask) |
+| Complete a focused conversation | [Build a Wizard](/guides/build-and-publish-wizard) |
+| Follow steps on the live page | [Review a Guidance run](/guides/review-guidance-run) |
+| Run an approved operation | [Create a governed action](/guides/create-action) |

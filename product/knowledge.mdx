@@ -44,10 +44,9 @@ make a defined scope available to wizards, Guidance, and the Resource Center.
 - Read a matching article in bounded windows rather than loading the entire corpus into every
   request.
 
-<Info>
-  Runtime knowledge retrieval is implemented in the current product build. The previous public
-  documentation that described retrieval as future work is no longer accurate.
-</Info>
+Accepted crawls and uploads automatically update the corpus used by existing experiences. There
+is no article-level Publish action. The experience's saved or published configuration controls
+its retrieval scope. See [when article changes become available](/guides/add-knowledge#when-article-changes-become-available).
 
 ## Retrieval flow
 
@@ -74,7 +73,7 @@ crawling, or a particular future retrieval architecture.
 | Freshness | Manual sync or optional weekly sync for web sources |
 | Private sources | Authenticated crawling is not part of the current contract |
 | Scope | All content, selected articles, or none |
-| Resource Center search | Published article cards only; raw search text is not retained as analytics content |
+| Resource Center search | Searches the delivered corpus and returns article cards; raw search text is not retained as analytics content |
 
 <Warning>
   Ingestion and access are separate decisions. Review source ownership, exclusions, sensitivity,

@@ -63,7 +63,7 @@ changes only that page override.
 
 Search and Ask are independent availability controls below the contextual content.
 
-- **Search the knowledge base** searches the published knowledge corpus and returns ranked article
+- **Search the knowledge base** searches the delivered workspace knowledge corpus and returns ranked article
   cards.
 - **Ask in your own words** opens in-panel chat with the reserved Resource Center Agent.
 
@@ -88,12 +88,15 @@ and are not advertised as tools.
 ## Preview, test, and publish
 
 <Steps>
-  <Step title="Preview the selected route">
-    Use **Preview** to check route resolution, inherited content, card behavior, Search, and Ask.
+  <Step title="Preview the content layout">
+    Use **Preview** to inspect the selected override's cards, ordering, and inherited content.
+    Selecting an override does not prove that the product URL matches it. Verify route matching,
+    Search, Ask, and callback execution in the browser Test session below.
   </Step>
   <Step title="Test dependencies">
-    Confirm referenced guides, articles, callbacks, connector availability, and the reserved
-    agent's capabilities and actions are published and available in the target environment. A
+    Confirm referenced articles are indexed, readable, and returned by a real Search. Check that
+    guides, callbacks, connectors, and the reserved agent's capabilities and actions are available
+    in Test; publish the versioned dependencies needed for Production before the Resource Center. A
     guide that contains an Indicate step is Test-only today and cannot be used as a working
     Production destination.
   </Step>

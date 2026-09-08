@@ -31,12 +31,14 @@ Place the stable SDK entry on every page where Dubot may render.
 
 The client token belongs in the script URL. It is not an argument to `Dubot.init()`.
 `crossorigin="anonymous"` preserves useful SDK error details for telemetry.
+The script above runs before the next script in the page. If your application loads it
+asynchronously, wait for its `load` event before calling `window.Dubot`.
 
 ## 2. Initialize for the signed-in user
 
 ```html
-<script>
-  window.Dubot.init({
+<script type="module">
+  await window.Dubot.init({
     userId: currentUser.id,
     email: currentUser.email,
     identityToken: identityTokenFromYourBackend,
@@ -49,11 +51,18 @@ The client token belongs in the script URL. It is not an argument to `Dubot.init
 ```
 
 Only pass context needed by the experience. Context values must be strings, numbers, or booleans.
+`currentUser` and `identityTokenFromYourBackend` represent values from your authenticated
+application; obtain them before this code runs. Omit `identityToken` only when your workspace
+permits unsigned sessions. See [Identity and context](/sdk/identity-context) for server signing.
+
+`init()` returns a promise. Await it before a programmatic launch. A resolved promise alone is
+not proof that configuration loaded: expected setup failures are logged to the browser console.
+Complete the verification checks below.
 
 ## 3. Publish and match a surface
 
 A configured placement mounts automatically when its page rules match. You can also render a
-published wizard programmatically:
+published wizard programmatically after initialization:
 
 ```js
 window.Dubot.renderAgent({
@@ -67,7 +76,8 @@ For an inline wizard, supply a selector:
 ```html
 <div id="billing-assistant"></div>
 
-<script>
+<script type="module">
+  // Run after the awaited init() call in your application setup.
   window.Dubot.renderAgent({
     slug: 'billing-help',
     presentationMode: 'InlineWizard',
@@ -118,8 +128,26 @@ Continue with [Identity and context](/sdk/identity-context) and [SDK actions](/s
 ## Before Production
 
 - Match the exact HTTPS product origins that should load Dubot.
-- Allow the agreed Dubot CDN and runtime connections in the host Content Security Policy.
+- Configure the [Content Security Policy destinations](#content-security-policy) for the features
+  and brand assets you use.
 - Initialize only after the application knows the signed-in user and has obtained a fresh
   server-minted identity token.
 - Send only the context and callbacks required by the active experience.
 - Verify one allowed case and deliberately rejected origin, identity, and action case.
+
+## Content Security Policy
+
+For the default production browser SDK, permit these destinations in your existing policy:
+
+| Directive | Destination | Used for |
+| --- | --- | --- |
+| `script-src` | `https://cdn.dubot.ai` | The SDK script |
+| `connect-src` | `https://cdn.dubot.ai` | Configuration, chat, Guidance, events, uploads, and fetched stylesheets |
+| `connect-src` | `wss://cdn.dubot.ai` | The optional end-user MCP action channel |
+| `style-src` | `https://cdn.dubot.ai` and your configured font-stylesheet origin | SDK and Brand stylesheets |
+| `font-src` | The origins serving your configured font files | Brand fonts |
+
+This is a destination list, not a replacement policy. Keep your application's existing
+directives and nonce or hash requirements. Brand styles, images, videos, embedded content, and
+host callbacks may need their own sources. Check the browser's CSP violation messages with the
+actual published Brand and selected features before launch.
