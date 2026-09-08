@@ -21,11 +21,16 @@ The CDN script installs one browser global: `window.Dubot`.
 Initializes identity, configuration, placements, Resource Center, Guidance resume, analytics, and
 the optional action channel.
 
+Returns `Promise<void>`. Await it before programmatic launches. Missing client tokens,
+configuration-fetch failures, duplicate calls, and calls after `destroy()` are reported in the
+console and can resolve without a working surface. Verify the rendered result and Network
+responses; resolution does not prove identity acceptance or successful rendering.
+
 | Option | Type | Notes |
 | --- | --- | --- |
-| `userId` | `string` | Stable signed-in customer user id |
+| `userId` | `string` | Required for identified sessions and user-attributed analytics; omitted or empty means anonymous |
 | `email` | `string` | Optional identity attribution |
-| `identityToken` | `string` | Server-minted HS256 JWT with `sub = userId` |
+| `identityToken` | `string` | Required when signed identity is enforced and for the end-user action channel; server-minted HS256 JWT with `sub = userId` |
 | `mode` | `bubble`, `inline`, `sidebar`, or `fullscreen` | Default for programmatic wizard rendering |
 | `position` | `bottom-left` or `bottom-right` | Call-site widget-position override |
 | `actions` | array | Initial complete client-side callback set |
@@ -33,6 +38,13 @@ the optional action channel.
 | `context` | object | Flat scalar session context, approximately 2 KB maximum |
 
 The client token is read from the SDK script URL and is not an `init()` option.
+All other initialization options are optional. Omitting `mode` defaults programmatic rendering
+to `bubble`; configured placements keep their own presentation.
+
+An identical repeated call does not remount placements. A new token with otherwise unchanged
+options refreshes identity in place. Other changed options can restart initialization. Pass the
+complete intended configuration when reinitializing; `init()` is not a partial-update method.
+See [token renewal and account changes](/sdk/identity-context#renew-an-identity-token).
 
 ## Wizards and Resource Center
 
@@ -43,18 +55,26 @@ The two presentation fields use different public values:
 | `init({ mode })` | `bubble`, `inline`, `sidebar`, `fullscreen` | Default for later programmatic Wizard rendering |
 | `renderAgent({ presentationMode })` | `Bubble`, `InlineWizard`, `Sidebar`, `Fullscreen` | Presentation for this rendered Wizard |
 
-| Method | Description |
-| --- | --- |
-| `renderAgent({ slug, presentationMode?, selector? })` | Renders a published wizard; selector applies to inline mode |
-| `openResourceCenter()` | Opens the published Resource Center when allowed by its trigger state |
-| `closeResourceCenter()` | Closes the Resource Center |
+| Method | Returns | Behavior |
+| --- | --- | --- |
+| `renderAgent({ slug, presentationMode?, selector? })` | `void` | Starts rendering a Wizard; `slug` is required and inline mode needs a matching `selector`. Fetching and mounting continue asynchronously; errors appear in the console or surface |
+| `openResourceCenter()` | `void` | Opens the mounted Resource Center when its trigger state allows it; has no effect when no Resource Center is mounted |
+| `closeResourceCenter()` | `void` | Closes the mounted Resource Center; has no effect when none is mounted |
+
+These methods use the current environment's configuration: the saved draft in a browser-extension
+Test session, or the published version in Production. They do not publish configuration.
 
 ## Host state
 
-| Method | Description |
-| --- | --- |
-| `setActions(actions)` | Replaces the complete client-side callback set |
-| `setContext(context)` | Replaces the complete flat scalar context map |
+| Method | Returns | Description |
+| --- | --- | --- |
+| `setActions(actions)` | `void` | Replaces the complete client-side callback set; pass `[]` to remove all callbacks |
+| `setContext(context)` | `void` | Replaces the complete flat scalar context map; pass `{}` to clear it. Nested values and overflow are dropped with a console warning |
+
+Each action has `tool_id: string`, `input_schema: object`, and
+`execute(input): unknown | Promise<unknown>`. Each static Resource Center callback has `id: string`
+and `execute(): unknown | Promise<unknown>`. See [SDK actions](/sdk/actions) for complete examples
+and the separate governance requirements.
 
 ## Guidance
 
@@ -64,24 +84,34 @@ The two presentation fields use different public values:
 | `triggerGuidance({ goal })` | Starts a goal-based run |
 
 The returned session has `stop()`, optional `guidanceSessionId`, and a `done` promise that
-resolves to a terminal outcome.
+resolves to an outcome containing `{ status, detail }`, where `status` is `completed`, `stopped`,
+or `error` and `detail` is a string.
+`done` resolves on failure as well; inspect its status instead of relying on a rejection.
+`stop()` returns `void`. Goal-based runs require workspace enablement and a controlled evaluation;
+see [Guidance availability and guide compatibility](/product/guidance).
 
 ## End-user MCP action channel
 
 | Method | Description |
 | --- | --- |
-| `listActionChannelGrants()` | Lists grants for the currently verified product identity |
-| `openActionChannelConnections()` | Opens the in-product grant and revocation surface |
+| `listActionChannelGrants()` | Returns `Promise<ActionChannelGrant[]>`; non-success HTTP responses return `[]`, while network or JSON parsing failures can reject |
+| `openActionChannelConnections()` | Returns `void`; opens the in-product grant and revocation surface |
 
 These methods return no grants or no-op when the SDK does not have both `userId` and
 `identityToken`.
+They belong to the [controlled-rollout end-user action channel](/integrations/mcp#end-user-action-channel).
+
+Each grant contains string fields `id`, `clientId`, `clientName`, `workspaceId`, `sub`, and
+`createdAt`. An empty list alone does not distinguish no grants from a rejected HTTP request;
+inspect the Network response when troubleshooting.
 
 ## Lifecycle
 
 ### `destroy()`
 
 Tears down the installed instance. It is safe to call more than once and terminal for that
-instance.
+instance. Returns `void`. Reload the full page before initializing a fresh instance; reinserting
+the script into the same document does not revive it.
 
 <Note>
   `setAuthoringMode()` exists for the Dubot browser extension's authoring isolation. It is not a

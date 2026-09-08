@@ -61,7 +61,9 @@ outcomes. See [Recover or roll back configuration](/operate/recovery) before cha
 
 ## Resource Center or Guidance is incomplete
 
-- For Resource Center Search, confirm the knowledge articles are indexed and published.
+- For Resource Center Search, confirm the knowledge articles are indexed and returned by the
+  runtime. Articles are delivered automatically after ingestion; there is no article Publish
+  button. If results remain stale, follow [Knowledge delivery](/guides/add-knowledge#when-article-changes-become-available).
 - For Ask, confirm **Ask in your own words** is enabled and its reserved Agent has the intended
   published capabilities and knowledge scope.
 - For a reviewed guide, confirm both the guide and workspace Guidance configuration are published.
@@ -88,7 +90,8 @@ service. Preserve the run evidence so the responsible layer can be diagnosed wit
 ## The SDK was destroyed
 
 `destroy()` is terminal for that installed SDK instance. Repeating `init()` after `destroy()` is
-ignored. Reload the script to create a new instance.
+ignored. Reload the full page to create a new instance. Adding the CDN script again in the same
+document is treated as a duplicate install and does not revive the destroyed instance.
 
 ## Collect evidence before escalating
 

@@ -109,3 +109,40 @@ important contract is to send one complete, flat snapshot whenever relevant host
 
 See [Troubleshoot the browser SDK](/sdk/troubleshooting#identity-requests-fail) for the failure
 checklist.
+
+## Renew an identity token
+
+Your application obtains fresh tokens from its authenticated backend; the SDK does not mint or
+schedule their renewal. Before the token expires, call `init()` with the same user's full options
+and the new token:
+
+```js
+await window.Dubot.init({
+  ...currentDubotOptions,
+  identityToken: freshIdentityTokenFromYourBackend,
+});
+```
+
+`currentDubotOptions` is the complete initialization configuration maintained by your application.
+When only the token changes, the SDK refreshes it without remounting placements and reconnects
+the action channel as needed. A changed user or other initialization options can restart the
+configuration lifecycle. Use `setContext()` or `setActions()` for their respective updates.
+
+## Log out or switch accounts
+
+End the old user's Dubot session as part of logout or account switching:
+
+```js
+window.Dubot.destroy();
+```
+
+Then perform a full page navigation through your application's logout or account-switch flow.
+On the next page, load the SDK and initialize it only after the new identity and token are ready.
+This tears down active surfaces and action-channel presence; changing context alone does not
+change the authenticated user.
+
+`destroy()` is terminal for the installed instance. Calling `init()` afterward is ignored, and
+inserting the CDN script again in the same document is treated as a duplicate install. Use a
+full page reload when you need a fresh instance. For an application that must switch users
+without navigation, review its reinitialization and conversation-isolation behavior with Dubot
+before rollout.
