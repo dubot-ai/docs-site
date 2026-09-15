@@ -37,6 +37,17 @@ Blank fields inherit platform defaults.
   content, and trigger belong to the Resource Center configuration, not the brand.
 </Note>
 
+## Fonts and inheritance
+
+Font family selects the face to use. The optional external font CSS URL loads a stylesheet when
+the font is not already available in the host page or device. An already loaded font can work
+without another URL in Dubot; entering a family name alone does not prove it is rendering.
+
+Shared primitives provide the base appearance. Surface overrides can keep their own values, so
+review Agent Chat, Guidance, and Resource Center rather than assuming one color edit affects
+every visible element. The [brand setup guide](/guides/set-up-your-brand#set-up-fonts) explains
+font sourcing, fallback behavior, and verification.
+
 ## Lifecycle
 
 Brand changes follow the same draft and publish distinction as other versioned entities. Saving a

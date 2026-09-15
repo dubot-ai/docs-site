@@ -14,13 +14,51 @@ it. To make the selected brand the workspace default, use its menu and choose **
 
 ## 2. Configure the tabs
 
-Use the tabs that are implemented in the editor:
+Use your design assets to map brand values to each surface. Apply the values you know and keep
+unrelated settings unchanged. Start with the shared primitives, then review surface overrides:
 
 - **Primitives** controls the shared color, typography, shape, and other base tokens.
 - **Agent Chat** controls chat-specific branding.
 - **Guidance** controls the Guidance overlay tokens.
 - **Resource Center** is a surface view with no separate token set. Its specific branding comes
   from Primitives.
+
+### Choose colors by their role
+
+Use your main accent for **primaryColor**, and choose a readable **primaryColorContrast** for
+text and icons on it. Map backgrounds to **surfaceColor** and **raisedSurfaceColor**, then set
+text, secondary text, borders, links, and semantic success/error colors.
+
+Review Agent Chat message backgrounds and Guidance controls separately. Some Guidance values
+derive from shared primitives when no override is set. A saved override can therefore keep its
+own color after you change a primitive. Check the preview and contrast warnings instead of
+assuming that every surface changed.
+
+### Set up fonts
+
+**Font family** selects a font; it does not download one. Enter its CSS family name with suitable
+fallbacks, for example `"Your Brand Font", system-ui, sans-serif`.
+
+**Font stylesheet URL** is optional because a usable font may already be available on the host
+page or device. If the intended font already renders correctly, you do not need to add another
+stylesheet just to fill this field. A font working on your computer does not by itself show that
+all customer devices can load it.
+
+If the font is not already available, use the exact HTTPS stylesheet URL from your font provider
+or your own licensed hosting. The URL must point to CSS that declares the intended font. Dubot
+does not provide a font-file upload in this editor. Do not construct a provider URL from the font
+name or remove an existing working stylesheet unless you intend to replace it.
+
+<Note>
+  A family such as Sofia Pro can work when it is already loaded. An empty stylesheet field is
+  not evidence that the font failed. Verify the rendered font in the actual host product,
+  including a browser or device that does not rely on your local font installation.
+</Note>
+
+Check the font in Preview and on the host page where customers use Dubot. If it falls back, check
+the stylesheet and font requests, the declared family name, and whether the host permits those
+resources. A developer can inspect the browser's rendered-font information to confirm the face
+in use. Until then, distinguish a saved family name from verified font rendering.
 
 ## 3. Preview and save
 
@@ -36,8 +74,13 @@ Center as needed. Make edits, then select **Save draft**.
 
 Check Guidance against both pale and dark host-product backgrounds. Its surface should remain
 visibly separate from the page, with readable text, a clear boundary, and enough shadow or outline
-to preserve the floating overlay. Keep coral for intentional interaction and status cues rather
-than using it as a large background treatment.
+to preserve the floating overlay. Use your brand accent deliberately for interactive controls,
+and keep status colors recognizable.
+
+After **Save draft**, reload or reopen the brand and check that the values remain. Saving proves
+that the draft persisted; it does not prove that a custom font loaded or that every preview looks
+right. If you use Guidance, a completed field-entry step or a click on **Save draft** still needs
+this saved-state check. A stopped walkthrough may have completed only part of the task.
 
 ## 4. Publish
 
