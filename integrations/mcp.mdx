@@ -73,6 +73,15 @@ It requires:
 - the end user to approve the connecting client;
 - a live eligible product tab when a tool is called.
 
+<Warning>
+  Set the resume URL to a signed-in page that loads the Dubot SDK and does **not** redirect.
+  Dubot passes the approval request in the URL hash (`#consent_challenge=…`); if your app
+  redirects the landing page (for example from `/` to a dashboard route), the hash can be
+  dropped and the Allow or Deny prompt never appears. Test it: connect a client, select
+  **Open product**, and confirm the prompt shows in your product. The same applies to links
+  that hand a conversation over to the Resource Center.
+</Warning>
+
 Confirm-gated calls render an in-product Accept or Decline prompt. Completed calls appear in an
 action toast and remain subject to the published action version, input schema, response mask, and
 customer-side permissions.
