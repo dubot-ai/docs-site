@@ -1,0 +1,97 @@
+---
+title: "Write guides that work"
+sidebarTitle: "Write guides that work"
+description: "Plan, record and tidy a Guidance guide so it finds the right controls and stops in the right place"
+---
+
+A guide works when three things are true: the path exists in the product today, every step
+points at a control Guidance can see, and the saved draft reads like instructions for a person.
+Most failed guides miss one of those. The wording of the request is rarely the problem.
+
+## Before you record
+
+<Steps>
+  <Step title="Walk the path yourself">
+    Click through the job in the product and write down each control's visible label, in order.
+    Guidance follows what is on the page, so a label from an old help article or a menu that
+    no longer exists sends it looking for something that isn't there.
+  </Step>
+  <Step title="Check where Guidance can run">
+    Guidance runs only on pages that load the Dubot browser SDK. If the job ends on a page without
+    it (a shared preview, a third-party checkout, a new tab), end the guide on the last page that
+    has the SDK and describe the rest in the closing line.
+  </Step>
+  <Step title="Spot controls Guidance can't point at">
+    Guidance points at elements it can see and the customer can click. Plan a text instruction
+    instead of a pointer for:
+    - icon-only buttons and tabs with no accessible name (add an `aria-label` in your product to fix this)
+    - controls that only appear on hover
+    - drag-and-drop steps
+    - anything inside an iframe
+    - elements covered by another layer, such as navigation hidden behind a full-screen editor
+  </Step>
+</Steps>
+
+## Write the request
+
+Record the run from the Resource Center with a planned request. Use this shape:
+
+```text
+Show me how to [one job]. Start [on the page where the first control is visible].
+Walk me through: 1) [control, by its visible label] 2) … 3) ….
+If [setting] is already [value], say so and move on.
+Point at each control and let me click it myself.
+Stop before [the one action the customer must own, e.g. Publish]. Saving is fine.
+Done when [an end state on a page that loads the SDK].
+Then tell me in one line [what to do next].
+```
+
+<Tip>
+  Keep each guide to one job. If a journey leaves the current area and comes back (for example,
+  build an audience, then return to apply it), record two guides. Short guides plan faster and
+  finish more often.
+</Tip>
+
+A few phrasings matter more than they look:
+
+- **"Let me click it myself"** keeps the customer in control of every change and gives you a run
+  you can save.
+- **Name the stop precisely.** "Stop before Publish" is clearer than "don't change anything", which
+  can also block the saves the job needs.
+- **Say what to do when a setting is already right**, so the guide doesn't ask for a pointless click.
+- **Give dropdowns one instruction** ("Choose a property, then User ID") rather than two steps.
+- **Don't ask the customer to hover** over something. Guidance can't see hovers; ask them to click
+  or describe what they see.
+- **Finish with "Then tell me in one line…"**: that line becomes the closing card.
+
+## Record the run
+
+Open the start page, ask the Resource Center your request, and do what a customer would: click the
+highlighted control itself. Watch for:
+
+- a highlight in the wrong place or on something you can't click
+- a tooltip that covers the menu you need to use
+- steps Guidance performs that you meant the customer to own
+
+Stop the run if the path is wrong, fix the request, and record again. A clean completed run is
+worth more than a patched one.
+
+## Tidy the saved draft
+
+After [Save as guide](/guides/review-guidance-run), rewrite each field before you publish. The
+draft is generated from the run and needs a person's edit:
+
+| Field | What to check |
+| --- | --- |
+| Title | The job in the customer's words, verb first. The generated title can describe the run's last recovery step. |
+| Start condition | Where the guide begins, in general terms, with a fallback: "User is editing any content in the editor. If not, open Content first." Replace any page IDs. |
+| Trigger phrases | Eight to twelve real ways customers ask, including symptoms ("backdrop not showing"). The default is a single copy of the title. |
+| Guide body | Three to five short steps, one per control, plus the stop rule. Remove recovery steps and restore any step the generator skipped. |
+
+Then test the draft with the questions it should answer and two that it shouldn't. It should start
+for the first set only.
+
+## Expected result
+
+A reviewed guide starts from a clear trigger, points at controls the customer can click, stops
+before the action the customer owns, and closes with one line on what to do next.
