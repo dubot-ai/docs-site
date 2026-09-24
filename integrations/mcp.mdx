@@ -73,14 +73,40 @@ It requires:
 - the end user to approve the connecting client;
 - a live eligible product tab when a tool is called.
 
-<Warning>
-  Set the resume URL to a signed-in page that loads the Dubot SDK and does **not** redirect.
-  Dubot passes the approval request in the URL hash (`#consent_challenge=…`); if your app
-  redirects the landing page (for example from `/` to a dashboard route), the hash can be
-  dropped and the Allow or Deny prompt never appears. Test it: connect a client, select
-  **Open product**, and confirm the prompt shows in your product. The same applies to links
-  that hand a conversation over to the Resource Center.
-</Warning>
+### Set up the action channel
+
+<Steps>
+  <Step title="Open the MCP integration">
+    Go to **Settings → Integrations → MCP** and turn on **MCP action channel**. The connection URL
+    shown (for example `https://mcp.dubot.ai/<workspace>`) is what end users add to their AI client.
+  </Step>
+  <Step title="Name it">
+    Set **Display name** to your product name. It appears in consent copy and in the Resource Center.
+  </Step>
+  <Step title="Choose the resume URL and consent challenge">
+    The resume URL is where **Open product** sends the user so they can approve the connection. Use a
+    signed-in page that every user can reach and that loads the Dubot SDK.
+
+    Dubot adds the approval request to that URL. **Hash** (`#consent_challenge=…`) is the default. If
+    your app redirects the landing page (for example from `/` to a workspace dashboard) and the
+    redirect drops the hash, choose **Query** instead: most routers keep query parameters through a
+    redirect. Test it before sharing the URL (see the last step).
+  </Step>
+  <Step title="Write the agent description">
+    Up to 512 characters, sent to AI clients as instructions when they connect. Say how to find IDs,
+    which URL to link users to, and that changes need explicit intent. If your app redirects deep
+    links, tell agents which URL to use for Resource Center handoffs.
+  </Step>
+  <Step title="Choose the actions">
+    Only published Session API actions appear. Turn on the ones end users should reach from an AI
+    client. Leave off actions that return very large results (for example raw HTML) and anything
+    destructive you don't want exposed. Use a response mask on list actions to keep results small.
+  </Step>
+  <Step title="Publish and test">
+    Save the draft and publish. Then connect a real AI client: select **Open product**, confirm the
+    Allow or Deny prompt appears in your product, allow it, and run one read and one approved change.
+  </Step>
+</Steps>
 
 Confirm-gated calls render an in-product Accept or Decline prompt. Completed calls appear in an
 action toast and remain subject to the published action version, input schema, response mask, and
