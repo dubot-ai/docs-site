@@ -132,6 +132,7 @@
                 "expanded": false,
                 "pages": [
                   "guides/enable-guidance",
+                  "guides/write-guidance-guides",
                   "guides/review-guidance-run"
                 ]
               }
