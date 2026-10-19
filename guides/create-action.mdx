@@ -49,10 +49,9 @@ channel is in scope.
     the application's existing authentication.
   </Tab>
   <Tab title="Client-side callback">
-    Use this for an operation owned by the current page or host application. Define the callback's
-    title, model-facing description, and policy. After creation, install the matching callback in
-    the host application. Its input schema is observed from the SDK registration and is not entered
-    in the dashboard. The host runs the registered function when the callback is invoked.
+    Use this for an operation owned by the current page or host application. The simplest path is to register the callback in the host first, then approve it from **Actions → Pending review** (see [SDK actions](/sdk/actions#review-a-discovered-callback)). Dubot then takes the tool ID and input schema from your code.
+
+    If you create the callback here instead, define its title, model-facing description, and policy, then install the matching callback in the host. In the host, the `tool_id` must be the action's tool key with the `clientside_callback_` prefix. Its input schema is observed from the SDK registration and is not entered in the dashboard. Turn on **Enabled** before you expect the agent to call it. The host runs the registered function when the callback is invoked.
   </Tab>
 </Tabs>
 

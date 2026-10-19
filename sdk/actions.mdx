@@ -32,10 +32,9 @@ await window.Dubot.init({
 ```
 
 The callback must also have a reviewed, published governance envelope in Dubot and be reachable
-through a Skill capability attached to the wizard.
+through a Skill capability attached to the wizard or Copilot.
 
-The action detail shows whether the callback has been observed from the SDK. Registration supplies
-the schema and unlocks publishing; an unregistered callback remains unavailable at runtime.
+The action detail shows whether the callback has been observed from the SDK. Registration supplies the schema and unlocks publishing; an unregistered or disabled callback remains unavailable at runtime. Dubot matches a registration to an action by its full tool ID, including the `clientside_callback_` prefix.
 
 <Frame caption="Publishing stays unavailable until the host registers the callback and its input schema appears in Dubot.">
   <img
@@ -43,6 +42,44 @@ the schema and unlocks publishing; an unregistered callback remains unavailable 
     alt="A client-side callback waiting to be registered from the SDK before it can be published"
   />
 </Frame>
+
+### Name the callback `clientside_callback_<name>`
+
+Every `tool_id` you pass in `actions` must:
+
+- start with `clientside_callback_`, for example `clientside_callback_open_billing`;
+- use only lowercase letters, numbers and underscores, 64 characters at most;
+- not reuse a built-in SDK tool, such as `clientside_callback_navigate`.
+
+The SDK skips any callback that breaks these rules. It doesn't throw. It only logs a console error, for example:
+
+```text
+[dubot] skipping clientside action 'open_billing': tool_id must start with 'clientside_callback_'
+```
+
+If a callback never shows as registered in Dubot, check the browser console for this message first.
+
+### Review a discovered callback
+
+When the host registers a callback that doesn't match an existing action, Dubot lists it for review rather than discarding it. This is the most reliable way to create a callback action, because the tool ID and input schema come straight from your code.
+
+<Steps>
+  <Step title="Register it from the host">
+    Add the callback to `Dubot.init({ actions })` and load a page where the SDK runs.
+  </Step>
+  <Step title="Find it in Pending review">
+    Open **Actions → Pending review**. Each observed `tool_id` appears with its session count and when it was last seen.
+  </Step>
+  <Step title="Review and create">
+    Select **Review**. Check the observed input schema, add a display name and a model-facing agent description, then select **Approve & create**. This creates a draft action that stays disabled.
+  </Step>
+  <Step title="Enable it">
+    On the action, turn on **Enabled**. A disabled callback is never offered to the agent, even when it's published.
+  </Step>
+  <Step title="Attach and publish">
+    Add the action to a Skill capability and publish with **Publish all**, which publishes the skill and its actions together. Then publish the wizard or Copilot that uses the skill.
+  </Step>
+</Steps>
 
 ## Replace callbacks when page state changes
 
@@ -110,4 +147,4 @@ await window.Dubot.init({
 });
 ```
 
-`resourceCenterCallbacks` and `actions` are intentionally separate registries.
+`resourceCenterCallbacks` and `actions` are intentionally separate registries. A card callback's `id` matches the card's callback ID in the Resource Center and doesn't need the `clientside_callback_` prefix.
