@@ -86,10 +86,10 @@ For an inline wizard, supply a selector:
 </script>
 ```
 
-To open a published Resource Center programmatically:
+To open a published Copilot programmatically:
 
 ```js
-window.Dubot.openResourceCenter();
+window.Dubot.openCopilot();
 ```
 
 To start a published reviewed guide:
@@ -113,7 +113,7 @@ Check that:
 - `initProps.userId` matches the signed-in user;
 - `initProps.verified` reflects whether an identity token was supplied, not whether the server
   accepted its signature;
-- the expected placement or Resource Center appears on a matching page;
+- the expected placement or Copilot appears on a matching page;
 - Test shows the latest saved configuration and Production shows only the published version;
 - a deliberately invalid origin or identity fails as expected.
 

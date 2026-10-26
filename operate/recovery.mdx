@@ -36,20 +36,20 @@ that restored draft.
 <Steps>
   <Step title="Identify the smallest affected entity">
     Open the supporting conversation, run, or action call. Confirm the active Wizard, guide,
-    action, capability, Resource Center, and version before changing configuration.
+    action, capability, Copilot, and version before changing configuration.
   </Step>
   <Step title="Remove or isolate the live dependency">
     Unpublish the affected experience when the whole surface is unsafe. For a single action,
     disable or unpublish the action and remove it from the Skill when needed. For a guide, unpublish
-    it and remove or replace Resource Center cards that depend on it.
+    it and remove or replace Copilot cards that depend on it.
   </Step>
   <Step title="Repair in Test">
     Restore a known version or save a corrected draft. Exercise the original failure plus one safe
     success case and one unavailable or declined case.
   </Step>
   <Step title="Republish in dependency order">
-    Publish the repaired action before its Skill, the Skill before its Wizard or Resource Center,
-    and a guide before the Resource Center card that launches it.
+    Publish the repaired action before its Skill, the Skill before its Wizard or Copilot,
+    and a guide before the Copilot card that launches it.
   </Step>
   <Step title="Verify Production and Activity">
     Repeat the original customer job on the approved origin, then inspect the new conversation,
@@ -69,10 +69,10 @@ capability results that depend on those articles.
 | If you changed | Also check |
 | --- | --- |
 | Action | Enabled state, execution policy, response mask, Skill membership, host callback or executor, and Activity |
-| Capability | **Wizards** usage, Resource Center Agent attachment, included actions, delivery mode, and published version |
-| Guide | Workspace Guidance status, Resource Center cards, source run, targets, and trigger phrases |
+| Capability | **Wizards** usage, Copilot Agent attachment, included actions, delivery mode, and published version |
+| Guide | Workspace Guidance status, Copilot cards, source run, targets, and trigger phrases |
 | Wizard | Placement, page rules, direct knowledge, capabilities, Brand, and SDK identity/context |
-| Resource Center | Default and route content, Search, Ask Agent, callbacks, trigger, and page availability |
+| Copilot | Default and route content, Search, Ask Agent, callbacks, trigger, and page availability |
 
 See [Preview and publish safely](/operate/publishing) for lifecycle definitions and
 [Understand analytics and activity](/guides/understand-analytics) for finding the supporting record.

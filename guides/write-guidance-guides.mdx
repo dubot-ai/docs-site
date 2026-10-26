@@ -34,7 +34,7 @@ Most failed guides miss one of those. The wording of the request is rarely the p
 
 ## Write the request
 
-Record the run from the Resource Center with a planned request. Use this shape:
+Record the run from the Copilot with a planned request. Use this shape:
 
 ```text
 Show me how to [one job]. Start [on the page where the first control is visible].
@@ -66,7 +66,7 @@ A few phrasings matter more than they look:
 
 ## Record the run
 
-Open the start page, ask the Resource Center your request, and do what a customer would: click the
+Open the start page, ask the Copilot your request, and do what a customer would: click the
 highlighted control itself. Watch for:
 
 - a highlight in the wrong place or on something you can't click
@@ -95,3 +95,9 @@ for the first set only.
 
 A reviewed guide starts from a clear trigger, points at controls the customer can click, stops
 before the action the customer owns, and closes with one line on what to do next.
+
+## Choose Show or Do
+
+Each saved guide requires an explicit **Show** or **Do** mode. Show leaves clicks, typing, and selection to the user. Do permits automation only in agent-owned stages. Write the guide's user handoffs and stopping conditions explicitly; Do does not authorize filling or submitting a stage that belongs to the user.
+
+A forced workspace mode policy can override the saved choice. The resolved mode remains fixed through steering, replanning, and reconnection. Older runs with an unknown mode require an explicit selection before saving as a new guide.

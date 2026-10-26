@@ -35,13 +35,13 @@ is the only capability type that carries Session API actions and client-side cal
 ## Actions are catalog contracts
 
 Actions define the governed operation contract. They are included in a Skill capability;
-publishing an action alone does not attach it to a wizard or the Resource Center Agent. The
+publishing an action alone does not attach it to a wizard or the Copilot Agent. The
 controlled-rollout end-user MCP channel has separate action enablement.
 
 ```text
 action catalog
   -> Skill capability
-    -> wizard or Resource Center Agent
+    -> wizard or Copilot Agent
       -> available in that customer experience
 ```
 

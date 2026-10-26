@@ -4,8 +4,8 @@ description: "A recommended path from an empty workspace to one verified Dubot e
 ---
 
 The fastest way to learn Dubot is to publish one small, useful experience before adding actions,
-multiple placements, or broad page coverage. For most new workspaces, start with a Resource Center
-that contains one useful resource and can search a small, reviewed knowledge corpus.
+multiple placements, or broad page coverage. For most new workspaces, start with a Copilot
+that answers one useful question from a small, reviewed knowledge scope.
 
 ## Before you begin
 
@@ -24,11 +24,9 @@ steps. A missing product area may also require workspace enablement from Dubot.
 
 Help a customer find the article **Invite a teammate** from your product's team-settings page.
 Use your own public article and actual product path in place of this example. Success is simple:
-the Resource Center opens, its article card opens the right help page, and searching for
-**invite** returns that article.
+the Copilot opens, its article card opens the right help page, and asking how to invite a teammate returns a useful answer grounded in that article.
 
-This first experience uses an article and Search. Leave Ask off until you are ready to configure
-and test its Agent.
+This first experience uses a task prompt, one article, and the Copilot Agent. It does not need an action that changes product data.
 
 ## Build the first path
 
@@ -43,27 +41,23 @@ and test its Agent.
     and select **This page only**. Open **View articles** after the crawl and confirm the title,
     URL, and instructions. Knowledge is delivered automatically; there is no article Publish step.
   </Step>
-  <Step title="Configure one Resource Center path">
-    Open [Resource Center](/guides/configure-resource-center). In **Content**, create an **Exact**
+  <Step title="Configure one Copilot path">
+    Open [Copilot](/guides/configure-resource-center). In **Content**, create an **Exact**
     route override for your team-settings path, such as `/settings/team`, and add the indexed
-    **Invite a teammate** article. Enable **Search the knowledge base** and leave **Ask in your
-    own words** off. In **Settings**, choose **Floating** so the customer can open the panel.
+    **Invite a teammate** article. Add a **Prompt** chip for “Help me invite a teammate.” In **Agent**, set the knowledge scope to your reviewed article and configure a concise answering prompt. In **Settings**, choose **Floating**.
   </Step>
   <Step title="Save and exercise Test">
-    Save the Resource Center draft. From its **Agent** tab, start a browser-extension Test session
-    on your team-settings page. Open the floating panel, open the article card, then search for
-    **invite**. Confirm the search result has the expected title and destination. If your workspace
-    already has other sources, Search can return those articles too; route overrides organize
-    cards but do not limit Search to that page's cards.
+    Save the Copilot draft. From its **Agent** tab, start a browser-extension Test session
+    on your team-settings page. Open the panel, open the article card, then select the invitation prompt. Confirm the answer matches the article and uses the right destination. Route overrides organize content; configure the agent's knowledge scope separately.
   </Step>
-  <Step title="Publish the Resource Center">
-    After the Test checks pass, select **Publish** on the Resource Center page. This example
+  <Step title="Publish the Copilot">
+    After the Test checks pass, select **Publish** on the Copilot page. This example
     needs no actions, Skill capabilities, or guides. If you changed Brand, publish those changes
     as well. Saving a draft alone does not update the customer-facing panel.
   </Step>
   <Step title="Verify Production">
     End the Test session and load the same page with the installed SDK on an approved Production
-    origin. Repeat the card and Search checks, and confirm the Resource Center analytics record.
+    origin. Repeat the card and conversation checks, and confirm the Copilot analytics record.
     The extension alone does not install Dubot for your customers.
   </Step>
 </Steps>
@@ -80,7 +74,7 @@ and test its Agent.
 
 | Customer need | Add next |
 | --- | --- |
-| Ask a question in their own words | [Configure and test the Resource Center Agent](/guides/configure-resource-center#enable-search-and-ask) |
+| Ask a question in their own words | [Configure and test the Copilot Agent](/guides/configure-resource-center#configure-the-copilot-agent) |
 | Complete a focused conversation | [Build a Wizard](/guides/build-and-publish-wizard) |
 | Follow steps on the live page | [Review a Guidance run](/guides/review-guidance-run) |
 | Run an approved operation | [Create a governed action](/guides/create-action) |

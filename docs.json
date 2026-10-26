@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "maple",
   "name": "Dubot Docs",
-  "description": "Product and integration documentation for Dubot",
+  "description": "Build an in-product copilot that answers questions, shows the next step, and helps users complete tasks.",
   "colors": {
     "primary": "#0D1341",
     "light": "#F4BEAE",
@@ -111,7 +111,7 @@
                 ]
               },
               {
-                "group": "Resource Center",
+                "group": "Copilot",
                 "root": "product/resource-center",
                 "expanded": false,
                 "pages": [

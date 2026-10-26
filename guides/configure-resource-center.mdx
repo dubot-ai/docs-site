@@ -1,127 +1,75 @@
 ---
-title: "Configure and publish the Resource Center"
+title: "Configure and publish Copilot"
 sidebarTitle: "Configure and publish"
-description: "Create page-aware help with content, Search, Ask, callbacks, and a tested publish"
+description: "Configure a task-focused Copilot with prompts, page context, knowledge, and reviewed actions"
 ---
 
-## What you will do
+Configure one Copilot for your workspace, test it on a representative product page, and publish the complete experience.
 
-You will configure the single versioned Resource Center for your workspace, preview it against a
-route, and publish the complete configuration.
+## Choose the first user task
 
-<Frame caption="The customer-facing panel keeps curated content, Search, and Ask together.">
-  <img
-    src="/assets/product/resource-center.png"
-    alt="A page-aware Resource Center with curated content, Search, and Ask"
-  />
-</Frame>
+Start with something specific: understand a bill, invite a teammate, or complete a setup step. Choose an outcome you can observe and a point where the user should take over. Use three to five relevant entries per page rather than reproducing your Help Center navigation.
 
 ## Configure Content
 
-Open **Resource Center** and use the **Content** tab. Add default content under **All pages**,
-then create route overrides for exact paths or path prefixes. On a matched route, pinned content
-appears first and inherited defaults fill **More Resources**. Overrides can hide inherited content
-for that route without changing the default list.
+Open **Copilot** and select **Content**. Put shared resources in **All pages**, then add overrides for exact paths or path prefixes. Pin the most useful page-specific task first and hide inherited resources that do not help on that route.
 
 <Note>
-  To match a page and its descendants, enter the route root, such as `/dubot/actions`, and select
-  **Prefix**. Do not append `/*`; the route field treats those characters literally. Test the root
-  page itself in a browser-extension Test session because selecting an override in the editor can
-  display its cards before the live URL match has been verified.
+  For a page and its descendants, enter the route root and choose **Prefix**. Do not append `/*`; those characters are literal. Test both the root and a descendant in the host product. Selecting an override in the editor does not prove the live URL matches.
 </Note>
 
-<Frame caption="All pages defines the default content; route overrides and Search and Ask availability are configured in the same version.">
-  <img
-    src="/assets/product/resource-center-configuration.png"
-    alt="The Resource Center Content tab with All pages defaults, a route override, and Search and Ask controls"
-  />
-</Frame>
+Add a **Prompt** for a common task. Give its chip a short outcome label such as “Set up billing” and write the full request the agent should receive. Selecting the chip starts a conversation. You can also add reviewed guides, Help Center articles, video embeds, hyperlinks, host callbacks, and an MCP connector where available.
 
-The current addable types are reviewed guides, Help Center articles with a resolvable external
-URL, **Video embed**, **Callback**, **Hyperlink**, and **MCP connector**. Articles open
-externally. Static components are explicitly placed and are never Search results or Ask grounding.
-There is no directly pinnable Wizard content type.
+Do not pin the same inherited item again. Use an override to change relevance, not to create duplicate cards. Verify every callback and guide in the host product before making it a recommended path.
 
-### Use defaults sparingly
+## Configure the Copilot Agent
 
-Start with one or two resources that are useful almost everywhere, such as the documentation home
-and a first-value path. Put task-specific help in page overrides instead of growing one long global
-list. On each route, lead with the smallest set of resources that helps the customer understand the
-page or complete its likely next task.
+In **Agent**, configure the reserved agent's prompt, knowledge scope, and Skills. Skills supply the agent's available actions. This agent saves and publishes with Copilot and has no independent placement or version history.
 
-Do not pin a default resource again in a page override. The default already appears under **More
-Resources**. If the default is not useful on that route, hide the inherited item there. Hiding it
-changes only that page override.
+Ask is always available in the authoring experience. Enable file uploads only when useful for the task and choose the supported file types. **Let users point at things on the page** controls page-element attachments.
 
-<Note>
-  **Preview** resolves the latest saved Resource Center draft. The ordinary customer-facing panel
-  continues to resolve the published version. If page-aware content appears in Preview but not on
-  the product page, check whether the Resource Center is **Pending** before changing its route rule.
-</Note>
+The current route and available Copilot items are supplied at runtime. The agent should ask only for information that the page, knowledge, and its tools cannot provide.
 
-## Enable Search and Ask
+### A task-focused starting prompt
 
-Search and Ask are independent availability controls below the contextual content.
+```text
+Help the user complete the task they came here to do. Use the current page and available product context before asking for more information.
 
-- **Search the knowledge base** searches the delivered workspace knowledge corpus and returns ranked article
-  cards.
-- **Ask in your own words** opens in-panel chat with the reserved Resource Center Agent.
+Answer a specific question directly. For a task, offer the shortest supported path: explain it, show the next step, or perform an available action. Use only configured Skills, actions, guides, and callbacks. A resource card is not permission to call a tool.
 
-Configure that reserved agent in the **Agent** tab. Its prompt, explicit knowledge scope,
-capabilities, and action references are embedded in the Resource Center version. Actions reach Ask
-through Skill capabilities. The agent is not a normal placeable wizard and has no independent
-publish lifecycle. Ask receives the current route and resolved Resource Center context at runtime.
+Preserve user-owned steps. Ask for required confirmation before a consequential action, and verify the resulting product state before saying the task is complete.
 
-In the agent prompt, tell Ask to answer a specific question before recommending a next step. For an
-exploratory request, recommend no more than three relevant paths and prioritize the current route's
-resources before global content. This keeps Ask useful without turning every answer into a copy of
-the workspace navigation.
+If the next step is unavailable, say what you found and offer a working resource or configured support path. Keep the first reply concise.
+```
+
+Adapt this prompt to your product and available tools. It describes the intended behavior; testing must establish which tasks your configuration can complete.
 
 ## Configure Settings
 
-In **Settings**, set display copy, the Search/Ask placeholder, and one trigger: Floating, Injected,
-Auto-open, or Programmatic. Configure Resource Center callback keys, labels, and descriptions.
-Callback cards invoke matching host handlers registered through
-`Dubot.init({ resourceCenterCallbacks: [...] })`; they are separate from agent-callable actions
-and are not advertised as tools.
+Set the panel title, welcome copy, and composer placeholder. A useful starting point is “What would you like to get done?” with “Ask a question or describe a task.” Choose Floating, Injected, Auto-open, or Programmatic as the trigger.
 
-## Preview, test, and publish
+Host callback cards invoke matching handlers registered through `Dubot.init({ resourceCenterCallbacks: [...] })`. They are separate from agent-callable actions. Use [SDK surfaces](/sdk/surfaces#copilot) for `openCopilot()` and `closeCopilot()`.
+
+## Test and publish
 
 <Steps>
-  <Step title="Preview the content layout">
-    Use **Preview** to inspect the selected override's cards, ordering, and inherited content.
-    Selecting an override does not prove that the product URL matches it. Verify route matching,
-    Search, Ask, and callback execution in the browser Test session below.
+  <Step title="Preview the home and page override">
+    Save the draft, then inspect the composer, prompt chips, resource ordering, and inherited content in Preview.
   </Step>
-  <Step title="Test dependencies">
-    Confirm referenced articles are indexed, readable, and returned by a real Search. Check that
-    guides, callbacks, connectors, and the reserved agent's capabilities and actions are available
-    in Test; publish the versioned dependencies needed for Production before the Resource Center. A
-    guide that contains an Indicate step is Test-only today and cannot be used as a working
-    Production destination.
+  <Step title="Exercise a real task in Test">
+    From **Agent**, start a browser-extension Test session on a representative product page. Test a typed request, a prompt chip, a knowledge-backed answer, and every recommended guide or callback. Check allowed attachments and history when relevant.
   </Step>
-  <Step title="Test on a product page">
-    From the **Agent** tab, start a Test session for a representative route. Open the Resource
-    Center and exercise its content, Search, Ask, and any callback cards with the saved draft. For
-    every Prefix override, test both its root route and one descendant route when one exists.
+  <Step title="Check handoffs and the result">
+    If the task launches Guidance, verify Show or Do behavior, user-owned steps, Stop and Resume where applicable, and the observed final state. A successful launch is not a completed task.
   </Step>
-  <Step title="Publish">
-    Use the Resource Center page's **Publish** action. It publishes the versioned Resource Center
-    and its embedded Ask configuration together. Saving a draft does not make it available in
-    Production.
+  <Step title="Publish the dependencies and Copilot">
+    Publish the required actions, Skills, guides, and Guidance configuration for Production. Then use the Copilot page's **Publish** action. Its reserved agent is included in the same version.
+  </Step>
+  <Step title="Verify the published experience">
+    Repeat the safe task on an approved Production origin. Confirm the correct route content, working task paths, and expected activity or conversation records.
   </Step>
 </Steps>
 
-Use **Unpublish** to remove the Production pointer, or archive the Resource Center to remove the
-panel from Test. Review Analytics for opens, viewers, card interactions, searches, and Ask/chat
-submissions after launch.
+**Preview** and extension Test use the saved draft; ordinary users receive the published version. If they differ, check publication before changing a route rule. **Unpublish** removes Copilot from Production; archiving also removes it from Test.
 
-## Expected result
-
-In Test, the panel resolves the intended default or route-specific content and each enabled path
-works. After publishing, the same behavior appears on an approved Production origin and creates
-the expected Resource Center analytics or conversation record.
-
-See [Preview Dubot with the browser extension](/guides/preview-with-browser-extension) for the Test
-session workflow, [Understand analytics and activity](/guides/understand-analytics) for the
-operating loop, and [Recover or roll back configuration](/operate/recovery) for safe removal.
+See [Preview with the browser extension](/guides/preview-with-browser-extension), [Understand analytics and activity](/guides/understand-analytics), and [Recover or roll back configuration](/operate/recovery).

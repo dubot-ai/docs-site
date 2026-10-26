@@ -5,7 +5,7 @@ description: "Compose reusable context and Skill actions for an active agent"
 ---
 
 <Info>
-  A capability is a reusable bundle of context. Attach it to a wizard or the Resource Center
+  A capability is a reusable bundle of context. Attach it to a wizard or the Copilot
   Agent to compose an experience from shared behavior.
 </Info>
 
@@ -40,7 +40,7 @@ Add the agent prompt, model-facing description, and priority. Choose delivery fo
 Product domain capabilities may define a knowledge scope to limit the product knowledge available
 to that capability. Only Skill capabilities can include Session API actions and client-side callbacks.
 An action's catalog presence or published state alone does not make it available to a wizard or the
-Resource Center Agent.
+Copilot Agent.
 
 Before publishing a Skill, review every included action in the dependency list. Hold back any
 draft or unsafe dependency rather than publishing it accidentally with the capability.
@@ -57,8 +57,8 @@ draft or unsafe dependency rather than publishing it accidentally with the capab
 <Steps>
   <Step title="Save the capability">Review its type, delivery, prompt, description, priority, and included content.</Step>
   <Step title="Publish the capability">Publish the version that should be eligible for runtime use.</Step>
-  <Step title="Attach it to an agent">Select the published capability on a wizard or the Resource Center Agent.</Step>
-  <Step title="Publish the experience">Publish the Wizard, or publish the Resource Center that contains its reserved Agent configuration.</Step>
+  <Step title="Attach it to an agent">Select the published capability on a wizard or the Copilot Agent.</Step>
+  <Step title="Publish the experience">Publish the Wizard, or publish the Copilot that contains its reserved Agent configuration.</Step>
 </Steps>
 
 For an optional capability, the attachment can decide whether to embed it or make it load-on-demand.
@@ -73,11 +73,11 @@ delivery mode.
 
 ## Expected result
 
-The active Wizard or Resource Center Agent receives the intended reusable instructions, knowledge,
+The active Wizard or Copilot Agent receives the intended reusable instructions, knowledge,
 and published actions without gaining unrelated access. Activity from an included action can be
 traced back to the capability that carried it.
 
 Next, attach the capability while [building a Wizard](/guides/build-and-publish-wizard) or
-[configuring the Resource Center](/guides/configure-resource-center). See
+[configuring the Copilot](/guides/configure-resource-center). See
 [Capabilities and actions](/product/capabilities-actions) for the composition model and
 [Recover or roll back configuration](/operate/recovery) for dependency repair.
