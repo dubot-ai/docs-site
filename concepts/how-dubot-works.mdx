@@ -11,14 +11,14 @@ team has published for that workspace.
 <Steps>
   <Step title="Load the published experience">
     The browser SDK uses the public client token in its script URL to load placements, brand
-    settings, and the Resource Center for the current page.
+    settings, and the Copilot for the current page.
   </Step>
   <Step title="Identify the user and page context">
     The host calls `Dubot.init()` with a user id, a server-minted identity token when identity
     verification is enabled, and the minimum flat context the experience needs.
   </Step>
   <Step title="Resolve the allowed knowledge and tools">
-    The active wizard, or the page-aware Resource Center Agent, supplies instructions and
+    The active wizard, or the page-aware Copilot Agent, supplies instructions and
     capabilities. Dubot narrows the workspace knowledge corpus to the configured scope and
     actions to those exposed through an attached Skill capability and currently supported by the
     host. Production resolves published versions only.
@@ -47,9 +47,9 @@ team has published for that workspace.
 </Frame>
 
 The Dubot application is the configuration plane. Teams author wizards, capabilities, actions,
-the knowledge corpus, Guidance, Resource Center content, and brand there. The browser SDK is the
-runtime plane inside the customer product. The Resource Center Agent saves and publishes with the
-Resource Center; it is not a placed Wizard.
+the knowledge corpus, Guidance, Copilot content, and brand there. The browser SDK is the
+runtime plane inside the customer product. The Copilot Agent saves and publishes with the
+Copilot; it is not a placed Wizard.
 
 | Plane | Reads | Writes |
 | --- | --- | --- |

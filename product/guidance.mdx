@@ -1,116 +1,53 @@
 ---
 title: "Guidance"
 sidebarTitle: "Overview"
-description: "Help a customer complete work in the product interface"
+description: "Show users the next step or help complete a task with explicit user handoffs"
 ---
 
-Guidance operates against the live page with visible controls for the customer. It is useful when
-the task is easier to complete in context than through conversation alone.
+Guidance helps a user complete work on the live page. It can show the next control, perform supported interactions, and pause when the next step belongs to the user. Launch it from a configured Copilot conversation, a reviewed guide, or the SDK.
 
-<Note>
-  The marketing site uses [**Browserbot**](https://www.dubot.ai/browserbot) for the broader
-  live-product experience. In the Dubot app, SDK, and technical docs, its guided on-page runtime is
-  configured under **Guidance**. Governed API operations are documented separately as
-  [Actions](/product/capabilities-actions).
-</Note>
+## Show and Do
 
-## What the customer sees
+| Mode | What happens |
+| --- | --- |
+| **Show** | Dubot explains and highlights controls. The user performs host clicks, typing, and selection. |
+| **Do** | Dubot can automate agent-owned stages. User-owned stages still require the user's interaction and evidence of completion. |
 
-An active run keeps its job and **Stop** control visible while it works on the page. The action
-card stays anchored to the target so the customer can see what is happening.
+Each saved guide has an explicit Show or Do mode. The workspace policy can be **Let the agent decide**, **Always show**, or **Always do**. With the default policy, a saved guide keeps its mode and a goal-based run chooses a mode with its plan. A forced workspace policy overrides the guide or planner choice.
 
-<Frame caption="The active job and Stop control remain visible while Guidance applies the change.">
-  <img
-    src="/assets/product/guidance-run-progress.png"
-    alt="Guidance applying a change on an invoice while the job and Stop control remain visible"
-  />
-</Frame>
+The resolved mode stays fixed through reconnection, steering, and replanning. Changing mode starts a new run.
 
-When a step belongs to the customer, Guidance highlights the target and waits instead of taking
-over. The customer can complete the step or choose the offered handoff.
+## User handoffs stay explicit
 
-<Frame caption="Guidance can highlight a target and wait when the next action belongs to the customer.">
-  <img
-    src="/assets/product/guidance-customer-step.png"
-    alt="Guidance highlighting the Send test control and waiting for the customer to act"
-  />
-</Frame>
+For example, a Do run can navigate to Team and open an invitation dialog. If the email field and Send button belong to the user, Dubot highlights them and waits. Do does not authorize the assistant to fill or submit those stages.
 
-<Note>
-  The HoneyBook workspace shown in these examples is a demo account. The exact host-product
-  styling can vary, but the visible run, target, and stop controls are the important behavior.
-</Note>
+A required button handoff waits for the actual host-button click. **Skip**, a passive **Next**, an unrelated click, or a chat answer does not satisfy required user work. An explanatory tooltip can use Next without activating the underlying control. Input confirmation accepts the user's value without synthesizing a host click.
+
+The runtime checks allowed actions and user handoffs. A click alone does not prove success: the resulting product state must still be observed.
 
 ## Two ways to start
 
-| Mode | Input | Use when |
+| Start | Input | Use when |
 | --- | --- | --- |
-| Reviewed guide | A published guide id | The journey and its expected steps have been authored and reviewed |
-| Goal-based Guidance | A free-text goal | A controlled evaluation needs the runtime to reason over the current page |
+| Reviewed guide | A published guide ID | The goal, mode, start condition, and instructions have been reviewed |
+| Goal-based Guidance | A free-text goal | The runtime should plan against the current page within configured constraints |
 
-Reviewed guides are the more predictable customer-facing path. Goal-based Guidance should be
-evaluated with clear constraints and a safe stopping condition before broader use.
+Saved guides contain a title, goal, start condition, trigger phrases, explicit interaction mode, and a plain-language guide body. Authors describe the intended task and user handoffs; the runtime resolves the current interface. Guides do not require saved CSS selectors or the older typed step composition.
 
-## Reviewed guide steps
+## The current Guide Bar
 
-| Step | What it does |
-| --- | --- |
-| Message | Explains context without acting |
-| Perform | Executes a reviewed interaction such as a click |
-| Indicate | Highlights a target and waits for the customer, a Next action, or a timeout |
-| Ask | Pauses for a choice or free-text response |
+The on-page Guide Bar keeps the active task and **Stop** control visible. A paused run can expose **Resume**; question and choice states wait for the user's answer. Typing in the bar composer can pause a running guide so the user can steer it. Failed runs expose a recovery path when available.
 
-<Warning>
-  **Indicate is currently Test-only.** You can author, save, and test an Indicate step, but the
-  current product will not publish a guide that contains one. This is a platform compatibility
-  gate, not something an individual workspace can unlock by upgrading its SDK. Keep the guide as
-  a draft until Production supports the richer guide format. Do not change Indicate to Perform
-  merely to bypass the gate because Perform would take the customer-owned action.
-</Warning>
+When a Copilot conversation launches Guidance, the panel yields space without destroying the conversation. After the run, the conversation can show the resulting completed, stopped, or failed state. A run can resume after supported navigation once the SDK initializes again.
 
-<Frame caption="An Indicate step keeps the target, instruction, Skip option, and Stop control visible.">
-  <img
-    src="/assets/product/guidance-reviewed-guide.png"
-    alt="A reviewed guide waiting for the customer to complete a highlighted step"
-  />
-</Frame>
+The [SDK Storybook](https://dubot-sdk-storybook.pages.dev/?path=/story/guidance-exploratory--play-invite) demonstrates current component states with scripted fixtures. These examples do not perform work in a real customer account.
 
-The browser extension can help author guides from a real workflow. Captured interactions remain
-review material until the guide is saved and, when its step types are Production-compatible,
-published.
+## Save, publish, and verify
 
-## Runtime controls
+[Enable Guidance](/guides/enable-guidance) for the workspace, test a safe journey, and publish the configuration. Reviewed guides have their own draft and publish lifecycle. When saving a run as a guide, review its mode and user handoffs before publishing it.
 
-- A persistent control lets the customer stop a run.
-- Indicate steps include a visible target, instruction, and Skip option.
-- Guidance can pause for customer input rather than guessing.
-- A run that crosses a hard navigation can resume after the SDK initializes on the next page.
-- Reduced-motion and screen-reader behavior are part of the SDK surface.
-- Completion, stop, error, and abandoned outcomes are recorded for activity review.
+The current guide format replaces the older typed-step compatibility restriction. Do not change a user-owned step into an automated action to make a guide run. Test the intended behavior with compatible services and SDK in the target environment.
 
-A completed action should show both the changed page state and a bounded result in the panel. In
-this demo, the updated date is visible in the invoice and Dubot reports that it verified the value
-on the page.
+A Copilot guide card is ready only when Copilot, the guide, and Guidance are published for the same environment and the path works on the host page. Record launch, guide outcome, and observed task completion separately.
 
-<Frame caption="The completed state shows the updated page value and Dubot's verified result.">
-  <img
-    src="/assets/product/guidance-verified-outcome.png"
-    alt="A completed Guidance action with the updated invoice state and a verified result"
-  />
-</Frame>
-
-## Configure and publish
-
-The Guidance area contains the reserved Guidance configuration, reviewed guides, and Activity.
-Production can run only published Guidance configuration and published guides. A Resource Center
-guide card should not be treated as ready until its guide can be published and its Guidance
-dependency works in the target environment. A draft guide containing Indicate steps can be tested,
-but it cannot currently become a Production Resource Center destination.
-
-Follow [Enable Guidance](/guides/enable-guidance) to configure the workspace, test a representative
-walkthrough, and turn Guidance on. Then follow
-[Turn a Guidance run into a guide](/guides/review-guidance-run) to review a real journey and
-publish it as reusable help.
-
-Developers can start Guidance through `Dubot.triggerGuidance()`. See
-[SDK surfaces](/sdk/surfaces) for the supported call shapes.
+Developers can start a run through `Dubot.triggerGuidance()`. See [SDK surfaces](/sdk/surfaces#guidance) and [Turn a run into a guide](/guides/review-guidance-run).

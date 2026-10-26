@@ -18,7 +18,7 @@ The CDN script installs one browser global: `window.Dubot`.
 
 ### `init(options?)`
 
-Initializes identity, configuration, placements, Resource Center, Guidance resume, analytics, and
+Initializes identity, configuration, placements, Copilot, Guidance resume, analytics, and
 the optional action channel.
 
 Returns `Promise<void>`. Await it before programmatic launches. Missing client tokens,
@@ -46,7 +46,7 @@ options refreshes identity in place. Other changed options can restart initializ
 complete intended configuration when reinitializing; `init()` is not a partial-update method.
 See [token renewal and account changes](/sdk/identity-context#renew-an-identity-token).
 
-## Wizards and Resource Center
+## Wizards and Copilot
 
 The two presentation fields use different public values:
 
@@ -58,8 +58,10 @@ The two presentation fields use different public values:
 | Method | Returns | Behavior |
 | --- | --- | --- |
 | `renderAgent({ slug, presentationMode?, selector? })` | `void` | Starts rendering a Wizard; `slug` is required and inline mode needs a matching `selector`. Fetching and mounting continue asynchronously; errors appear in the console or surface |
-| `openResourceCenter()` | `void` | Opens the mounted Resource Center when its trigger state allows it; has no effect when no Resource Center is mounted |
-| `closeResourceCenter()` | `void` | Closes the mounted Resource Center; has no effect when none is mounted |
+| `openCopilot(options?: { message?: string })` | `void` | Opens the mounted Copilot; an optional message starts a new conversation. Has no effect when no Copilot is mounted |
+| `openResourceCenter(options?: { message?: string })` | `void` | Temporary compatibility alias for `openCopilot()` |
+| `closeCopilot()` | `void` | Closes the mounted Copilot; has no effect when none is mounted |
+| `closeResourceCenter()` | `void` | Temporary compatibility alias for `closeCopilot()` |
 
 These methods use the current environment's configuration: the saved draft in a browser-extension
 Test session, or the published version in Production. They do not publish configuration.
@@ -72,7 +74,7 @@ Test session, or the published version in Production. They do not publish config
 | `setContext(context)` | `void` | Replaces the complete flat scalar context map; pass `{}` to clear it. Nested values and overflow are dropped with a console warning |
 
 Each action has `tool_id: string`, `input_schema: object`, and
-`execute(input): unknown | Promise<unknown>`. Each static Resource Center callback has `id: string`
+`execute(input): unknown | Promise<unknown>`. Each static Copilot callback has `id: string`
 and `execute(): unknown | Promise<unknown>`. See [SDK actions](/sdk/actions) for complete examples
 and the separate governance requirements.
 

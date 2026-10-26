@@ -1,6 +1,6 @@
 ---
 title: "SDK surfaces"
-description: "Render wizards, open the Resource Center, and start Guidance"
+description: "Render wizards, open the Copilot, and start Guidance"
 ---
 
 ## Wizard placement modes
@@ -26,15 +26,19 @@ Configured placements and programmatic rendering use the same current chat surfa
 configured page targeting when a wizard should appear automatically; use `renderAgent()` when
 the host owns the launch event.
 
-## Resource Center
+## Copilot
 
 ```js
-window.Dubot.openResourceCenter();
-window.Dubot.closeResourceCenter();
+window.Dubot.openCopilot();
+// Optionally start a new conversation with a task.
+window.Dubot.openCopilot({ message: "Help me invite a teammate." });
+window.Dubot.closeCopilot();
 ```
 
-Programmatic open works when the published Resource Center trigger mode allows it. A mounted
-wizard sidebar takes precedence over the base Resource Center panel.
+Programmatic open works when the published Copilot trigger mode allows it. A mounted
+wizard sidebar takes precedence over the base Copilot panel.
+
+`openResourceCenter()` and `closeResourceCenter()` remain temporary compatibility aliases. New integrations should use `openCopilot()` and `closeCopilot()`.
 
 ## Guidance
 
@@ -83,7 +87,7 @@ identity.
 window.Dubot.destroy();
 ```
 
-`destroy()` removes placements, Resource Center, Guidance, action-channel presence, listeners,
+`destroy()` removes placements, Copilot, Guidance, action-channel presence, listeners,
 and queued runtime state. It is idempotent and terminal for that SDK instance. Reload the page
 to create a new instance.
 

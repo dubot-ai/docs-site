@@ -1,114 +1,77 @@
 ---
-title: "Resource Center"
+title: "Copilot"
 sidebarTitle: "Overview"
-description: "Put page-aware help, search, Ask, and approved launches in one panel"
+description: "Give users a page-aware copilot that answers questions and helps them complete tasks"
 ---
 
-<Info>
-  The Resource Center is implemented in the current product build. Workspace configuration and
-  deployment determine whether it is available in a target environment.
-</Info>
-
-## A first-class, workspace-owned help surface
-
-Each workspace has one versioned Resource Center. It combines a default resource list with
-optional route overrides for the page the customer is viewing.
-
-The Resource Center is authored and published as its own product surface. Its dashboard has four
-tabs: **Content**, **Agent**, **Settings**, and **Analytics**. Version history belongs to the
-Resource Center configuration, and the embedded Ask agent publishes as part of the same version.
-
-<Frame caption="A page-aware Resource Center combines curated content, Search, and Ask in the product interface.">
-  <img
-    src="/assets/product/resource-center.png"
-    alt="A current page-aware Resource Center rendered by the Dubot SDK"
-  />
-</Frame>
+Copilot gives users a place to ask a question or work through a task without leaving your product. It brings together conversation, suggested prompts, relevant resources, and launches into reviewed guides or host actions.
 
 <Note>
-  This demonstrates the implemented panel, card, trigger, and composer states.
+  Copilot was previously called Resource Center. Existing page URLs, `resourceCenter` configuration keys, `resourceCenterCallbacks`, and the reserved `resource-center` agent slug retain their technical names. The dashboard calls the experience **Copilot**.
 </Note>
 
-At runtime, the pieces remain distinct:
+## Start with what the user wants to get done
 
-```text
-curated content + page overrides -> Browse
-delivered knowledge corpus       -> Search
-Resource Center Agent
-  + capabilities
-  + knowledge scope              -> Ask
-guides + articles + callbacks    -> help customers can open or start
-```
+The home panel leads with a task composer. A user can describe their goal, choose a suggested prompt, or open a relevant resource. The conversation uses the current route and resolved Copilot items as context.
 
-## Content
+<Frame caption="The current SDK Copilot home with a task composer, suggested prompt, contextual resources, and chat history. Sample content from Storybook.">
+  <img src="/assets/product/copilot-contextual-home-20261026.png" alt="Current Copilot panel with a question composer, Set up billing prompt, and contextual resources" />
+</Frame>
 
-The default list and route overrides can contain:
+The [interactive SDK Storybook](https://dubot-sdk-storybook.pages.dev/?path=/story/chat-resource-center--open-contextual-home) uses the real panel and chat components with scripted example replies. It demonstrates the interface, not a live connection to a customer's account.
 
-- published reviewed guides;
-- Help Center articles with an external URL;
-- video embeds;
-- hyperlinks;
-- host-provided callback cards;
-- an MCP connector card for the controlled-rollout action channel.
+## One experience per workspace
 
-Route overrides can pin, hide, and order content for exact paths or path prefixes without
-duplicating the default list.
+Each workspace has one versioned Copilot with **Content**, **Agent**, **Settings**, and **Analytics** tabs. Its reserved agent saves and publishes with the Copilot. It is not a separately placed wizard and has no independent publish lifecycle.
 
-The Content tab shows **All pages** and authored page overrides. On a matched route, pinned items
-appear first and inherited defaults fill **More Resources**. Static components are explicitly
-placed content and are not searchable or used as Ask grounding.
+Use **All pages** for shared resources. Add exact-path or prefix overrides to tailor the experience to the current page. Overrides can pin, hide, and order resources without duplicating the default list.
 
-## Search and Ask
+## Conversation and context
 
-Search and Ask are independent workspace-wide features configured on the Resource Center. When
-enabled, they remain available below the contextual content list on every eligible page.
+- **Ask in your own words** is the primary path. Configure its prompt, knowledge, and Skills in **Agent**.
+- **Prompt** items appear as suggestion chips. Selecting a chip starts a conversation with its authored prompt.
+- Users can point at things on the page when page-element attachments are enabled.
+- File uploads are optional. Configure allowed file types and upload availability in **Agent**.
+- Chat history lets users return to recent conversations.
+- Actions reach the Copilot Agent through attached Skills. Adding a content card does not grant the agent a new tool.
 
-- **Search** returns ranked article cards from the delivered workspace knowledge corpus.
-- **Ask** opens an in-panel conversation with the reserved Resource Center Agent.
-- Ask receives the current route and resolved Resource Center content automatically at runtime.
-- The reserved agent is configured only in the **Agent** tab. Its prompt, explicit knowledge
-  scope, capabilities, and action references are embedded in the versioned Resource Center; it
-  is not a normal placeable wizard and has no separate publish lifecycle.
-- Static cards do not become search results or Ask grounding.
-- Articles open at their external source rather than in an in-panel reader.
+The current home uses a conversation composer rather than separate Search and Ask launch cards. Knowledge retrieval supports answers according to the agent's configured scope. Curated static cards are not automatically part of that knowledge corpus.
 
-## Settings and triggers
+## Resources and task paths
 
-The **Settings** tab controls display copy, trigger behavior, availability, and which Resource
-Center callbacks may be exposed. Display settings include the panel title and Search/Ask
-placeholder.
+| Item | What the user gets |
+| --- | --- |
+| Prompt | A suggested request that starts a conversation |
+| Guide | A published, reviewed walkthrough |
+| Help Center article | An external article opened at its source |
+| Video embed | A video shown within the panel |
+| Hyperlink | A destination opened in the configured tab |
+| Callback | A registered host action invoked when the user selects the card |
+| MCP connector | Connection details when the workspace's action channel is enabled |
 
-Choose one trigger mode:
+Guide availability depends on published Guidance configuration and a compatible SDK. Host callbacks must be registered by the application. An MCP card does not by itself enable a connection or grant consent.
+
+## Show the way or help do the work
+
+A Copilot conversation can launch [Guidance](/product/guidance) when that capability is configured. **Show** leaves host interactions to the user. **Do** permits automation in agent-owned stages while preserving explicit user handoffs. When Guidance runs, the panel yields space to the on-page experience; the conversation remains available afterward.
+
+## Display and launch
+
+Use **Settings** for the panel title, welcome text, composer placeholder, page availability, and trigger.
 
 | Trigger | Behavior |
 | --- | --- |
 | Floating | Dubot renders the launcher |
 | Injected | Dubot mounts the trigger into a matching host selector |
 | Auto-open | The panel opens when its targeting conditions match |
-| Programmatic | Your application calls `Dubot.openResourceCenter()` |
+| Programmatic | Your application calls `Dubot.openCopilot()` |
 
-When an agent Sidebar is mounted, the Resource Center's base launcher and browse panel yield to
-that sidebar. An active Ask conversation remains open.
+A mounted agent Sidebar takes priority over the base Copilot launcher and home panel.
 
-## Analytics
+## Publish and measure
 
-The **Analytics** tab reports panel opens and unique viewers, card impressions and clicks with
-per-item breakdowns, searches and searches with results, and Ask/chat submissions. Search text
-and question text are not retained in Resource Center analytics.
+Save the draft, test a representative route and task, then use the Copilot page's **Publish** action. Publish its required guides, Skills, actions, and Guidance configuration for the target environment as well. Saving a draft does not update Production.
 
-## Host callbacks
+Use **Analytics** to inspect panel opens, unique viewers, item impressions and clicks, and chat submissions. Historical search metrics may also appear. Analytics aggregates do not retain raw search or question text; conversation records have their own scope.
 
-Callback cards run functions supplied through
-`Dubot.init({ resourceCenterCallbacks: [...] })`. They are deliberately separate from
-agent-callable actions: selecting a card invokes the matching host handler directly, and the
-handler is never advertised as a tool to a wizard or MCP client.
-
-## Publishing
-
-The Resource Center has its own draft, publish, unpublish, archive, and version lifecycle.
-Publishing should validate referenced guides, articles, callbacks, and the embedded Ask
-configuration, including its capability and action references. In the current product, use the
-Resource Center page's publish action rather than assuming it is included in every bulk publish.
-
-Follow [Configure and publish the Resource Center](/guides/configure-resource-center) for the
-current Content, Agent, Settings, Test session, and publish workflow.
+Follow [Configure and publish Copilot](/guides/configure-resource-center) for the setup workflow and [SDK surfaces](/sdk/surfaces#copilot) for programmatic launch.

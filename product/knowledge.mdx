@@ -7,7 +7,7 @@ description: "Ingest, scope, search, and read product documentation"
 ## Build one reviewable workspace corpus
 
 Dubot can ingest product guidance from a public Help Center or supported document uploads, then
-make a defined scope available to wizards, Guidance, and the Resource Center.
+make a defined scope available to wizards, Guidance, and the Copilot.
 
 <CardGroup cols={3}>
   <Card title="Crawl a Help Center" icon="globe">
@@ -40,7 +40,7 @@ make a defined scope available to wizards, Guidance, and the Resource Center.
 - Enable weekly synchronization for crawl sources.
 - Review article count, corpus size, sync state, and content no longer linked from its source.
 - Remove a source and its extracted content.
-- Search the configured scope during a wizard, Guidance, or Resource Center request.
+- Search the configured scope during a wizard, Guidance, or Copilot request.
 - Read a matching article in bounded windows rather than loading the entire corpus into every
   request.
 
@@ -73,7 +73,7 @@ crawling, or a particular future retrieval architecture.
 | Freshness | Manual sync or optional weekly sync for web sources |
 | Private sources | Authenticated crawling is not part of the current contract |
 | Scope | All content, selected articles, or none |
-| Resource Center search | Searches the delivered corpus and returns article cards; raw search text is not retained as analytics content |
+| Copilot answers | Retrieves from the Copilot Agent's configured knowledge scope |
 
 <Warning>
   Ingestion and access are separate decisions. Review source ownership, exclusions, sensitivity,

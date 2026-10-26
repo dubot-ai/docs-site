@@ -76,17 +76,16 @@ experiences can use those changes without being republished when their knowledge
 includes the affected content. Review a source before adding it to a workspace used in Production.
 
 Source health describes ingestion, not successful delivery or retrieval. After a sync, confirm
-the intended article appears in a real Search or Ask result. If the source is Healthy but runtime
+the intended article supports a real knowledge-backed answer. If the source is Healthy but runtime
 results remain stale, re-crawl the source or use **Sync all**, then collect the source URL, sync
 time, expected article, and observed result for support.
 
 ### Choose what each experience can retrieve
 
-When configuring a Wizard, Guidance, a Product domain capability, or the Resource Center Agent,
-choose the entire knowledge base or selected articles. A Wizard, Guidance, or the Resource Center
+When configuring a Wizard, Guidance, a Product domain capability, or the Copilot Agent,
+choose the entire knowledge base or selected articles. A Wizard, Guidance, or the Copilot
 Agent can also leave direct knowledge unattached. Ingestion and retrieval access are separate
-decisions. A Resource Center static card is not knowledge grounding, and Resource Center Search
-uses the delivered workspace corpus. Save and test changes to an experience's knowledge scope,
+decisions. A Copilot static card is not knowledge grounding; configure the Copilot Agent's scope explicitly. Save and test changes to an experience's knowledge scope,
 then publish that experience or capability to update its Production scope.
 
 <Warning>
@@ -100,6 +99,6 @@ The source reports a healthy sync, its intended articles are visible and readabl
 experience uses an explicit scope. A source existing in Knowledge does not make it available to
 every customer surface automatically.
 
-Next, configure the [Resource Center](/guides/configure-resource-center), a
+Next, configure the [Copilot](/guides/configure-resource-center), a
 [Wizard](/guides/build-and-publish-wizard), or [Guidance](/guides/enable-guidance). For safe source
 removal, follow [Recover or roll back configuration](/operate/recovery#knowledge-removal).

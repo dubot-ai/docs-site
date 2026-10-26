@@ -50,7 +50,7 @@ Check the complete chain in order:
 
 1. The action is reviewed, enabled, and published.
 2. A published **Skill** capability contains the action.
-3. The Skill is attached to the active Wizard or Resource Center Agent.
+3. The Skill is attached to the active Wizard or Copilot Agent.
 4. The experience is published.
 5. For a client-side callback, the current page includes it in `init({ actions })` or the latest
    complete `setActions()` replacement.
@@ -59,17 +59,15 @@ Check the complete chain in order:
 Open the action's **Activity** tab to distinguish unavailable, declined, invalid-input, and failed
 outcomes. See [Recover or roll back configuration](/operate/recovery) before changing Production.
 
-## Resource Center or Guidance is incomplete
+## Copilot or Guidance is incomplete
 
-- For Resource Center Search, confirm the knowledge articles are indexed and returned by the
-  runtime. Articles are delivered automatically after ingestion; there is no article Publish
+- For Copilot answers, confirm the knowledge articles are indexed and available to its agent. Articles are delivered automatically after ingestion; there is no article Publish
   button. If results remain stale, follow [Knowledge delivery](/guides/add-knowledge#when-article-changes-become-available).
-- For Ask, confirm **Ask in your own words** is enabled and its reserved Agent has the intended
-  published capabilities and knowledge scope.
+- For Ask, confirm the reserved Copilot Agent is delivered for the environment and has the intended published Skills and knowledge scope.
 - For a reviewed guide, confirm both the guide and workspace Guidance configuration are published.
 - For a goal-based Guidance run, confirm Guidance is enabled and the target page is supported.
-- For a stale Resource Center card, confirm its referenced guide, article, callback, or connector is
-  still available, then republish the Resource Center.
+- For a stale Copilot card, confirm its referenced guide, article, callback, or connector is
+  still available, then republish the Copilot.
 
 ## Guidance stops before the first useful step
 
