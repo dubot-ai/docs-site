@@ -1,0 +1,98 @@
+---
+title: "Prepare your UI for Guidance"
+sidebarTitle: "UI readiness"
+description: "Give Guidance clear targets with semantic controls, visible labels, meaningful state, and activation that works beyond a pointer click."
+keywords: ["Guidance", "accessible names", "buttons", "UI integration", "keyboard activation"]
+---
+
+Prepare the controls in your product so Dubot Guidance can identify the intended target and the interaction works when activated. Start with one representative journey on a page that loads the [browser SDK](/sdk/quickstart). A control can look clickable while still lacking a useful name or relying on pointer events that other forms of activation do not fire.
+
+## Use controls that match the interaction
+
+Use native HTML controls where possible: buttons for actions, links for navigation, and inputs for editable values. A tile, section header, or layer row that performs an action should expose that action as a control.
+
+Adding `role="button"` to a `div` does not implement button behavior. A custom button also needs keyboard focus, Enter and Space activation, and correct disabled behavior. Prefer a native `button` and set `type="button"` for actions that should not submit a form.
+
+Keep separate actions in separate controls. For example, selecting a layer and expanding its children should not require nested buttons.
+
+## Give each control a useful name
+
+Use the visible text as the accessible name whenever possible. Associate a visible field label with its input using `label`, or use `aria-labelledby` when the label is elsewhere. Give icon-only controls a specific `aria-label`.
+
+| Control | Useful name |
+| --- | --- |
+| Palette tile | Heading 1 |
+| Section disclosure | Typography |
+| Color value field | Background color |
+| Clear color button | Clear background color |
+| Position buttons | Align left, Align right, Align top, Align bottom |
+| Spacing fields | Margin left, Padding top |
+
+Avoid empty names and generic labels such as `clickable-icon`. Distinguish nearby controls with names that describe their purpose. Hide decorative icons from the accessibility tree so they do not add unrelated text to a button's name.
+
+Label the actual editable element, not just its surrounding container. Keep an input type appropriate to the value and interaction your product supports. Naming a color field does not require changing it to a different input type.
+
+## Expose state and implement the behavior
+
+A disclosure button should report `aria-expanded` and actually show or hide its content. Use `aria-pressed` for a toggle button and the appropriate selected state for the widget pattern you implement. Keep these values synchronized with the product state.
+
+This simplified React example shows a named disclosure and an associated field label. It illustrates ordinary UI code, not a Dubot SDK API. Use unique IDs if you render more than one instance.
+
+```jsx
+import { useState } from "react";
+
+export function BackgroundControls() {
+  const [expanded, setExpanded] = useState(false);
+  const [color, setColor] = useState("");
+
+  return (
+    <section>
+      <button
+        type="button"
+        aria-expanded={expanded}
+        aria-controls="background-fields"
+        onClick={() => setExpanded((value) => !value)}
+      >
+        Background
+      </button>
+      <div id="background-fields" hidden={!expanded}>
+        <label htmlFor="background-color">Background color</label>
+        <input
+          id="background-color"
+          type="text"
+          value={color}
+          onChange={(event) => setColor(event.target.value)}
+        />
+        <button type="button" onClick={() => setColor("")}>
+          Clear background color
+        </button>
+      </div>
+    </section>
+  );
+}
+```
+
+The field is a text input in this example because it accepts a typed color value. Connect the value to your product's existing validation and update behavior.
+
+See the W3C patterns for [buttons](https://www.w3.org/WAI/ARIA/apg/patterns/button/) and [disclosures](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/) for the underlying accessibility behavior.
+
+## Make activation complete the action
+
+Put the core action on a path that works through click activation. Selection that happens only on `mousedown`, for example, can work with a mouse but fail when a control is activated through its keyboard behavior or `element.click()`.
+
+For a selectable layer, verify that activation both selects the node and opens the expected toolbox. A new label alone cannot repair an event handler that never runs.
+
+Preserve existing pointer and drag behavior when changing markup. Naming a draggable tile does not make a drag-and-drop step supported by Guidance. For journeys that require dragging, follow the limitations in [Write guides that work](/guides/write-guidance-guides#before-you-record) and provide a text instruction where needed.
+
+## Test one complete journey
+
+Use a safe Test journey with an explicit stopping point, then check:
+
+1. In the browser's accessibility inspector, each target has the intended role and name.
+2. Each target is visible and available when its step begins. Open disclosures before targeting their contents.
+3. Buttons work with pointer clicks, Enter, and Space. Where the journey uses programmatic click activation, confirm that it produces the same intended result.
+4. Inputs update the product value, selection opens the expected controls, and expanded or pressed states remain accurate.
+5. Existing drag interactions and layout still work after the markup changes.
+6. Guidance selects the intended target and reaches the expected product state without crossing the journey's stopping point.
+
+These checks prepare the UI; they do not replace testing Guidance on the actual page. If a run still fails, collect the target's role and name, the activation method, and the observed result alongside the evidence in [Troubleshoot the browser SDK](/sdk/troubleshooting#collect-evidence-before-escalating).
