@@ -71,6 +71,12 @@ outcomes. See [Recover or roll back configuration](/operate/recovery) before cha
 - For a stale Resource Center card, confirm its referenced guide, article, callback, or connector is
   still available, then republish the Resource Center.
 
+## Guidance cannot find or activate a control
+
+If Guidance starts but misses a visible control, inspect that control's role and accessible name. If it finds the right control but activation has no effect, check whether the product relies on pointer-only events such as `mousedown`.
+
+Follow [Prepare your UI for Guidance](/sdk/prepare-ui-for-guidance) to check names, state, and activation, then repeat the same safe Test journey. Record the intended target, its role and name, and the observed result if the failure persists.
+
 ## Guidance stops before the first useful step
 
 Retry the same safe Test goal once. If it fails again with the same message before selecting a

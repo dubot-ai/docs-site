@@ -161,7 +161,12 @@
         "groups": [
           {
             "group": "Start integrating",
-            "pages": ["integrations/overview", "sdk/quickstart", "sdk/troubleshooting"]
+            "pages": [
+              "integrations/overview",
+              "sdk/quickstart",
+              "sdk/prepare-ui-for-guidance",
+              "sdk/troubleshooting"
+            ]
           },
           {
             "group": "Browser SDK",
